@@ -1,0 +1,18 @@
+[submodule "FlameSteelFramework/FlameSteelCore"]
+	path = FlameSteelFramework/FlameSteelCore
+	url = https://gitlab.com/demensdeum/FlameSteelCore
+[submodule "FlameSteelFramework/FlameSteelEngineGameToolkit"]
+	path = FlameSteelFramework/FlameSteelEngineGameToolkit
+	url = https://gitlab.com/demensdeum/FlameSteelEngineGameToolkit
+[submodule "FlameSteelFramework/FSGL"]
+	path = FlameSteelFramework/FSGL
+	url = https://gitlab.com/demensdeum/FSGL.git
+[submodule "FlameSteelFramework/FlameSteelEngineGameToolkitFSGL"]
+	path = FlameSteelFramework/FlameSteelEngineGameToolkitFSGL
+	url = https://gitlab.com/demensdeum/FlameSteelEngineGameToolkitFSGL.git
+[submodule "FlameSteelFramework/FlameSteelBattleHorn"]
+	path = FlameSteelFramework/FlameSteelBattleHorn
+	url = https://gitlab.com/demensdeum/FlameSteelBattleHorn
+[submodule "FlameSteelFramework/FlameSteelCommonTraits"]
+	path = FlameSteelFramework/FlameSteelCommonTraits
+	url = https://gitlab.com/demensdeum/FlameSteelCommonTraits
