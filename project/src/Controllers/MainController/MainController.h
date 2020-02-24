@@ -15,6 +15,7 @@ class MainController {
 public:
     void start();
     void switchToSceneController();
+    void startGameLoop();
     
 private:
     shared_ptr<IOSystem> ioSystem;

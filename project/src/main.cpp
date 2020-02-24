@@ -8,6 +8,8 @@ int main(int argc, char *argv[]) {
     
     auto controller = make_shared<MainController>();
     controller->start();
-    cout << argc << ";" << argv << endl;
-    
+    controller->switchToSceneController();
+    controller->startGameLoop();
+
+    cout << argc << ";" << argv;
 }

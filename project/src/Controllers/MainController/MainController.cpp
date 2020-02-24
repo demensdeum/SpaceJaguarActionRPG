@@ -27,3 +27,7 @@ void MainController::switchToSceneController() {
     state = scene;
     mainGameController->initializeGameFromState(scene);
 }
+
+void MainController::startGameLoop() {
+    mainGameController->startGameLoop();
+}
