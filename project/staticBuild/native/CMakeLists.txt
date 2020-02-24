@@ -26,6 +26,7 @@ if (NOT FLAME_STEEL_PROJECT_TEMPLATE_ROOT_DIRECTORY)
 endif()
 
 include_directories(
+    ${FLAME_STEEL_PROJECT_TEMPLATE_ROOT_DIRECTORY}/project/src/
     ${FLAME_STEEL_PROJECT_TEMPLATE_ROOT_DIRECTORY}/include/
     ${FLAME_STEEL_PROJECT_TEMPLATE_ROOT_DIRECTORY}/FlameSteelFramework/FlameSteelCore/src/
     ${FLAME_STEEL_PROJECT_TEMPLATE_ROOT_DIRECTORY}/FlameSteelFramework/FlameSteelEngineGameToolkit/src/
