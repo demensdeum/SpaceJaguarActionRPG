@@ -5,7 +5,12 @@
 
 class SceneController: public GameController, public enable_shared_from_this<SceneController> {
   
+public:
     void step();
     
+private:
+	void initialize();
+	bool isInitialized = false;
+
 };
 #endif
