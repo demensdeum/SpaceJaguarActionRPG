@@ -1,5 +1,5 @@
 {
-    "name" : "Space Jaguar",
+    "name" : "Flame Steel Engine Project Template",
     "relativeProjectDirectoryPath" : "/../",
     "buildCommand" : "sh buildScripts/native/staticBuild.sh",
     "cleanCommand" : "sh buildScripts/native/clean.sh",
