@@ -1,3 +1,3 @@
-# FlameSteelEngineProjectTemplate
+# Space Jaguar
 
-Flame Steel Engine Project Template
+Space Jaguar - 3D Action RPG
