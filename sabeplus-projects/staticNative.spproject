@@ -3,5 +3,5 @@
     "relativeProjectDirectoryPath" : "/../",
     "buildCommand" : "sh buildScripts/native/staticBuild.sh",
     "cleanCommand" : "sh buildScripts/native/clean.sh",
-    "runScript" : "build/staticNative/FlameSteelEngineProject/FlameSteelEngineProject"
+    "runScript" : "sh buildScripts/native/run.sh"
 }

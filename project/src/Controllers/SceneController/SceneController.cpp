@@ -1,6 +1,7 @@
 #include "SceneController.h"
 #include <iostream>
 #include <Utils/CubeBuilder/CubeBuilder.h>
+#include <Utils/MapBuilder/MapBuilder.h>
 #include <FlameSteelEngineGameToolkit/Utils/Factory.h>
 
 using namespace std; 
@@ -17,7 +18,7 @@ void SceneController::initialize() {
                      0,0,0
                  );
 	objectsContext->addObject(camera.sharedPointer());
- 	auto cursorCube = toNotNull(make<CubeBuilder>()->makeCube(3, 0, 0, 255, 0, 0));
+ 	auto cursorCube = toNotNull(make<MapBuilder>()->makeCube(3, 0, 0));
 	objectsContext->addObject(cursorCube.sharedPointer());
 	freeCameraControlsController = make<FreeCameraControlsController>(camera, toNotNull(ioSystem->inputController), shared_from_this());
 }
