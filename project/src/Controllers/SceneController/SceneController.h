@@ -4,8 +4,10 @@
 #include <FlameSteelCore/SharedNotNullPointer.h>
 #include <FlameSteelEngineGameToolkit/Controllers/GameController.h>
 #include <Utils/FreeCameraControlsController/FreeCameraControlsController.h>
+#include <Controllers/SceneController/GameplaySubcontroller/GameplaySubcontroller.h>
 
 using namespace Shortcuts;
+using namespace SpaceJaguarActionRPG;
 using namespace FlameSteelEngine::GameToolkit::Utils;
 
 class SceneController: public GameController, public enable_shared_from_this<SceneController>, public FreeCameraControlsControllerDelegate {
@@ -20,5 +22,6 @@ private:
 	NotNull<Object> camera;
 	NotNull<InputController> inputController;
 	NotNull<FreeCameraControlsController> freeCameraControlsController;
+	NotNull<GameplaySubcontroller> gameplaySubcontroller;
 };
 #endif

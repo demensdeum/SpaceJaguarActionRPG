@@ -12,7 +12,7 @@ using namespace FlameSteelEngine::GameToolkit::Utils;
 
 static const float MapBuilderSize = 1;
 
-shared_ptr<Object> MapBuilder::makeCube(float x, float y, float z) {
+shared_ptr<Object> MapBuilder::makeMap(float x, float y, float z) {
 
     auto cube = make_shared<Object>();
     serializedModel = Factory::makeSerializedModel();
@@ -46,16 +46,6 @@ shared_ptr<Object> MapBuilder::makeCube(float x, float y, float z) {
     cube->setInstanceIdentifier(make_shared<string>(key));
 
     cube->addComponent(serializedModel);
-    
-    /*auto surfaceMaterial = Factory::makeSurfaceMaterial(64, 64);
-    auto surface = surfaceMaterial->material->surface;
-    if (surface == nullptr) {
-        throwRuntimeException(string("Surface inside of SurfaceMaterial is nullptr"));
-    }
-
-    SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, red, green, blue));
-
-    cube->addComponent(surfaceMaterial);*/
 
     auto position = Factory::makePosition(x, y, z);
     cube->addComponent(position);

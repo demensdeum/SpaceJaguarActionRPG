@@ -9,6 +9,7 @@ using namespace FlameSteelEngine::GameToolkit::Utils;
 
 void SceneController::initialize() {
 	isInitialized = true;
+	gameplaySubcontroller = make<GameplaySubcontroller>();
 	inputController = toNotNull(ioSystem->inputController);
 	camera = Factory::makeObject(
                      make_shared<string>("camera"),
@@ -18,8 +19,11 @@ void SceneController::initialize() {
                      0,0,0
                  );
 	objectsContext->addObject(camera.sharedPointer());
- 	auto cursorCube = toNotNull(make<MapBuilder>()->makeCube(3, 0, 0));
-	objectsContext->addObject(cursorCube.sharedPointer());
+ 	auto mapObject= toNotNull(make<MapBuilder>()->makeMap(0, 0, 0));
+	objectsContext->addObject(mapObject.sharedPointer());
+	auto jagObject = toNotNull(make<CubeBuilder>()->makeCube(0, 0, 0));
+	objectsContext->addObject(jagObject.sharedPointer());
+	gameplaySubcontroller->addObject(jagObject);
 	freeCameraControlsController = make<FreeCameraControlsController>(camera, toNotNull(ioSystem->inputController), shared_from_this());
 }
 
@@ -27,9 +31,10 @@ void SceneController::initialize() {
 	if (isInitialized == false) {
 		initialize();
 	}
-	renderer->render(gameData);     
 	freeCameraControlsController->step();
 	inputController->pollKey();
+	gameplaySubcontroller->step();
+	renderer->render(gameData);
  }
 
 void SceneController::freeCameraControlsControllerDidFinish(shared_ptr<FreeCameraControlsController> ) {
