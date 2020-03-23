@@ -5,10 +5,10 @@
 
 namespace SpaceJaguarActionRPG {
 
-class ObjectControls: Object {
+class ObjectControls: public Object {
 
 public:
-	void step();
+	virtual void step() = 0;
 
 };
 };

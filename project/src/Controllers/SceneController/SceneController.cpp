@@ -3,6 +3,7 @@
 #include <Utils/CubeBuilder/CubeBuilder.h>
 #include <Utils/MapBuilder/MapBuilder.h>
 #include <FlameSteelEngineGameToolkit/Utils/Factory.h>
+#include <Utils/GameplayObjectsFactory/GameplayObjectsFactory.h>
 
 using namespace std; 
 using namespace FlameSteelEngine::GameToolkit::Utils;
@@ -21,7 +22,7 @@ void SceneController::initialize() {
 	objectsContext->addObject(camera.sharedPointer());
  	auto mapObject= toNotNull(make<MapBuilder>()->makeMap(0, 0, 0));
 	objectsContext->addObject(mapObject.sharedPointer());
-	auto jagObject = toNotNull(make<CubeBuilder>()->makeCube(0, 0, 0));
+	auto jagObject = GameplayObjectsFactory::makeJag();
 	objectsContext->addObject(jagObject.sharedPointer());
 	gameplaySubcontroller->addObject(jagObject);
 	freeCameraControlsController = make<FreeCameraControlsController>(camera, toNotNull(ioSystem->inputController), shared_from_this());
