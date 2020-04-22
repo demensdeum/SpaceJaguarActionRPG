@@ -22,7 +22,7 @@ void SceneController::initialize() {
 	objectsContext->addObject(camera.sharedPointer());
  	auto mapObject= toNotNull(make<MapBuilder>()->makeMap(0, 0, 0));
 	objectsContext->addObject(mapObject.sharedPointer());
-	auto jagObject = GameplayObjectsFactory::makeJag();
+	jagObject = GameplayObjectsFactory::makeJag(inputController, shared_from_this());
 	objectsContext->addObject(jagObject.sharedPointer());
 	gameplaySubcontroller->addObject(jagObject);
 	freeCameraControlsController = make<FreeCameraControlsController>(camera, toNotNull(ioSystem->inputController), shared_from_this());
@@ -41,3 +41,7 @@ void SceneController::initialize() {
 void SceneController::freeCameraControlsControllerDidFinish(shared_ptr<FreeCameraControlsController> ) {
     objectsContext->updateObject(camera.sharedPointer());
 };
+
+void SceneController::playerOwnerObjectControlsDidFinish(shared_ptr<PlayerOwnerObjectControls> ) {
+	objectsContext->updateObject(jagObject.sharedPointer());
+}
