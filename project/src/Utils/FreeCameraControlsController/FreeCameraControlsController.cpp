@@ -2,14 +2,24 @@
 #include <iostream>
 #include <glm/gtc/matrix_transform.hpp>
 #include <FlameSteelEngineGameToolkit/Utils/FSEGTUtils.h>
+#include <Utils/CameraController/CameraControllerDelegate.h>
 
 using namespace FlameSteelEngine::GameToolkit::Utils;
 
-FreeCameraControlsController::FreeCameraControlsController(NotNull<Object> camera, NotNull<InputController> inputController, shared_ptr<FreeCameraControlsControllerDelegate> delegate) {
+FreeCameraControlsController::FreeCameraControlsController(NotNull<Object> camera, NotNull<InputController> inputController, shared_ptr<CameraControllerDelegate> delegate) {
     this->camera = camera;
     this->inputController = inputController;
     this->delegate = delegate;
 };
+
+void FreeCameraControlsController::printout() {
+	auto rotationVector = FSEGTUtils::getObjectRotation(camera.sharedPointer());
+	auto positionVector = FSEGTUtils::getObjectPosition(camera.sharedPointer());
+	cout << "Position: ";
+	cout << positionVector->x << ";" << positionVector->y << ";" << positionVector->z << endl;
+	cout << "Rotation: ";
+	cout << rotationVector->x << ";" << rotationVector->y << ";" << rotationVector->z << endl;
+}
 
 void FreeCameraControlsController::step() {
     if (inputController->isUpKeyPressed() == true) {
@@ -90,6 +100,7 @@ void FreeCameraControlsController::step() {
 
     translateByRotation(0,0,0);
     rotateByPointerIfNeeded();
+
 };
 
 void FreeCameraControlsController::rotateByPointerIfNeeded() {
@@ -114,7 +125,7 @@ void FreeCameraControlsController::rotateByPointerIfNeeded() {
 
         auto lockedDelegate = delegate.lock();
         if (lockedDelegate.get() != nullptr) {
-            lockedDelegate->freeCameraControlsControllerDidFinish(shared_from_this());
+            lockedDelegate->cameraControllerDidFinish(shared_from_this());
         }
     }
 }
@@ -147,7 +158,7 @@ void FreeCameraControlsController::translateByRotation(float x, float y, float z
 
     auto lockedDelegate = delegate.lock();
     if (lockedDelegate.get() != nullptr) {
-        lockedDelegate->freeCameraControlsControllerDidFinish(shared_from_this());
+        lockedDelegate->cameraControllerDidFinish(shared_from_this());
     }
 
 }

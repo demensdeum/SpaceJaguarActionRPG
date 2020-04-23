@@ -7,16 +7,16 @@ void PlayerOwnerObjectControls::step() {
 	auto position = FSEGTUtils::getObjectPosition(puppet.sharedPointer());
 
     if (inputController->isUpKeyPressed() == true) {
-        position->z -= 1;
+        position->z -= 0.1;
     }
     if (inputController->isDownKeyPressed() == true) {
-        position->z += 1;
+        position->z += 0.1;
     }
     if (inputController->isLeftKeyPressed() == true) {
-        position->x -= 1;
+        position->x -= 0.1;
     }
     if (inputController->isRightKeyPressed() == true) {
-        position->x += 1;
+        position->x += 0.1;
     }
 
 	auto lockedDelegate = delegate.lock();

@@ -25,20 +25,34 @@ void SceneController::initialize() {
 	jagObject = GameplayObjectsFactory::makeJag(inputController, shared_from_this());
 	objectsContext->addObject(jagObject.sharedPointer());
 	gameplaySubcontroller->addObject(jagObject);
-	freeCameraControlsController = make<FreeCameraControlsController>(camera, toNotNull(ioSystem->inputController), shared_from_this());
+#if SPACEJAGUARACTIONRPG_FREEFLY
+	cameraController = make<FreeCameraControlsController>(camera, toNotNull(ioSystem->inputController), shared_from_this());
+#else
+	cameraController = make<AcuteAngleCameraController>(camera, jagObject, shared_from_this());
+#endif
 }
 
  void SceneController::step() {
 	if (isInitialized == false) {
 		initialize();
 	}
-	freeCameraControlsController->step();
 	inputController->pollKey();
 	gameplaySubcontroller->step();
+	cameraController->step();
 	renderer->render(gameData);
+
+    if (inputController->isExitKeyPressed() == true) {
+        exit(10);
+    }
+
+#if SPACEJAGUARACTIONRPG_FREEFLY 
+	cameraController->printout();
+#endif
+
  }
 
-void SceneController::freeCameraControlsControllerDidFinish(shared_ptr<FreeCameraControlsController> ) {
+void SceneController::cameraControllerDidFinish(shared_ptr<CameraController> ) {
+	//cout << "camera controller did finish" << endl;
     objectsContext->updateObject(camera.sharedPointer());
 };
 

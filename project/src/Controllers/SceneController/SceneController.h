@@ -1,9 +1,16 @@
 #ifndef FLAMESTEELENGINEPROJECTSCENECONTROLLER_H_
 #define FLAMESTEELENGINEPROJECTSCENECONTROLLER_H_
 
+#define SPACEJAGUARACTIONRPG_FREEFLY 0
+
 #include <FlameSteelCore/SharedNotNullPointer.h>
+#include <FlameSteelEngineGameToolkit/IO/Input/InputController.h>
 #include <FlameSteelEngineGameToolkit/Controllers/GameController.h>
+#if SPACEJAGUARACTIONRPG_FREEFLY
 #include <Utils/FreeCameraControlsController/FreeCameraControlsController.h>
+#else
+#include <Utils/AcuteAngleCameraController/AcuteAngleCameraController.h>
+#endif
 #include <Controllers/SceneController/GameplaySubcontroller/GameplaySubcontroller.h>
 #include <Controllers/SceneController/ObjectControls/PlayerOwnerObjectControls/PlayerOwnerObjectControlsDelegate.h>
 
@@ -11,11 +18,11 @@ using namespace Shortcuts;
 using namespace SpaceJaguarActionRPG;
 using namespace FlameSteelEngine::GameToolkit::Utils;
 
-class SceneController: public GameController, public enable_shared_from_this<SceneController>, public FreeCameraControlsControllerDelegate, public PlayerOwnerObjectControlsDelegate {
+class SceneController: public GameController, public enable_shared_from_this<SceneController>, public CameraControllerDelegate, public PlayerOwnerObjectControlsDelegate {
   
 public:
     void step();
-    void freeCameraControlsControllerDidFinish(shared_ptr<FreeCameraControlsController> freeCameraControlsController);
+    void cameraControllerDidFinish(shared_ptr<CameraController> cameraController);
     void playerOwnerObjectControlsDidFinish(shared_ptr<PlayerOwnerObjectControls> playerOwnerObjectControls);
     
 private:
@@ -24,7 +31,12 @@ private:
 	NotNull<Object> jagObject;
 	NotNull<Object> camera;
 	NotNull<InputController> inputController;
-	NotNull<FreeCameraControlsController> freeCameraControlsController;
+
+#if SPACEJAGUARACTIONRPG_FREEFLY
+	NotNull<FreeCameraControlsController> cameraController;
+#else
+	NotNull<AcuteAngleCameraController> cameraController;
+#endif
 	NotNull<GameplaySubcontroller> gameplaySubcontroller;
 };
 #endif
