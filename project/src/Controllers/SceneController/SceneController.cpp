@@ -4,8 +4,11 @@
 #include <Utils/MapBuilder/MapBuilder.h>
 #include <FlameSteelEngineGameToolkit/Utils/Factory.h>
 #include <Utils/GameplayObjectsFactory/GameplayObjectsFactory.h>
+#include <FlameSteelEngineGameToolkit/Utils/FSEGTUtils.h>
+#include <FlameSteelCore/Utils.h>
 
 using namespace std; 
+using namespace FlameSteelCore::Utils;
 using namespace FlameSteelEngine::GameToolkit::Utils;
 
 void SceneController::initialize() {
@@ -36,6 +39,9 @@ void SceneController::initialize() {
 	if (isInitialized == false) {
 		initialize();
 	}
+
+	FSEGTUtils::setObjectIsVisible(jagObject.sharedPointer(), RandomBool());
+
 	inputController->pollKey();
 	gameplaySubcontroller->step();
 	cameraController->step();
