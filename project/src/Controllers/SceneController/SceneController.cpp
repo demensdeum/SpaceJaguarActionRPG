@@ -33,6 +33,8 @@ void SceneController::initialize() {
 #else
 	cameraController = make<AcuteAngleCameraController>(camera, jagObject, shared_from_this());
 #endif
+	animationController = make<AnimationController>(jagObject, shared_from_this());
+	animationController->initialize();
 }
 
  void SceneController::step() {
@@ -40,10 +42,11 @@ void SceneController::initialize() {
 		initialize();
 	}
 
-	FSEGTUtils::setObjectIsVisible(jagObject.sharedPointer(), RandomBool());
+	//FSEGTUtils::setObjectIsVisible(jagObject.sharedPointer(), RandomBool());
 
 	inputController->pollKey();
 	gameplaySubcontroller->step();
+	animationController->step();
 	cameraController->step();
 	renderer->render(gameData);
 
@@ -64,4 +67,12 @@ void SceneController::cameraControllerDidFinish(shared_ptr<CameraController> ) {
 
 void SceneController::playerOwnerObjectControlsDidFinish(shared_ptr<PlayerOwnerObjectControls> ) {
 	objectsContext->updateObject(jagObject.sharedPointer());
+}
+
+void SceneController::animationControllerDidAddObject(shared_ptr<AnimationController> , NotNull<Object> object) {
+	objectsContext->addObject(object.sharedPointer());
+}
+
+void SceneController::animationControllerDidUpdateObject(shared_ptr<AnimationController> , NotNull<Object> object) {
+	objectsContext->updateObject(object.sharedPointer());
 }
