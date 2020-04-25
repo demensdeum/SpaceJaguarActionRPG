@@ -12,13 +12,13 @@ namespace SpaceJaguarActionRPG {
 class GameplaySubcontroller {
 
 public:
-	void addObject(NotNull<Object> object);
-	void removeAll();
+    void addObject(NotNull<Object> object);
+    void removeAll();
 
-	void step();
+    void step();
 
 private:
-	NotNull<Objects> objects = make<Objects>();
+    NotNull<Objects> objects = make<Objects>();
 
 };
 

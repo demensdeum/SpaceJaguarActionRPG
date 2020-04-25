@@ -20,7 +20,7 @@ class FreeCameraControlsController: public CameraController, public enable_share
 public:
     FreeCameraControlsController(NotNull<Object> camera, NotNull<InputController> inputController, shared_ptr<CameraControllerDelegate> delegate);
     void step();
-	void printout();
+    void printout();
 
 private:
     NotNull<Object> camera;

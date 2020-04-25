@@ -17,17 +17,17 @@ namespace SpaceJaguarActionRPG {
 class PlayerOwnerObjectControls: public ObjectControls, public enable_shared_from_this<PlayerOwnerObjectControls> {
 
 public:
-	void step();
-	void setPuppetAndInputControllerAndDelegate(
-		NotNull<Object> puppet, 
-		NotNull<InputController> inputController, 
-		weak_ptr<SpaceJaguarActionRPG::PlayerOwnerObjectControlsDelegate> delegate
-	);
+    void step();
+    void setPuppetAndInputControllerAndDelegate(
+        NotNull<Object> puppet,
+        NotNull<InputController> inputController,
+        weak_ptr<SpaceJaguarActionRPG::PlayerOwnerObjectControlsDelegate> delegate
+    );
 
 private:
-		NotNull<Object> puppet;
-		NotNull<InputController> inputController;
-		weak_ptr<SpaceJaguarActionRPG::PlayerOwnerObjectControlsDelegate> delegate;
+    NotNull<Object> puppet;
+    NotNull<InputController> inputController;
+    weak_ptr<SpaceJaguarActionRPG::PlayerOwnerObjectControlsDelegate> delegate;
 
 };
 

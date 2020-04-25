@@ -18,7 +18,7 @@ void MainController::start() {
 
     mainGameController->setIOSystem(ioSystem->getFSGLIOSystem());
 
-}; 
+};
 
 void MainController::switchToSceneController() {
     if (state == scene) {

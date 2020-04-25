@@ -8,7 +8,7 @@ namespace SpaceJaguarActionRPG {
 class ObjectControls: public Object {
 
 public:
-	virtual void step() = 0;
+    virtual void step() = 0;
 
 };
 };

@@ -7,7 +7,7 @@
 using namespace Shortcuts;
 
 namespace FlameSteelCore {
-	class Object;
+class Object;
 };
 
 using namespace FlameSteelCore;
@@ -19,8 +19,8 @@ namespace Utils {
 class CameraController {
 
 public:
-	virtual ~CameraController() = default;
-	virtual void step() = 0;
+    virtual ~CameraController() = default;
+    virtual void step() = 0;
 
 protected:
     NotNull<Object> camera;

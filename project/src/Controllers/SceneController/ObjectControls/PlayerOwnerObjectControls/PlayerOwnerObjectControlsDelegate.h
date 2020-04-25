@@ -9,7 +9,7 @@ namespace SpaceJaguarActionRPG {
 
 class PlayerOwnerObjectControlsDelegate {
 public:
-	virtual void playerOwnerObjectControlsDidFinish(shared_ptr<PlayerOwnerObjectControls> playerOwnerObjectControls) = 0;
+    virtual void playerOwnerObjectControlsDidFinish(shared_ptr<PlayerOwnerObjectControls> playerOwnerObjectControls) = 0;
 };
 };
 

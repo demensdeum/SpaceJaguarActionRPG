@@ -15,7 +15,7 @@ namespace SpaceJaguarActionRPG {
 class GameplayObjectsFactory {
 
 public:
-	static NotNull<Object> makeJag(NotNull<InputController> inputController, weak_ptr<PlayerOwnerObjectControlsDelegate> delegate);
+    static NotNull<Object> makeJag(NotNull<InputController> inputController, weak_ptr<PlayerOwnerObjectControlsDelegate> delegate);
 
 };
 

@@ -13,12 +13,12 @@ FreeCameraControlsController::FreeCameraControlsController(NotNull<Object> camer
 };
 
 void FreeCameraControlsController::printout() {
-	auto rotationVector = FSEGTUtils::getObjectRotation(camera.sharedPointer());
-	auto positionVector = FSEGTUtils::getObjectPosition(camera.sharedPointer());
-	cout << "Position: ";
-	cout << positionVector->x << ";" << positionVector->y << ";" << positionVector->z << endl;
-	cout << "Rotation: ";
-	cout << rotationVector->x << ";" << rotationVector->y << ";" << rotationVector->z << endl;
+    auto rotationVector = FSEGTUtils::getObjectRotation(camera.sharedPointer());
+    auto positionVector = FSEGTUtils::getObjectPosition(camera.sharedPointer());
+    cout << "Position: ";
+    cout << positionVector->x << ";" << positionVector->y << ";" << positionVector->z << endl;
+    cout << "Rotation: ";
+    cout << rotationVector->x << ";" << rotationVector->y << ";" << rotationVector->z << endl;
 }
 
 void FreeCameraControlsController::step() {

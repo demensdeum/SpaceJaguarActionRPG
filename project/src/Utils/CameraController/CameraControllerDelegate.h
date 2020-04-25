@@ -14,7 +14,7 @@ class CameraController;
 class CameraControllerDelegate {
 
 public:
-	virtual void cameraControllerDidFinish(shared_ptr<CameraController> cameraController) = 0;
+    virtual void cameraControllerDidFinish(shared_ptr<CameraController> cameraController) = 0;
 };
 
 };

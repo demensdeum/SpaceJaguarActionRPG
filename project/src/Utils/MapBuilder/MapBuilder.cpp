@@ -18,17 +18,17 @@ shared_ptr<Object> MapBuilder::makeMap(float x, float y, float z) {
     serializedModel = Factory::makeSerializedModel();
     serializedModel->append(make_shared<string>("Flame Steel Graphics Library Model @ Demens Deum\nModel version = Happy Sasquatch (1.0)\nMesh"));
 
-	auto t1 = std::chrono::high_resolution_clock::now();
+    auto t1 = std::chrono::high_resolution_clock::now();
 
-	for (auto x = 0; x < 100; x++) {
-		for (auto y = 0; y < 100; y++) {
-			    putCeilAtXYZ(x, 0, y);
-		}
-	}
+    for (auto x = 0; x < 100; x++) {
+        for (auto y = 0; y < 100; y++) {
+            putCeilAtXYZ(x, 0, y);
+        }
+    }
 
-	auto t2 = std::chrono::high_resolution_clock::now();
-	auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
-	std::cout << duration;
+    auto t2 = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
+    std::cout << duration;
 
 
     serializedModel->append(make_shared<string>("\nMaterial - Texture path = com.demensdeum.spacejaguar.grass.texture"));

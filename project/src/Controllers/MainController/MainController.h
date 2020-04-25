@@ -11,19 +11,19 @@ using namespace FlameSteelProject::MainControllerState;
 
 namespace FlameSteelEngineProject {
 class MainController {
-    
+
 public:
     void start();
     void switchToSceneController();
     void startGameLoop();
-    
+
 private:
     shared_ptr<IOSystem> ioSystem;
     shared_ptr<Window> window;
     State state  =  started;
-    
+
     shared_ptr<FlameSteelEngine::GameToolkit::MainGameController> mainGameController;
-    shared_ptr<SceneController> sceneController;    
+    shared_ptr<SceneController> sceneController;
 };
 }
 #endif

@@ -39,7 +39,7 @@ shared_ptr<Object> CubeBuilder::makeCube(float x, float y, float z, int red, int
     cube->setInstanceIdentifier(make_shared<string>(key));
 
     cube->addComponent(serializedModel);
-    
+
     auto surfaceMaterial = Factory::makeSurfaceMaterial(64, 64);
     auto surface = surfaceMaterial->material->surface;
     if (surface == nullptr) {
