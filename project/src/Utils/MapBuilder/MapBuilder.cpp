@@ -20,8 +20,8 @@ shared_ptr<Object> MapBuilder::makeMap(float x, float y, float z) {
 
     auto t1 = std::chrono::high_resolution_clock::now();
 
-    for (auto x = 0; x < 100; x++) {
-        for (auto y = 0; y < 100; y++) {
+    for (auto x = 0; x < 40; x++) {
+        for (auto y = 0; y < 40; y++) {
             putCeilAtXYZ(x, 0, y);
         }
     }
