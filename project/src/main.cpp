@@ -12,4 +12,6 @@ int main(int argc, char *argv[]) {
     controller->startGameLoop();
 
     cout << argc << ";" << argv;
+    
+    return 0;
 }
