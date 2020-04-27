@@ -23,16 +23,20 @@ void SceneController::initialize() {
                  0,0,0
              );
     objectsContext->addObject(camera.sharedPointer());
+	cout << "Make map" << endl;
     auto mapObject= toNotNull(make<MapBuilder>()->makeMap(0, 0, 0));
     objectsContext->addObject(mapObject.sharedPointer());
+	cout << "Make Jaguar" << endl;
     jagObject = GameplayObjectsFactory::makeJag(inputController, shared_from_this());
     objectsContext->addObject(jagObject.sharedPointer());
     gameplaySubcontroller->addObject(jagObject);
+	cout << "Make camera" << endl;
 #if SPACEJAGUARACTIONRPG_FREEFLY
     cameraController = make<FreeCameraControlsController>(camera, toNotNull(ioSystem->inputController), shared_from_this());
 #else
     cameraController = make<AcuteAngleCameraController>(camera, jagObject, shared_from_this());
 #endif
+	cout << "Make animations" << endl;
     animationController = make<AnimationController>(jagObject, shared_from_this());
     animationController->initialize();
 }

@@ -1,0 +1,7 @@
+{
+    "name" : "Space Jaguar Action RPG (Windows)",
+    "relativeProjectDirectoryPath" : "/../../",
+    "buildCommand" : "sh scripts/buildScripts/windows/build.sh",
+    "cleanCommand" : "sh scripts/buildScripts/windows/clean.sh",
+    "runScript" : "sh scripts/buildScripts/windows/test.sh"
+}
