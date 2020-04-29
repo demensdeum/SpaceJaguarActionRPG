@@ -3,3 +3,4 @@ CMakeFiles
 Makefile
 *.cmake
 build
+/scripts/buildScripts/ios/resources/libs/
