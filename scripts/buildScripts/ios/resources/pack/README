@@ -1,0 +1,7 @@
+Self-signing ipa replacement script
+1. Put entitlements.plist from Xcode build archive into entitlements directory
+2. Put embedded.mobileprovision from Xcode build archive file into provision directory (must be updated every 7 days)
+3. Put executable + game resources + iOS specific files (plists, icons etc) into resources. Executable filename must be in sync with Info.plist "Executable file" key.
+4. Put PkgInfo from Xcode build archive into pkginfo directory (maybe not required for resigning and build)
+5. On macOS run build.sh with correct sign key argument (you can find it in Xcode run build log at codesign line)
+6. Upload ipa to device through Xcode (drag and drop in device applications section of devices window). Apple configurator 2 does not work.
