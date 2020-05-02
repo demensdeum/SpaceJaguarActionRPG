@@ -3,6 +3,7 @@
 
 #define SPACEJAGUARACTIONRPG_FREEFLY 0
 
+#include <Controllers/SpaceJaguarScriptController/SpaceJaguarScriptController.h>
 #include <Utils/AnimationController/AnimationController.h>
 #include <FlameSteelCore/SharedNotNullPointer.h>
 #include <FlameSteelEngineGameToolkit/IO/Input/InputController.h>
@@ -29,6 +30,7 @@ public:
     void animationControllerDidUpdateObject(shared_ptr<AnimationController> animationController, NotNull<Object> object);
 
 private:
+	NotNull<SpaceJaguarScriptController> scriptController;
     void initialize();
     bool isInitialized = false;
     NotNull<Object> jagObject;

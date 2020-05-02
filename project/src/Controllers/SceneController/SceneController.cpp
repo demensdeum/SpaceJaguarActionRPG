@@ -39,6 +39,9 @@ void SceneController::initialize() {
 	cout << "Make animations" << endl;
     animationController = make<AnimationController>(jagObject, shared_from_this());
     animationController->initialize();
+
+	scriptController = make<SpaceJaguarScriptController>();
+	scriptController->setScript("console.log(\"test\")");
 }
 
 void SceneController::step() {
@@ -52,6 +55,7 @@ void SceneController::step() {
     gameplaySubcontroller->step();
     animationController->step();
     cameraController->step();
+	scriptController->step();
     renderer->render(gameData);
 
     if (inputController->isExitKeyPressed() == true) {

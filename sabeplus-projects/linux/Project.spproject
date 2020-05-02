@@ -1,7 +1,7 @@
 {
     "name" : "Space Jaguar Action RPG (Linux)",
     "relativeProjectDirectoryPath" : "/../../",
-    "buildCommand" : "sh sabeplus-projects/linuxStatic/build.sh",
-    "cleanCommand" : "sh sabeplus-projects/linuxStatic/clean.sh",
-    "runScript" : "sh sabeplus-projects/linuxStatic/run.sh"
+    "buildCommand" : "sh scripts/buildScripts/linux/build.sh",
+    "cleanCommand" : "sh scripts/buildScripts/linux/clean.sh",
+    "runScript" : "sh scripts/buildScripts/linux/run.sh"
 }
