@@ -6,6 +6,7 @@
 #include <Utils/GameplayObjectsFactory/GameplayObjectsFactory.h>
 #include <FlameSteelEngineGameToolkit/Utils/FSEGTUtils.h>
 #include <FlameSteelCore/Utils.h>
+#include <FlameSteelEngineGameToolkit/Data/Components/FSEGTFactory.h>
 
 using namespace std;
 using namespace FlameSteelCore::Utils;
@@ -41,7 +42,9 @@ void SceneController::initialize() {
     animationController->initialize();
 
 	scriptController = make<SpaceJaguarScriptController>();
-	scriptController->setScript("console.log(\"test\")");
+	scriptController->dataSource = shared_from_this();
+	scriptController->delegate = shared_from_this();
+	scriptController->setScriptFromFilePath(string("com.demensdeum.spacejaguaractionrpg.scripts.sceneController.js"));
 }
 
 void SceneController::step() {
@@ -84,3 +87,38 @@ void SceneController::animationControllerDidAddObject(shared_ptr<AnimationContro
 void SceneController::animationControllerDidUpdateObject(shared_ptr<AnimationController>, NotNull<Object> object) {
     objectsContext->updateObject(object.sharedPointer());
 }
+
+shared_ptr<Object> SceneController::spaceJaguarScriptControllerDidRequestObjectWithName(shared_ptr<SpaceJaguarScriptController> , string  objectName) {
+	return objectsContext->objectWithInstanceIdentifier(make_shared<string>(objectName));
+}
+
+void SceneController::spaceJaguarScriptControllerDidRequestAddObjectWithPath(shared_ptr<SpaceJaguarScriptController> , string name, string  modelPath, float x, float y, float z) {
+    auto object = FSEGTFactory::makeOnSceneObject(
+                   make_shared<string>(name),
+                   make_shared<string>(name),
+                   shared_ptr<string>(),
+                   make_shared<string>(modelPath),
+                   shared_ptr<string>(),
+                   x, y, z,
+                   1, 1, 1,
+                   0, 0, 0,
+                   0);
+
+	cout << "SceneController addObject with name: " << name << endl;
+
+	objectsContext->addObject(object);
+}
+
+void SceneController::spaceJaguarScriptControllerDidRequestUpdateObjectWithNameAndPositionXYZ(shared_ptr<SpaceJaguarScriptController> , string name, float x, float y, float z) {
+	 auto object = objectsContext->objectWithInstanceIdentifier(make_shared<string>(name));
+	if (object.get() == nullptr) {
+		auto errorString = string("SceneController update object error, no object with name: ");
+		errorString += name;
+		throwRuntimeException(errorString);
+	}
+	auto position = FSEGTUtils::getObjectPosition(object);
+	position->x = x;
+	position->y = y;
+	position->z = z;
+	objectsContext->updateObject(object);
+};

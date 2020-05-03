@@ -11,12 +11,12 @@ NotNull<Object> GameplayObjectsFactory::makeJag(
     weak_ptr<PlayerOwnerObjectControlsDelegate> delegate
 ) {
     auto jag = FSEGTFactory::makeOnSceneObject(
-                   make_shared<string>("dummy"),
-                   make_shared<string>("dummy"),
+                   make_shared<string>("Jaguar"),
+                   make_shared<string>("Jaguar"),
                    shared_ptr<string>(),
                    make_shared<string>("com.demensdeum.deathmaskgame.combatdrone.fsglmodel"),
                    shared_ptr<string>(),
-                   0, 0, 0,
+                   10, 0, 10,
                    1, 1, 1,
                    0, 0, 0,
                    0);
