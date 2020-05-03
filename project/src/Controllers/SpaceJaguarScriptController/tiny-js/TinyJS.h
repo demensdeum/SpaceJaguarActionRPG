@@ -94,7 +94,7 @@ enum LEX_TYPES {
     LEX_R_UNDEFINED,
     LEX_R_NEW,
 
-	LEX_R_LIST_END /* always the last entry */
+    LEX_R_LIST_END /* always the last entry */
 };
 
 enum SCRIPTVAR_FLAGS {
@@ -179,19 +179,19 @@ typedef void (*JSCallback)(CScriptVar *var, void *userdata);
 class CScriptVarLink
 {
 public:
-  std::string name;
-  CScriptVarLink *nextSibling;
-  CScriptVarLink *prevSibling;
-  CScriptVar *var;
-  bool owned;
+    std::string name;
+    CScriptVarLink *nextSibling;
+    CScriptVarLink *prevSibling;
+    CScriptVar *var;
+    bool owned;
 
-  CScriptVarLink(CScriptVar *var, const std::string &name = TINYJS_TEMP_NAME);
-  CScriptVarLink(const CScriptVarLink &link); ///< Copy constructor
-  ~CScriptVarLink();
-  void replaceWith(CScriptVar *newVar); ///< Replace the Variable pointed to
-  void replaceWith(CScriptVarLink *newVar); ///< Replace the Variable pointed to (just dereferences)
-  int getIntName(); ///< Get the name as an integer (for arrays)
-  void setIntName(int n); ///< Set the name as an integer (for arrays)
+    CScriptVarLink(CScriptVar *var, const std::string &name = TINYJS_TEMP_NAME);
+    CScriptVarLink(const CScriptVarLink &link); ///< Copy constructor
+    ~CScriptVarLink();
+    void replaceWith(CScriptVar *newVar); ///< Replace the Variable pointed to
+    void replaceWith(CScriptVarLink *newVar); ///< Replace the Variable pointed to (just dereferences)
+    int getIntName(); ///< Get the name as an integer (for arrays)
+    void setIntName(int n); ///< Set the name as an integer (for arrays)
 };
 
 /// Variable class (containing a doubly-linked list of children)
@@ -223,7 +223,9 @@ public:
     int getChildren(); ///< Get the number of children
 
     int getInt();
-    bool getBool() { return getInt() != 0; }
+    bool getBool() {
+        return getInt() != 0;
+    }
     double getDouble();
     const std::string &getString();
     std::string getParsableString(); ///< get Data as a parsable javascript string
@@ -234,17 +236,39 @@ public:
     void setArray();
     bool equals(CScriptVar *v);
 
-    bool isInt() { return (flags&SCRIPTVAR_INTEGER)!=0; }
-    bool isDouble() { return (flags&SCRIPTVAR_DOUBLE)!=0; }
-    bool isString() { return (flags&SCRIPTVAR_STRING)!=0; }
-    bool isNumeric() { return (flags&SCRIPTVAR_NUMERICMASK)!=0; }
-    bool isFunction() { return (flags&SCRIPTVAR_FUNCTION)!=0; }
-    bool isObject() { return (flags&SCRIPTVAR_OBJECT)!=0; }
-    bool isArray() { return (flags&SCRIPTVAR_ARRAY)!=0; }
-    bool isNative() { return (flags&SCRIPTVAR_NATIVE)!=0; }
-    bool isUndefined() { return (flags & SCRIPTVAR_VARTYPEMASK) == SCRIPTVAR_UNDEFINED; }
-    bool isNull() { return (flags & SCRIPTVAR_NULL)!=0; }
-    bool isBasic() { return firstChild==0; } ///< Is this *not* an array/object/etc
+    bool isInt() {
+        return (flags&SCRIPTVAR_INTEGER)!=0;
+    }
+    bool isDouble() {
+        return (flags&SCRIPTVAR_DOUBLE)!=0;
+    }
+    bool isString() {
+        return (flags&SCRIPTVAR_STRING)!=0;
+    }
+    bool isNumeric() {
+        return (flags&SCRIPTVAR_NUMERICMASK)!=0;
+    }
+    bool isFunction() {
+        return (flags&SCRIPTVAR_FUNCTION)!=0;
+    }
+    bool isObject() {
+        return (flags&SCRIPTVAR_OBJECT)!=0;
+    }
+    bool isArray() {
+        return (flags&SCRIPTVAR_ARRAY)!=0;
+    }
+    bool isNative() {
+        return (flags&SCRIPTVAR_NATIVE)!=0;
+    }
+    bool isUndefined() {
+        return (flags & SCRIPTVAR_VARTYPEMASK) == SCRIPTVAR_UNDEFINED;
+    }
+    bool isNull() {
+        return (flags & SCRIPTVAR_NULL)!=0;
+    }
+    bool isBasic() {
+        return firstChild==0;    ///< Is this *not* an array/object/etc
+    }
 
     CScriptVar *mathsOp(CScriptVar *b, int op); ///< do a maths op with another script variable
     void copyValue(CScriptVar *val); ///< copy the value from the value given

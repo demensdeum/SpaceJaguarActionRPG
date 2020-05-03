@@ -12,7 +12,7 @@ class SpaceJaguarScriptController;
 class SpaceJaguarScriptControllerDataSource {
 
 public:
-	virtual shared_ptr<Object> spaceJaguarScriptControllerDidRequestObjectWithName(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string  objectName) = 0;
+    virtual shared_ptr<Object> spaceJaguarScriptControllerDidRequestObjectWithName(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string  objectName) = 0;
 
 };
 };

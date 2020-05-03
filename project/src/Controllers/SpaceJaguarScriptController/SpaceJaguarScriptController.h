@@ -19,17 +19,17 @@ namespace SpaceJaguarActionRPG {
 class SpaceJaguarScriptController: public ScriptController, public enable_shared_from_this<SpaceJaguarScriptController> {
 
 public:
-	void setScriptFromFilePath(string path);
-	void step();
-	weak_ptr<SpaceJaguarScriptControllerDataSource> dataSource;
-	weak_ptr<SpaceJaguarScriptControllerDelegate> delegate;
+    void setScriptFromFilePath(string path);
+    void step();
+    weak_ptr<SpaceJaguarScriptControllerDataSource> dataSource;
+    weak_ptr<SpaceJaguarScriptControllerDelegate> delegate;
 
 private:
-	NotNull<SpaceJaguarScriptControllerCallContainer> callContainer = make<SpaceJaguarScriptControllerCallContainer>();
-	NotNull<CTinyJS> tinyJS = make<CTinyJS>();
+    NotNull<SpaceJaguarScriptControllerCallContainer> callContainer = make<SpaceJaguarScriptControllerCallContainer>();
+    NotNull<CTinyJS> tinyJS = make<CTinyJS>();
 
-	void initialize();
-	bool isInitialized = false;
+    void initialize();
+    bool isInitialized = false;
 
 };
 };

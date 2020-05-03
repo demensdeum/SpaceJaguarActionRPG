@@ -10,8 +10,8 @@ using namespace Shortcuts;
 namespace SpaceJaguarActionRPG {
 
 struct SpaceJaguarScriptControllerCallContainer {
-	shared_ptr<SpaceJaguarScriptController> spaceJaguarScriptController;
-	NotNull<CTinyJS> tinyJS;
+    shared_ptr<SpaceJaguarScriptController> spaceJaguarScriptController;
+    NotNull<CTinyJS> tinyJS;
 };
 
 };

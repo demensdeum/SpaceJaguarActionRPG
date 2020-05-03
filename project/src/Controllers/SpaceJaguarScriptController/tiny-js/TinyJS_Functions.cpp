@@ -83,27 +83,27 @@ void scStringSubstring(CScriptVar *c, void *) {
 
     int l = hi-lo;
     if (l>0 && lo>=0 && lo+l<=(int)str.length())
-      c->getReturnVar()->setString(str.substr(lo, l));
+        c->getReturnVar()->setString(str.substr(lo, l));
     else
-      c->getReturnVar()->setString("");
+        c->getReturnVar()->setString("");
 }
 
 void scStringCharAt(CScriptVar *c, void *) {
     string str = c->getParameter("this")->getString();
     int p = c->getParameter("pos")->getInt();
     if (p>=0 && p<(int)str.length())
-      c->getReturnVar()->setString(str.substr(p, 1));
+        c->getReturnVar()->setString(str.substr(p, 1));
     else
-      c->getReturnVar()->setString("");
+        c->getReturnVar()->setString("");
 }
 
 void scStringCharCodeAt(CScriptVar *c, void *) {
     string str = c->getParameter("this")->getString();
     int p = c->getParameter("pos")->getInt();
     if (p>=0 && p<(int)str.length())
-      c->getReturnVar()->setInt(str.at(p));
+        c->getReturnVar()->setInt(str.at(p));
     else
-      c->getReturnVar()->setInt(0);
+        c->getReturnVar()->setInt(0);
 }
 
 void scStringSplit(CScriptVar *c, void *) {
@@ -115,13 +115,13 @@ void scStringSplit(CScriptVar *c, void *) {
 
     size_t pos = str.find(sep);
     while (pos != string::npos) {
-      result->setArrayIndex(length++, new CScriptVar(str.substr(0,pos)));
-      str = str.substr(pos+1);
-      pos = str.find(sep);
+        result->setArrayIndex(length++, new CScriptVar(str.substr(0,pos)));
+        str = str.substr(pos+1);
+        pos = str.find(sep);
     }
 
     if (str.size()>0)
-      result->setArrayIndex(length++, new CScriptVar(str));
+        result->setArrayIndex(length++, new CScriptVar(str));
 }
 
 void scStringFromCharCode(CScriptVar *c, void *) {
@@ -142,7 +142,7 @@ void scIntegerValueOf(CScriptVar *c, void *) {
 
     int val = 0;
     if (str.length()==1)
-      val = str[0];
+        val = str[0];
     c->getReturnVar()->setInt(val);
 }
 
@@ -165,59 +165,59 @@ void scEval(CScriptVar *c, void *data) {
 }
 
 void scArrayContains(CScriptVar *c, void *) {
-  CScriptVar *obj = c->getParameter("obj");
-  CScriptVarLink *v = c->getParameter("this")->firstChild;
+    CScriptVar *obj = c->getParameter("obj");
+    CScriptVarLink *v = c->getParameter("this")->firstChild;
 
-  bool contains = false;
-  while (v) {
-      if (v->var->equals(obj)) {
-        contains = true;
-        break;
-      }
-      v = v->nextSibling;
-  }
+    bool contains = false;
+    while (v) {
+        if (v->var->equals(obj)) {
+            contains = true;
+            break;
+        }
+        v = v->nextSibling;
+    }
 
-  c->getReturnVar()->setInt(contains);
+    c->getReturnVar()->setInt(contains);
 }
 
 void scArrayRemove(CScriptVar *c, void *) {
-  CScriptVar *obj = c->getParameter("obj");
-  vector<int> removedIndices;
-  CScriptVarLink *v;
-  // remove
-  v = c->getParameter("this")->firstChild;
-  while (v) {
-      if (v->var->equals(obj)) {
-        removedIndices.push_back(v->getIntName());
-      }
-      v = v->nextSibling;
-  }
-  // renumber
-  v = c->getParameter("this")->firstChild;
-  while (v) {
-      int n = v->getIntName();
-      int newn = n;
-      for (size_t i=0;i<removedIndices.size();i++)
-        if (n>=removedIndices[i])
-          newn--;
-      if (newn!=n)
-        v->setIntName(newn);
-      v = v->nextSibling;
-  }
+    CScriptVar *obj = c->getParameter("obj");
+    vector<int> removedIndices;
+    CScriptVarLink *v;
+    // remove
+    v = c->getParameter("this")->firstChild;
+    while (v) {
+        if (v->var->equals(obj)) {
+            removedIndices.push_back(v->getIntName());
+        }
+        v = v->nextSibling;
+    }
+    // renumber
+    v = c->getParameter("this")->firstChild;
+    while (v) {
+        int n = v->getIntName();
+        int newn = n;
+        for (size_t i=0; i<removedIndices.size(); i++)
+            if (n>=removedIndices[i])
+                newn--;
+        if (newn!=n)
+            v->setIntName(newn);
+        v = v->nextSibling;
+    }
 }
 
 void scArrayJoin(CScriptVar *c, void *) {
-  string sep = c->getParameter("separator")->getString();
-  CScriptVar *arr = c->getParameter("this");
+    string sep = c->getParameter("separator")->getString();
+    CScriptVar *arr = c->getParameter("this");
 
-  ostringstream sstr;
-  int l = arr->getArrayLength();
-  for (int i=0;i<l;i++) {
-    if (i>0) sstr << sep;
-    sstr << arr->getArrayIndex(i)->getString();
-  }
+    ostringstream sstr;
+    int l = arr->getArrayLength();
+    for (int i=0; i<l; i++) {
+        if (i>0) sstr << sep;
+        sstr << arr->getArrayIndex(i)->getString();
+    }
 
-  c->getReturnVar()->setString(sstr.str());
+    c->getReturnVar()->setString(sstr.str());
 }
 
 // ----------------------------------------------- Register Functions

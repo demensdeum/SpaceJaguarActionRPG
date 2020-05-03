@@ -23,16 +23,16 @@ public:
     void playerOwnerObjectControlsDidFinish(shared_ptr<PlayerOwnerObjectControls> playerOwnerObjectControls);
     void animationControllerDidAddObject(shared_ptr<AnimationController> animationController, NotNull<Object> object);
     void animationControllerDidUpdateObject(shared_ptr<AnimationController> animationController, NotNull<Object> object);
-	shared_ptr<Object> spaceJaguarScriptControllerDidRequestObjectWithName(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string  objectName);
-	void spaceJaguarScriptControllerDidRequestAddObjectWithPath(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string name, string  modelPath, float x, float y, float z); 
-	void spaceJaguarScriptControllerDidRequestUpdateObjectWithNameAndPositionXYZ(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string name, float x, float y, float z);
-	void spaceJaguarScriptControllerDidRequestChangeNoclipMode(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, bool noclipMode);
+    shared_ptr<Object> spaceJaguarScriptControllerDidRequestObjectWithName(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string  objectName);
+    void spaceJaguarScriptControllerDidRequestAddObjectWithPath(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string name, string  modelPath, float x, float y, float z);
+    void spaceJaguarScriptControllerDidRequestUpdateObjectWithNameAndPositionXYZ(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string name, float x, float y, float z);
+    void spaceJaguarScriptControllerDidRequestChangeNoclipMode(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, bool noclipMode);
 
 private:
-	bool noclipPrintoutMode = false;
-	bool noclipMode = false;
+    bool noclipPrintoutMode = false;
+    bool noclipMode = false;
 
-	NotNull<SpaceJaguarScriptController> scriptController;
+    NotNull<SpaceJaguarScriptController> scriptController;
     void initialize();
     bool isInitialized = false;
     NotNull<Object> jagObject;

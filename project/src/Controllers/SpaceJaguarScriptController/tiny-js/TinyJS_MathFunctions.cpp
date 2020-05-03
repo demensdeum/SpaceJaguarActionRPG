@@ -44,95 +44,95 @@ using namespace std;
 #define F_SGN(a)            ((a)>0 ? 1 : ((a)<0 ? -1 : 0 ))
 #define F_RNG(a,min,max)    ((a)<(min) ? min : ((a)>(max) ? max : a ))
 #define F_ROUND(a)          ((a)>0 ? (int) ((a)+0.5) : (int) ((a)-0.5) )
- 
+
 //CScriptVar shortcut macro
 #define scIsInt(a)          ( c->getParameter(a)->isInt() )
-#define scIsDouble(a)       ( c->getParameter(a)->isDouble() )  
+#define scIsDouble(a)       ( c->getParameter(a)->isDouble() )
 #define scGetInt(a)         ( c->getParameter(a)->getInt() )
-#define scGetDouble(a)      ( c->getParameter(a)->getDouble() )  
+#define scGetDouble(a)      ( c->getParameter(a)->getDouble() )
 #define scReturnInt(a)      ( c->getReturnVar()->setInt(a) )
-#define scReturnDouble(a)   ( c->getReturnVar()->setDouble(a) )  
+#define scReturnDouble(a)   ( c->getReturnVar()->setDouble(a) )
 
 #ifdef _MSC_VER
 namespace
 {
-    double asinh( const double &value )
-    {
-        double returned;
+double asinh( const double &value )
+{
+    double returned;
 
-        if(value>0)
+    if(value>0)
         returned = log(value + sqrt(value * value + 1));
-        else
+    else
         returned = -log(-value + sqrt(value * value + 1));
 
-        return(returned);
-    }
+    return(returned);
+}
 
-    double acosh( const double &value )
-    {
-        double returned;
+double acosh( const double &value )
+{
+    double returned;
 
-        if(value>0)
+    if(value>0)
         returned = log(value + sqrt(value * value - 1));
-        else
+    else
         returned = -log(-value + sqrt(value * value - 1));
 
-        return(returned);
-    }
+    return(returned);
+}
 }
 #endif
 
 //Math.abs(x) - returns absolute of given value
 void scMathAbs(CScriptVar *c, void *) {
     if ( scIsInt("a") ) {
-      scReturnInt( F_ABS( scGetInt("a") ) );
+        scReturnInt( F_ABS( scGetInt("a") ) );
     } else if ( scIsDouble("a") ) {
-      scReturnDouble( F_ABS( scGetDouble("a") ) );
+        scReturnDouble( F_ABS( scGetDouble("a") ) );
     }
 }
 
 //Math.round(a) - returns nearest round of given value
 void scMathRound(CScriptVar *c, void *) {
     if ( scIsInt("a") ) {
-      scReturnInt( F_ROUND( scGetInt("a") ) );
+        scReturnInt( F_ROUND( scGetInt("a") ) );
     } else if ( scIsDouble("a") ) {
-      scReturnDouble( F_ROUND( scGetDouble("a") ) );
+        scReturnDouble( F_ROUND( scGetDouble("a") ) );
     }
 }
 
-//Math.min(a,b) - returns minimum of two given values 
+//Math.min(a,b) - returns minimum of two given values
 void scMathMin(CScriptVar *c, void *) {
     if ( (scIsInt("a")) && (scIsInt("b")) ) {
-      scReturnInt( F_MIN( scGetInt("a"), scGetInt("b") ) );
+        scReturnInt( F_MIN( scGetInt("a"), scGetInt("b") ) );
     } else {
-      scReturnDouble( F_MIN( scGetDouble("a"), scGetDouble("b") ) );
+        scReturnDouble( F_MIN( scGetDouble("a"), scGetDouble("b") ) );
     }
 }
 
-//Math.max(a,b) - returns maximum of two given values  
+//Math.max(a,b) - returns maximum of two given values
 void scMathMax(CScriptVar *c, void *) {
     if ( (scIsInt("a")) && (scIsInt("b")) ) {
-      scReturnInt( F_MAX( scGetInt("a"), scGetInt("b") ) );
+        scReturnInt( F_MAX( scGetInt("a"), scGetInt("b") ) );
     } else {
-      scReturnDouble( F_MAX( scGetDouble("a"), scGetDouble("b") ) );
+        scReturnDouble( F_MAX( scGetDouble("a"), scGetDouble("b") ) );
     }
 }
 
-//Math.range(x,a,b) - returns value limited between two given values  
+//Math.range(x,a,b) - returns value limited between two given values
 void scMathRange(CScriptVar *c, void *) {
     if ( (scIsInt("x")) ) {
-      scReturnInt( F_RNG( scGetInt("x"), scGetInt("a"), scGetInt("b") ) );
+        scReturnInt( F_RNG( scGetInt("x"), scGetInt("a"), scGetInt("b") ) );
     } else {
-      scReturnDouble( F_RNG( scGetDouble("x"), scGetDouble("a"), scGetDouble("b") ) );
+        scReturnDouble( F_RNG( scGetDouble("x"), scGetDouble("a"), scGetDouble("b") ) );
     }
 }
 
 //Math.sign(a) - returns sign of given value (-1==negative,0=zero,1=positive)
 void scMathSign(CScriptVar *c, void *) {
     if ( scIsInt("a") ) {
-      scReturnInt( F_SGN( scGetInt("a") ) );
+        scReturnInt( F_SGN( scGetInt("a") ) );
     } else if ( scIsDouble("a") ) {
-      scReturnDouble( F_SGN( scGetDouble("a") ) );
+        scReturnDouble( F_SGN( scGetDouble("a") ) );
     }
 }
 
@@ -248,7 +248,7 @@ void scMathSqrt(CScriptVar *c, void *) {
 
 // ----------------------------------------------- Register Functions
 void registerMathFunctions(CTinyJS *tinyJS) {
-     
+
     // --- Math and Trigonometry functions ---
     tinyJS->addNative("function Math.abs(a)", scMathAbs, 0);
     tinyJS->addNative("function Math.round(a)", scMathRound, 0);
@@ -256,7 +256,7 @@ void registerMathFunctions(CTinyJS *tinyJS) {
     tinyJS->addNative("function Math.max(a,b)", scMathMax, 0);
     tinyJS->addNative("function Math.range(x,a,b)", scMathRange, 0);
     tinyJS->addNative("function Math.sign(a)", scMathSign, 0);
-    
+
     tinyJS->addNative("function Math.PI()", scMathPI, 0);
     tinyJS->addNative("function Math.toDegrees(a)", scMathToDegrees, 0);
     tinyJS->addNative("function Math.toRadians(a)", scMathToRadians, 0);
@@ -272,14 +272,14 @@ void registerMathFunctions(CTinyJS *tinyJS) {
     tinyJS->addNative("function Math.acosh(a)", scMathACosh, 0);
     tinyJS->addNative("function Math.tanh(a)", scMathTanh, 0);
     tinyJS->addNative("function Math.atanh(a)", scMathATanh, 0);
-       
+
     tinyJS->addNative("function Math.E()", scMathE, 0);
     tinyJS->addNative("function Math.log(a)", scMathLog, 0);
     tinyJS->addNative("function Math.log10(a)", scMathLog10, 0);
     tinyJS->addNative("function Math.exp(a)", scMathExp, 0);
     tinyJS->addNative("function Math.pow(a,b)", scMathPow, 0);
-    
+
     tinyJS->addNative("function Math.sqr(a)", scMathSqr, 0);
-    tinyJS->addNative("function Math.sqrt(a)", scMathSqrt, 0);    
-  
+    tinyJS->addNative("function Math.sqrt(a)", scMathSqrt, 0);
+
 }
