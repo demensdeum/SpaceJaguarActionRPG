@@ -89,6 +89,7 @@ void SpaceJaguarScriptController::initialize() {
 	callContainer->tinyJS = tinyJS;
 
 	try {
+		registerFunctions(tinyJS.get());
 		tinyJS->addNative("function include(text)", &tinyJSBindingsToFlameSteelEngineGameToolkit_Include, tinyJS.get());
 		tinyJS->addNative("function print(text)", &tinyJSBindingsToFlameSteelEngineGameToolkit_Print, 0);
 		tinyJS->addNative("function getObject__private(text)", &tinyjSBindingsToFlameSteelEngineGameToolkit_GetObject__private, callContainer.get());
