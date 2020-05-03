@@ -44,6 +44,28 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_GetObject__private(CScriptVar *
 	tinyJS->execute(executeString);
 }
 
+void tinyjSBindingsToFlameSteelEngineGameToolkit_EnableNoclip(CScriptVar *, void *context) {
+	auto container = (SpaceJaguarScriptControllerCallContainer *) context;
+	shared_ptr<SpaceJaguarScriptController> spaceJaguarScriptController = container->spaceJaguarScriptController;
+	auto tinyJS = container->tinyJS;
+	auto delegateLocked = spaceJaguarScriptController->delegate.lock();
+	if (delegateLocked == nullptr) {
+		throwRuntimeException("tinyjSBindingsToFlameSteelEngineGameToolkit_AddObject error: can't lock delegate");
+	}
+	delegateLocked->spaceJaguarScriptControllerDidRequestChangeNoclipMode(spaceJaguarScriptController, true);
+}
+
+void tinyjSBindingsToFlameSteelEngineGameToolkit_DisableNoclip(CScriptVar *, void *context) {
+	auto container = (SpaceJaguarScriptControllerCallContainer *) context;
+	shared_ptr<SpaceJaguarScriptController> spaceJaguarScriptController = container->spaceJaguarScriptController;
+	auto tinyJS = container->tinyJS;
+	auto delegateLocked = spaceJaguarScriptController->delegate.lock();
+	if (delegateLocked == nullptr) {
+		throwRuntimeException("tinyjSBindingsToFlameSteelEngineGameToolkit_AddObject error: can't lock delegate");
+	}
+	delegateLocked->spaceJaguarScriptControllerDidRequestChangeNoclipMode(spaceJaguarScriptController, false);
+}
+
 void tinyjSBindingsToFlameSteelEngineGameToolkit_AddObject__private(CScriptVar *v, void *context) {
 	auto container = (SpaceJaguarScriptControllerCallContainer *) context;
 	auto name = v->getParameter("name")->getString();
@@ -95,6 +117,8 @@ void SpaceJaguarScriptController::initialize() {
 		tinyJS->addNative("function getObject__private(text)", &tinyjSBindingsToFlameSteelEngineGameToolkit_GetObject__private, callContainer.get());
 		tinyJS->addNative("function addObject__private(name, modelPath, x, y, z)", &tinyjSBindingsToFlameSteelEngineGameToolkit_AddObject__private, callContainer.get());
 		tinyJS->addNative("function updateObject__private(name, x, y, z)", &tinyjSBindingsToFlameSteelEngineGameToolkit_UpdateObject__private, callContainer.get());
+		tinyJS->addNative("function GRANNYPILLS()", &tinyjSBindingsToFlameSteelEngineGameToolkit_EnableNoclip, callContainer.get());
+		tinyJS->addNative("function HANGOVER()", &tinyjSBindingsToFlameSteelEngineGameToolkit_DisableNoclip, callContainer.get());
 		tinyJS->execute("include(\"com.demensdeum.flamesteelenginegametoolkit.bindings.js\");");
 		tinyJS->execute("include(\"com.demensdeumflamesteelenginegametoolkit.private.js\");");
 		tinyJS->execute("print(\"Binding success\");");

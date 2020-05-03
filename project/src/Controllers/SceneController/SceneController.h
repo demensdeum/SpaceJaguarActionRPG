@@ -1,18 +1,13 @@
 #ifndef FLAMESTEELENGINEPROJECTSCENECONTROLLER_H_
 #define FLAMESTEELENGINEPROJECTSCENECONTROLLER_H_
 
-#define SPACEJAGUARACTIONRPG_FREEFLY 0
-
 #include <Controllers/SpaceJaguarScriptController/SpaceJaguarScriptController.h>
 #include <Utils/AnimationController/AnimationController.h>
 #include <FlameSteelCore/SharedNotNullPointer.h>
 #include <FlameSteelEngineGameToolkit/IO/Input/InputController.h>
 #include <FlameSteelEngineGameToolkit/Controllers/GameController.h>
-#if SPACEJAGUARACTIONRPG_FREEFLY
 #include <Utils/FreeCameraControlsController/FreeCameraControlsController.h>
-#else
 #include <Utils/AcuteAngleCameraController/AcuteAngleCameraController.h>
-#endif
 #include <Controllers/SceneController/GameplaySubcontroller/GameplaySubcontroller.h>
 #include <Controllers/SceneController/ObjectControls/PlayerOwnerObjectControls/PlayerOwnerObjectControlsDelegate.h>
 
@@ -31,8 +26,12 @@ public:
 	shared_ptr<Object> spaceJaguarScriptControllerDidRequestObjectWithName(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string  objectName);
 	void spaceJaguarScriptControllerDidRequestAddObjectWithPath(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string name, string  modelPath, float x, float y, float z); 
 	void spaceJaguarScriptControllerDidRequestUpdateObjectWithNameAndPositionXYZ(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string name, float x, float y, float z);
+	void spaceJaguarScriptControllerDidRequestChangeNoclipMode(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, bool noclipMode);
 
 private:
+	bool noclipPrintoutMode = false;
+	bool noclipMode = false;
+
 	NotNull<SpaceJaguarScriptController> scriptController;
     void initialize();
     bool isInitialized = false;
@@ -41,11 +40,9 @@ private:
     NotNull<InputController> inputController;
     NotNull<AnimationController> animationController;
 
-#if SPACEJAGUARACTIONRPG_FREEFLY
-    NotNull<FreeCameraControlsController> cameraController;
-#else
+    NotNull<FreeCameraControlsController> noclipCameraController;
     NotNull<AcuteAngleCameraController> cameraController;
-#endif
+
     NotNull<GameplaySubcontroller> gameplaySubcontroller;
 };
 #endif

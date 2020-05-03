@@ -32,11 +32,9 @@ void SceneController::initialize() {
     objectsContext->addObject(jagObject.sharedPointer());
     gameplaySubcontroller->addObject(jagObject);
 	cout << "Make camera" << endl;
-#if SPACEJAGUARACTIONRPG_FREEFLY
-    cameraController = make<FreeCameraControlsController>(camera, toNotNull(ioSystem->inputController), shared_from_this());
-#else
+
+    noclipCameraController = make<FreeCameraControlsController>(camera, toNotNull(ioSystem->inputController), shared_from_this());
     cameraController = make<AcuteAngleCameraController>(camera, jagObject, shared_from_this());
-#endif
 	cout << "Make animations" << endl;
     animationController = make<AnimationController>(jagObject, shared_from_this());
     animationController->initialize();
@@ -57,7 +55,12 @@ void SceneController::step() {
     inputController->pollKey();
     gameplaySubcontroller->step();
     animationController->step();
-    cameraController->step();
+	if (noclipMode) {
+		noclipCameraController->step();
+	}
+	else {
+	    cameraController->step();
+	}
 	scriptController->step();
     renderer->render(gameData);
 
@@ -65,9 +68,9 @@ void SceneController::step() {
         exit(10);
     }
 
-#if SPACEJAGUARACTIONRPG_FREEFLY
-    cameraController->printout();
-#endif
+	if (noclipPrintoutMode) {
+	    noclipCameraController->printout();
+	}
 
 }
 
@@ -122,3 +125,7 @@ void SceneController::spaceJaguarScriptControllerDidRequestUpdateObjectWithNameA
 	position->z = z;
 	objectsContext->updateObject(object);
 };
+
+void SceneController::spaceJaguarScriptControllerDidRequestChangeNoclipMode(shared_ptr<SpaceJaguarScriptController> , bool noclipMode) {
+	this->noclipMode = noclipMode;
+}
