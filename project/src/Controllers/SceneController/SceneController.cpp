@@ -28,7 +28,7 @@ void SceneController::initialize() {
     auto mapObject= toNotNull(make<MapBuilder>()->makeMap(0, 0, 0));
     objectsContext->addObject(mapObject.sharedPointer());
     cout << "Make Jaguar" << endl;
-    jagObject = GameplayObjectsFactory::makeJag(inputController, shared_from_this());
+    jagObject = GameplayObjectsFactory::makeJag(inputController);
     objectsContext->addObject(jagObject.sharedPointer());
     gameplaySubcontroller->addObject(jagObject);
     cout << "Make camera" << endl;
@@ -53,7 +53,7 @@ void SceneController::step() {
     //FSEGTUtils::setObjectIsVisible(jagObject.sharedPointer(), RandomBool());
 
     inputController->pollKey();
-    gameplaySubcontroller->step();
+    //gameplaySubcontroller->step();
     animationController->step();
     if (noclipMode) {
         noclipCameraController->step();
@@ -78,10 +78,6 @@ void SceneController::cameraControllerDidFinish(shared_ptr<CameraController> ) {
     //cout << "camera controller did finish" << endl;
     objectsContext->updateObject(camera.sharedPointer());
 };
-
-void SceneController::playerOwnerObjectControlsDidFinish(shared_ptr<PlayerOwnerObjectControls> ) {
-    objectsContext->updateObject(jagObject.sharedPointer());
-}
 
 void SceneController::animationControllerDidAddObject(shared_ptr<AnimationController>, NotNull<Object> object) {
     objectsContext->addObject(object.sharedPointer());
@@ -128,4 +124,20 @@ void SceneController::spaceJaguarScriptControllerDidRequestUpdateObjectWithNameA
 
 void SceneController::spaceJaguarScriptControllerDidRequestChangeNoclipMode(shared_ptr<SpaceJaguarScriptController>, bool noclipMode) {
     this->noclipMode = noclipMode;
+}
+
+bool SceneController::spaceJaguarScriptControllerAskingIsKeyPressed(shared_ptr<SpaceJaguarScriptController> , string  key) {
+	if (key == "leftKey") {
+		return inputController->isLeftKeyPressed();
+	}
+	else if (key == "rightKey") {
+		return inputController->isRightKeyPressed();
+	}
+	else if (key == "upKey") {
+		return inputController->isUpKeyPressed();
+	}
+	else if (key == "downKey") {
+		return inputController->isDownKeyPressed();
+	}
+	return false;
 }

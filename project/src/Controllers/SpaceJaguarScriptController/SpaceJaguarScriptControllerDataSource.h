@@ -13,6 +13,7 @@ class SpaceJaguarScriptControllerDataSource {
 
 public:
     virtual shared_ptr<Object> spaceJaguarScriptControllerDidRequestObjectWithName(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string  objectName) = 0;
+    virtual bool spaceJaguarScriptControllerAskingIsKeyPressed(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string  key) = 0;
 
 };
 };

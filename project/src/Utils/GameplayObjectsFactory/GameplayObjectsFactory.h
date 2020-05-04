@@ -4,7 +4,6 @@
 #include <FlameSteelCore/Object.h>
 #include <FlameSteelCore/SharedNotNullPointer.h>
 #include <FlameSteelEngineGameToolkit/IO/Input/InputController.h>
-#include <Controllers/SceneController/ObjectControls/PlayerOwnerObjectControls/PlayerOwnerObjectControlsDelegate.h>
 
 using namespace Shortcuts;
 using namespace FlameSteelCore;
@@ -15,7 +14,7 @@ namespace SpaceJaguarActionRPG {
 class GameplayObjectsFactory {
 
 public:
-    static NotNull<Object> makeJag(NotNull<InputController> inputController, weak_ptr<PlayerOwnerObjectControlsDelegate> delegate);
+    static NotNull<Object> makeJag(NotNull<InputController> inputController);
 
 };
 

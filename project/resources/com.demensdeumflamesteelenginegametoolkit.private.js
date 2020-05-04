@@ -9,7 +9,7 @@ function newObjectWithIdAndPositionXYZ__private(id, x, y, z) {
     object.name = id;
     object.position = position;
     
-    print("newObjectWithIdAndPosition__private");
+    print("newObjectWithIdAndPosition__private: " + object.name);
     
     return object;
 };

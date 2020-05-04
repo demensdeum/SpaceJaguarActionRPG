@@ -5,6 +5,19 @@
 using namespace std;
 using namespace SpaceJaguarActionRPG;
 
+void tinyjSBindingsToFlameSteelEngineGameToolkit_IsKeyPressed(CScriptVar *v, void *context) {
+    auto container = (SpaceJaguarScriptControllerCallContainer *) context;
+	auto key = v->getParameter("key")->getString();
+    shared_ptr<SpaceJaguarScriptController> spaceJaguarScriptController = container->spaceJaguarScriptController;
+    auto tinyJS = container->tinyJS;
+    auto dataSourceLocked = spaceJaguarScriptController->dataSource.lock();
+    if (dataSourceLocked == nullptr) {
+        throwRuntimeException("tinyjSBindingsToFlameSteelEngineGameToolkit_IsKeyPressed error: can't lock dataSource");
+    }
+    auto isPressed = dataSourceLocked->spaceJaguarScriptControllerAskingIsKeyPressed(spaceJaguarScriptController, key);
+	v->getReturnVar()->setInt(isPressed);
+}
+
 void tinyJSBindingsToFlameSteelEngineGameToolkit_Print(CScriptVar *v, void *) {
     cout << "Tiny-JS print: " << v->getParameter("text")->getString() << endl;
 }
@@ -31,15 +44,17 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_GetObject__private(CScriptVar *
     auto position = FSEGTUtils::getObjectPosition(object);
 
     auto executeString = string("");
-    executeString += "getObject__private__CallResult = newObjectWithIdAndPositionXYZ__private(";
+    executeString += "getObject__private__CallResult = newObjectWithIdAndPositionXYZ__private(\"";
     executeString += *id.get();
-    executeString += ",";
+    executeString += "\",";
     executeString += to_string(position->x);
     executeString += ",";
     executeString += to_string(position->y);
     executeString += ",";
     executeString += to_string(position->z);
     executeString += ");";
+
+	cout << "Get object execute string: " << executeString << endl;
 
     tinyJS->execute(executeString);
 }
@@ -50,7 +65,7 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_EnableNoclip(CScriptVar *, void
     auto tinyJS = container->tinyJS;
     auto delegateLocked = spaceJaguarScriptController->delegate.lock();
     if (delegateLocked == nullptr) {
-        throwRuntimeException("tinyjSBindingsToFlameSteelEngineGameToolkit_AddObject error: can't lock delegate");
+        throwRuntimeException("tinyjSBindingsToFlameSteelEngineGameToolkit_EnableNoclip error: can't lock delegate");
     }
     delegateLocked->spaceJaguarScriptControllerDidRequestChangeNoclipMode(spaceJaguarScriptController, true);
 }
@@ -61,7 +76,7 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_DisableNoclip(CScriptVar *, voi
     auto tinyJS = container->tinyJS;
     auto delegateLocked = spaceJaguarScriptController->delegate.lock();
     if (delegateLocked == nullptr) {
-        throwRuntimeException("tinyjSBindingsToFlameSteelEngineGameToolkit_AddObject error: can't lock delegate");
+        throwRuntimeException("tinyjSBindingsToFlameSteelEngineGameToolkit_DisableNoclip error: can't lock delegate");
     }
     delegateLocked->spaceJaguarScriptControllerDidRequestChangeNoclipMode(spaceJaguarScriptController, false);
 }
@@ -119,6 +134,7 @@ void SpaceJaguarScriptController::initialize() {
         tinyJS->addNative("function updateObject__private(name, x, y, z)", &tinyjSBindingsToFlameSteelEngineGameToolkit_UpdateObject__private, callContainer.get());
         tinyJS->addNative("function GRANNYPILLS()", &tinyjSBindingsToFlameSteelEngineGameToolkit_EnableNoclip, callContainer.get());
         tinyJS->addNative("function HANGOVER()", &tinyjSBindingsToFlameSteelEngineGameToolkit_DisableNoclip, callContainer.get());
+	tinyJS->addNative("function isKeyPressed(key)", &tinyjSBindingsToFlameSteelEngineGameToolkit_IsKeyPressed, callContainer.get());
         tinyJS->execute("include(\"com.demensdeum.flamesteelenginegametoolkit.bindings.js\");");
         tinyJS->execute("include(\"com.demensdeumflamesteelenginegametoolkit.private.js\");");
         tinyJS->execute("print(\"Binding success\");");
