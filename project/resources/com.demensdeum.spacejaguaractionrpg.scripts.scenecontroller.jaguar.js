@@ -1,3 +1,18 @@
+function addJaguarToScene() {
+    var jaguar = new Object();
+    jaguar.name = "Jaguar";
+    jaguar.modelPath = "com.demensdeum.deathmaskgame.combatdrone.fsglmodel";
+    
+    var position = new Object();
+    position.x = 10;
+    position.y = 0;
+    position.z = 10;
+    
+    jaguar.position = position;
+    
+    addObject(jaguar);
+}
+
 function jaguarControllerStep() {
     
     var moveSpeed = 0.1;

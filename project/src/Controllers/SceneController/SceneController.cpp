@@ -3,7 +3,6 @@
 #include <Utils/CubeBuilder/CubeBuilder.h>
 #include <Utils/MapBuilder/MapBuilder.h>
 #include <FlameSteelEngineGameToolkit/Utils/Factory.h>
-#include <Utils/GameplayObjectsFactory/GameplayObjectsFactory.h>
 #include <FlameSteelEngineGameToolkit/Utils/FSEGTUtils.h>
 #include <FlameSteelCore/Utils.h>
 #include <FlameSteelEngineGameToolkit/Data/Components/FSEGTFactory.h>
@@ -14,7 +13,6 @@ using namespace FlameSteelEngine::GameToolkit::Utils;
 
 void SceneController::initialize() {
     isInitialized = true;
-    gameplaySubcontroller = make<GameplaySubcontroller>();
     inputController = toNotNull(ioSystem->inputController);
     camera = Factory::makeObject(
                  make_shared<string>("camera"),
@@ -27,17 +25,9 @@ void SceneController::initialize() {
     cout << "Make map" << endl;
     auto mapObject= toNotNull(make<MapBuilder>()->makeMap(0, 0, 0));
     objectsContext->addObject(mapObject.sharedPointer());
-    cout << "Make Jaguar" << endl;
-    jagObject = GameplayObjectsFactory::makeJag(inputController);
-    objectsContext->addObject(jagObject.sharedPointer());
-    gameplaySubcontroller->addObject(jagObject);
-    cout << "Make camera" << endl;
 
+    cout << "Make camera" << endl;
     noclipCameraController = make<FreeCameraControlsController>(camera, toNotNull(ioSystem->inputController), shared_from_this());
-    cameraController = make<AcuteAngleCameraController>(camera, jagObject, shared_from_this());
-    cout << "Make animations" << endl;
-    animationController = make<AnimationController>(jagObject, shared_from_this());
-    animationController->initialize();
 
     scriptController = make<SpaceJaguarScriptController>();
     scriptController->dataSource = shared_from_this();
@@ -49,19 +39,20 @@ void SceneController::step() {
     if (isInitialized == false) {
         initialize();
     }
-
-    //FSEGTUtils::setObjectIsVisible(jagObject.sharedPointer(), RandomBool());
-
     inputController->pollKey();
-    //gameplaySubcontroller->step();
-    animationController->step();
+    scriptController->step();
+
+	if (jagObject.get() == nullptr) {
+		jagObject = objectsContext->objectWithInstanceIdentifier(make_shared<string>("Jaguar"));
+	    cameraController = make<AcuteAngleCameraController>(camera, jagObject, shared_from_this());
+	}
+
     if (noclipMode) {
         noclipCameraController->step();
     }
     else {
         cameraController->step();
     }
-    scriptController->step();
     renderer->render(gameData);
 
     if (inputController->isExitKeyPressed() == true) {
@@ -78,14 +69,6 @@ void SceneController::cameraControllerDidFinish(shared_ptr<CameraController> ) {
     //cout << "camera controller did finish" << endl;
     objectsContext->updateObject(camera.sharedPointer());
 };
-
-void SceneController::animationControllerDidAddObject(shared_ptr<AnimationController>, NotNull<Object> object) {
-    objectsContext->addObject(object.sharedPointer());
-}
-
-void SceneController::animationControllerDidUpdateObject(shared_ptr<AnimationController>, NotNull<Object> object) {
-    objectsContext->updateObject(object.sharedPointer());
-}
 
 shared_ptr<Object> SceneController::spaceJaguarScriptControllerDidRequestObjectWithName(shared_ptr<SpaceJaguarScriptController>, string  objectName) {
     return objectsContext->objectWithInstanceIdentifier(make_shared<string>(objectName));

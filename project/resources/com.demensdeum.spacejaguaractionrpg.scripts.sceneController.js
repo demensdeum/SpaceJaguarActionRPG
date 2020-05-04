@@ -13,6 +13,7 @@ function initializeIfNeeded() {
     
     initialized = true;
     includeDependencies();
+    addJaguarToScene();
     addEnemiesToScene();
 };
 
