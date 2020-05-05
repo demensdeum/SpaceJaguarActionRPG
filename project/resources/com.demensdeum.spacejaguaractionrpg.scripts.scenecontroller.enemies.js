@@ -43,8 +43,6 @@ function createEnemyWithName(name) {
 function addEnemiesToScene() {
     enemies = [];
     maxEnemiesCount = 100;
-    maxMapWidth = 40;
-    maxMapHeight = 40;
 
     for (var i = 0; i < maxEnemiesCount; i++) {
         print("add enemy to scene at index: " + i);
@@ -52,9 +50,9 @@ function addEnemiesToScene() {
         var enemy = createEnemyWithName(enemyName);        
         enemy.modelPath = "com.demensdeum.deathmaskgame.combatdrone.fsglmodel";
         var randomPosition = new Object();
-        randomPosition.x = Math.randInt(0, maxMapWidth);
+        randomPosition.x = Math.randInt(0, kMapWidth);
         randomPosition.y = 0;
-        randomPosition.z = Math.randInt(0, maxMapHeight);
+        randomPosition.z = Math.randInt(0, kMapHeight);
         enemy.position = randomPosition;
         addObject(enemy);
         enemies[i] = enemy;

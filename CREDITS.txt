@@ -1,0 +1,2 @@
+Art:
+    com.demensdeum.spacejaguaractionrpg.wall.texture.png (Altered) - Wall Texture by InvaderVeex https://www.deviantart.com/invaderveex/art/Forerunner-Tile-165450625

@@ -59,6 +59,11 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_GetObject__private(CScriptVar *
     tinyJS->execute(executeString);
 }
 
+void tinyjSBindingsToFlameSteelEngineGameToolkit_exit(CScriptVar *v, void *) {
+	auto exitCode = v->getParameter("exitCode")->getInt();
+	exit(exitCode);	
+}
+
 void tinyjSBindingsToFlameSteelEngineGameToolkit_EnableNoclip(CScriptVar *, void *context) {
     auto container = (SpaceJaguarScriptControllerCallContainer *) context;
     shared_ptr<SpaceJaguarScriptController> spaceJaguarScriptController = container->spaceJaguarScriptController;
@@ -127,6 +132,7 @@ void SpaceJaguarScriptController::initialize() {
 
     try {
         registerFunctions(tinyJS.get());
+        registerMathFunctions(tinyJS.get());
         tinyJS->addNative("function include(text)", &tinyJSBindingsToFlameSteelEngineGameToolkit_Include, tinyJS.get());
         tinyJS->addNative("function print(text)", &tinyJSBindingsToFlameSteelEngineGameToolkit_Print, 0);
         tinyJS->addNative("function getObject__private(text)", &tinyjSBindingsToFlameSteelEngineGameToolkit_GetObject__private, callContainer.get());
@@ -134,7 +140,8 @@ void SpaceJaguarScriptController::initialize() {
         tinyJS->addNative("function updateObject__private(name, x, y, z)", &tinyjSBindingsToFlameSteelEngineGameToolkit_UpdateObject__private, callContainer.get());
         tinyJS->addNative("function GRANNYPILLS()", &tinyjSBindingsToFlameSteelEngineGameToolkit_EnableNoclip, callContainer.get());
         tinyJS->addNative("function HANGOVER()", &tinyjSBindingsToFlameSteelEngineGameToolkit_DisableNoclip, callContainer.get());
-	tinyJS->addNative("function isKeyPressed(key)", &tinyjSBindingsToFlameSteelEngineGameToolkit_IsKeyPressed, callContainer.get());
+	 tinyJS->addNative("function isKeyPressed(key)", &tinyjSBindingsToFlameSteelEngineGameToolkit_IsKeyPressed, callContainer.get());
+	 tinyJS->addNative("function exit(exitCode)", &tinyjSBindingsToFlameSteelEngineGameToolkit_exit, nullptr);
         tinyJS->execute("include(\"com.demensdeum.flamesteelenginegametoolkit.bindings.js\");");
         tinyJS->execute("include(\"com.demensdeumflamesteelenginegametoolkit.private.js\");");
         tinyJS->execute("print(\"Binding success\");");

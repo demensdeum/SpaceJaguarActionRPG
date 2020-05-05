@@ -4,6 +4,7 @@
 #include <memory>
 #include "tiny-js/TinyJS.h"
 #include "tiny-js/TinyJS_Functions.h"
+#include "tiny-js/TinyJS_MathFunctions.h"
 #include <FlameSteelCore/SharedNotNullPointer.h>
 #include <FlameSteelEngineGameToolkit/Controllers/ScriptController.h>
 #include "SpaceJaguarScriptControllerDataSource.h"
