@@ -75,6 +75,18 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_EnableNoclip(CScriptVar *, void
     delegateLocked->spaceJaguarScriptControllerDidRequestChangeNoclipMode(spaceJaguarScriptController, true);
 }
 
+void tinyJSBindingsToFlameSteelEngineGameToolkit_setWindowTitle(CScriptVar *v, void *context) {
+    auto container = (SpaceJaguarScriptControllerCallContainer *) context;
+    shared_ptr<SpaceJaguarScriptController> spaceJaguarScriptController = container->spaceJaguarScriptController;
+    auto tinyJS = container->tinyJS;
+	auto text = v->getParameter("text")->getString();
+    auto delegateLocked = spaceJaguarScriptController->delegate.lock();
+    if (delegateLocked == nullptr) {
+        throwRuntimeException("tinyJSBindingsToFlameSteelEngineGameToolkit_SetWindowTitle error: can't lock delegate");
+    }
+    delegateLocked->spaceJaguarScriptControllerDidRequestSetWindowTitle(spaceJaguarScriptController, text);
+}
+
 void tinyjSBindingsToFlameSteelEngineGameToolkit_DisableNoclip(CScriptVar *, void *context) {
     auto container = (SpaceJaguarScriptControllerCallContainer *) context;
     shared_ptr<SpaceJaguarScriptController> spaceJaguarScriptController = container->spaceJaguarScriptController;
@@ -133,6 +145,7 @@ void SpaceJaguarScriptController::initialize() {
     try {
         registerFunctions(tinyJS.get());
         registerMathFunctions(tinyJS.get());
+        tinyJS->addNative("function setWindowTitle(text)", &tinyJSBindingsToFlameSteelEngineGameToolkit_setWindowTitle, callContainer.get());
         tinyJS->addNative("function include(text)", &tinyJSBindingsToFlameSteelEngineGameToolkit_Include, tinyJS.get());
         tinyJS->addNative("function print(text)", &tinyJSBindingsToFlameSteelEngineGameToolkit_Print, 0);
         tinyJS->addNative("function getObject__private(text)", &tinyjSBindingsToFlameSteelEngineGameToolkit_GetObject__private, callContainer.get());

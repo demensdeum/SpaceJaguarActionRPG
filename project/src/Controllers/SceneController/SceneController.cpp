@@ -91,6 +91,10 @@ void SceneController::spaceJaguarScriptControllerDidRequestAddObjectWithPath(sha
     objectsContext->addObject(object);
 }
 
+void SceneController::spaceJaguarScriptControllerDidRequestSetWindowTitle(shared_ptr<SpaceJaguarScriptController> , string title) {
+	ioSystem->setWindowTitle(title);
+};
+
 void SceneController::spaceJaguarScriptControllerDidRequestUpdateObjectWithNameAndPositionXYZ(shared_ptr<SpaceJaguarScriptController>, string name, float x, float y, float z) {
     auto object = objectsContext->objectWithInstanceIdentifier(make_shared<string>(name));
     if (object.get() == nullptr) {

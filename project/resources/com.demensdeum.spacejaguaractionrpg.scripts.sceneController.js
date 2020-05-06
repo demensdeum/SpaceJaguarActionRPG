@@ -1,3 +1,5 @@
+kGameTitle = "Space Jaguar v0.0.1";
+
 function includeDependencies() {
     include("com.demensdeum.spacejaguaractionrpg.scripts.sceneController.constants.js");
     include("com.demensdeum.spacejaguaractionrpg.scripts.wallsgenerator.js");
@@ -15,6 +17,7 @@ function initializeIfNeeded() {
     }
     
     initialized = true;
+    setWindowTitle(kGameTitle);    
     includeDependencies();
     addJaguarToScene();
     addEnemiesToScene();

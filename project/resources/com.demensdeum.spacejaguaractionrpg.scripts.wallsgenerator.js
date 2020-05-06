@@ -50,7 +50,7 @@ function drawVerticalLine(x, z, height) {
         var wallName = "wall" + wallsCounter;
         var wall = new Object();
         wall.name = wallName;
-        wall.modelPath = "com.spacejaguaractionrpg.wall.fsglmodel";
+        wall.modelPath = "com.demensdeum.spacejaguaractionrpg.wall.fsglmodel";
         wall.position = position;
         addObject(wall);
         wallsCounter += 1;
