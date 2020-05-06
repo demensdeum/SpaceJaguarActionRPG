@@ -78,7 +78,7 @@ function addWallsRectangle() {
 }
 
 function addWallsToScene() {
-    var rectanglesCount = 6;
+    var rectanglesCount = 2;
     for (var i = 0; i < rectanglesCount; i++) {
         addWallsRectangle();
     }
