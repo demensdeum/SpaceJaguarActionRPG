@@ -2,7 +2,8 @@ function includeDependencies() {
     include("com.demensdeum.spacejaguaractionrpg.scripts.sceneController.constants.js");
     include("com.demensdeum.spacejaguaractionrpg.scripts.wallsgenerator.js");
     include("com.demensdeum.spacejaguaractionrpg.scripts.scenecontroller.enemies.js");
-    include("com.demensdeum.spacejaguaractionrpg.scripts.scenecontroller.jaguar.js");    
+    include("com.demensdeum.spacejaguaractionrpg.scripts.scenecontroller.jaguar.js");
+    include("com.demensdeum.spacejaguaractionrpg.scripts.towns.js");
 }
 
 function initializeIfNeeded() {
@@ -18,6 +19,7 @@ function initializeIfNeeded() {
     addJaguarToScene();
     addEnemiesToScene();
     addWallsToScene();
+    addTownsToScene();
 };
 
 function step() {
@@ -27,4 +29,4 @@ function step() {
 };
 
 step();
-//GRANNYPILLS();
+GRANNYPILLS();
