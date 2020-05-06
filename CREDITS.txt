@@ -1,2 +1,7 @@
 Art:
     com.demensdeum.spacejaguaractionrpg.wall.texture.png (Altered) - Wall Texture by InvaderVeex https://www.deviantart.com/invaderveex/art/Forerunner-Tile-165450625
+    
+Models:
+    com.demensdeum.deathmaskgame.combatdrone.fsglmodel - Demensdeum
+    com.demensdeum.spacejaguaractionrpg.town.fsglmodel - Demensdeum
+    com.demensdeum.spacejaguaractionrpg.wall.fsglmodel - Demensdeum

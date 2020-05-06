@@ -1,5 +1,5 @@
 function addTownsToScene() {
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < 4; i++) {
         var townName = "town" + i;
         var town = new Object();
         town.modelPath = "com.demensdeum.spacejaguaractionrpg.town.fsglmodel";
