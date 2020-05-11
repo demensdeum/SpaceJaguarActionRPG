@@ -1,5 +1,15 @@
 BINDINGS_DEBUG = false;
 
+function createObject() {
+    var object = {
+        playAnimation : function(animationName) {
+            playAnimation__private(this.name, animationName);
+        }
+    };
+    
+    return object;
+}
+
 function getObject(name) {
     getObject__private(name);
     return getObject__private__CallResult;

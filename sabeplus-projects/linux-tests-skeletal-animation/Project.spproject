@@ -3,6 +3,6 @@
     "relativeProjectDirectoryPath" : "/../../",
     "buildCommand" : "sh scripts/buildScripts/linux/build.sh",
     "cleanCommand" : "sh scripts/buildScripts/linux/clean.sh",
-    "runScript" : "sh scripts/testRunners/skeletalAnimation/run.sh"
+    "runScript" : "sh scripts/testRunners/skeletalAnimation/run.sh",
     "debugScript" : "sh scripts/testRunners/skeletalAnimation/debug.sh"
 }

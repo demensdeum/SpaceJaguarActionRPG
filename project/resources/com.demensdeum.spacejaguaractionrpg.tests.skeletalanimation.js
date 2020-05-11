@@ -1,6 +1,6 @@
 print("com.demensdeum.spacejaguaractionrpg.tests.skeletalanimation.js loaded"); 
 
-var jaguar = new Object();
+var jaguar = createObject();
 jaguar.name = "Jaguar";
 jaguar.modelPath = "chibihero.fsglmodel";
     
@@ -12,3 +12,5 @@ position.z = 10;
 jaguar.position = position;
     
 addObject(jaguar);
+
+jaguar.playAnimation("walk");
