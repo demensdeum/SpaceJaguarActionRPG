@@ -15,6 +15,7 @@ using namespace FlameSteelEngine::GameToolkit::Utils;
 class SceneController: public GameController, public enable_shared_from_this<SceneController>, public CameraControllerDelegate, public SpaceJaguarScriptControllerDataSource, public SpaceJaguarScriptControllerDelegate {
 
 public:
+	SceneController(string startScriptPath);
     void step();
     void cameraControllerDidFinish(shared_ptr<CameraController> cameraController);
     shared_ptr<Object> spaceJaguarScriptControllerDidRequestObjectWithName(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string  objectName);
@@ -27,6 +28,7 @@ public:
 private:
     bool noclipPrintoutMode = false;
     bool noclipMode = false;
+	string startScriptPath;
 
     NotNull<SpaceJaguarScriptController> scriptController;
     void initialize();

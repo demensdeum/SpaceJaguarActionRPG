@@ -1,7 +1,7 @@
 function addJaguarToScene() {
     var jaguar = new Object();
     jaguar.name = "Jaguar";
-    jaguar.modelPath = "com.demensdeum.deathmaskgame.combatdrone.fsglmodel";
+    jaguar.modelPath = "chibihero.fsglmodel";
     
     var position = new Object();
     position.x = 10;

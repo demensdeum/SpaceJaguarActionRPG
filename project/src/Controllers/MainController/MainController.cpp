@@ -3,12 +3,21 @@
 
 using namespace FlameSteelEngineProject;
 
+MainController::MainController(shared_ptr<string> startScriptPath) {
+	this->startScriptPath = startScriptPath;
+};
 
 void MainController::start() {
     cout << "MainController::start()" << endl;
 
     mainGameController = make_shared<FlameSteelEngine::GameToolkit::MainGameController>();
-    sceneController = make_shared<SceneController>();
+	string mainScript = "com.demensdeum.flamesteelengine.application.main.js";
+
+	if (startScriptPath.get()) {
+		mainScript = *startScriptPath.get();
+	}
+
+	sceneController = make_shared<SceneController>(mainScript);
 
     mainGameController->setControllerForState(sceneController, scene);
 

@@ -11,6 +11,10 @@ using namespace std;
 using namespace FlameSteelCore::Utils;
 using namespace FlameSteelEngine::GameToolkit::Utils;
 
+SceneController::SceneController(string startScriptPath) {
+	this->startScriptPath = startScriptPath;
+};
+
 void SceneController::initialize() {
     isInitialized = true;
     inputController = toNotNull(ioSystem->inputController);
@@ -32,7 +36,7 @@ void SceneController::initialize() {
     scriptController = make<SpaceJaguarScriptController>();
     scriptController->dataSource = shared_from_this();
     scriptController->delegate = shared_from_this();
-    scriptController->setScriptFromFilePath(string("com.demensdeum.spacejaguaractionrpg.scripts.sceneController.js"));
+    scriptController->setScriptFromFilePath(startScriptPath);
 }
 
 void SceneController::step() {
