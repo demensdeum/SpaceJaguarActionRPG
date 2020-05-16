@@ -1,16 +1,19 @@
-print("com.demensdeum.spacejaguaractionrpg.tests.skeletalanimation.js loaded"); 
-
-var jaguar = createObject();
-jaguar.name = "Jaguar";
-jaguar.modelPath = "chibihero.fsglmodel";
+if (initialized != true) {
+    print("com.demensdeum.spacejaguaractionrpg.tests.skeletalanimation.js loaded");
+    initialized = true;
     
-var position = new Object();
-position.x = 10;
-position.y = 0;
-position.z = 10;
+    var jaguar = createObject();
+    jaguar.name = "Jaguar";
+    jaguar.modelPath = "chibihero.fsglmodel";
+    
+    var position = new Object();
+    position.x = 10;
+    position.y = 0;
+    position.z = 10;
    
-jaguar.position = position;
+    jaguar.position = position;
     
-addObject(jaguar);
+    addObject(jaguar);
 
-jaguar.playAnimation("walk");
+    jaguar.playAnimation("walk");
+}
