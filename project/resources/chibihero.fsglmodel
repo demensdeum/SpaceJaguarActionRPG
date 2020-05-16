@@ -2180,9 +2180,11 @@ Vertex - x = -0.005327, y = 0.25796, z = 0.056035, u = 0.020071, v = 0.453126
 Bone - Animation Test Bone
     Vertex Weight - 0, 1.0
 Bone End
+Node - WholeBody
+Node End 
 Animations
-    Animation - Test Animation, duration = 1.0
-        Node Animation - Test Animation
+    Animation - walk, duration = 4.0
+        Node Animation - WholeBody
             Position Keyframes
                 VectorKeyframe - time = 0.0, x = 0.0, y = 0.0, z = 0.0
                 VectorKeyframe - time = 1.0, x = 0.0, y = 0.0, z = 1.0

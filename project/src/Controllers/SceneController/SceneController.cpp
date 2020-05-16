@@ -132,3 +132,21 @@ bool SceneController::spaceJaguarScriptControllerAskingIsKeyPressed(shared_ptr<S
 	}
 	return false;
 }
+
+void SceneController::spaceJaguarScriptControllerDidRequestPlayAnimationForObjectWithName(
+	shared_ptr<SpaceJaguarScriptController> , 
+	string animationName, 
+	string objectName
+) 
+{
+	cout << "requested animation play: \"" << animationName << "\" for object with name: \"" << objectName << "\"" << endl;
+    auto object = objectsContext->objectWithInstanceIdentifier(make_shared<string>(objectName));
+    if (object.get() == nullptr) {
+        auto errorString = string("SceneController play animation error, no object with name: ");
+        errorString += objectName;
+        throwRuntimeException(errorString);
+    }
+
+	FSEGTUtils::setCurrentAnimationNameForObject(animationName, object);
+	objectsContext->updateObject(object);
+};

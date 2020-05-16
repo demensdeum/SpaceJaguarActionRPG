@@ -24,6 +24,7 @@ public:
     void spaceJaguarScriptControllerDidRequestChangeNoclipMode(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, bool noclipMode);
 	bool spaceJaguarScriptControllerAskingIsKeyPressed(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string  key);
 	void spaceJaguarScriptControllerDidRequestSetWindowTitle(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string title);
+	void spaceJaguarScriptControllerDidRequestPlayAnimationForObjectWithName(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string animationName, string objectName);
 
 private:
     bool noclipPrintoutMode = false;

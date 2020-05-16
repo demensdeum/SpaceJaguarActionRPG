@@ -87,8 +87,16 @@ void tinyJSBindingsToFlameSteelEngineGameToolkit_setWindowTitle(CScriptVar *v, v
     delegateLocked->spaceJaguarScriptControllerDidRequestSetWindowTitle(spaceJaguarScriptController, text);
 }
 
-void tinyjSBindingsToFlameSteelEngineGameToolkit_PlayAnimation__private(CScriptVar *, void *) {
-	cout << "tinyjSBindingsToFlameSteelEngineGameToolkit_PlayAnimation__private" << endl;
+void tinyjSBindingsToFlameSteelEngineGameToolkit_PlayAnimation__private(CScriptVar *v, void *context) {
+	auto container = (SpaceJaguarScriptControllerCallContainer *) context;
+	shared_ptr<SpaceJaguarScriptController> spaceJaguarScriptController = container->spaceJaguarScriptController;
+	auto animationName = v->getParameter("animationName")->getString();
+	auto objectName = v->getParameter("objectName")->getString();
+	auto delegateLocked = spaceJaguarScriptController->delegate.lock();
+    if (delegateLocked == nullptr) {
+        throwRuntimeException("tinyjSBindingsToFlameSteelEngineGameToolkit_PlayAnimation__private error: can't lock delegate");
+    }
+    delegateLocked->spaceJaguarScriptControllerDidRequestPlayAnimationForObjectWithName(spaceJaguarScriptController, animationName, objectName);
 }
 
 void tinyjSBindingsToFlameSteelEngineGameToolkit_DisableNoclip(CScriptVar *, void *context) {
