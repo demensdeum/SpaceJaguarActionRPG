@@ -1,3 +1,3 @@
  scripts/buildScripts/linux/build.sh
  cd build/linux/FlameSteelEngineProject/
-./FlameSteelEngineProject com.demensdeum.spacejaguaractionrpg.tests.skeletalanimation.js
+konsole -e ./FlameSteelEngineProject com.demensdeum.spacejaguaractionrpg.tests.skeletalanimation.js
