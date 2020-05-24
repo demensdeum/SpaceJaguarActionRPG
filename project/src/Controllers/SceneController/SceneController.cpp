@@ -27,8 +27,12 @@ void SceneController::initialize() {
              );
     objectsContext->addObject(camera.sharedPointer());
     cout << "Make map" << endl;
-    auto mapObject= toNotNull(make<MapBuilder>()->makeMap(0, 0, 0));
-    objectsContext->addObject(mapObject.sharedPointer());
+
+	if (startScriptPath == "com.demensdeum.flamesteelengine.application.main.js") {
+		auto mapObject= toNotNull(make<MapBuilder>()->makeMap(0, 0, 0));
+		objectsContext->addObject(mapObject.sharedPointer());
+	}
+
 
     cout << "Make camera" << endl;
     noclipCameraController = make<FreeCameraControlsController>(camera, toNotNull(ioSystem->inputController), shared_from_this());
