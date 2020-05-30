@@ -6,6 +6,8 @@
 #include <FlameSteelEngineGameToolkit/Utils/FSEGTUtils.h>
 #include <FlameSteelCore/Utils.h>
 #include <FlameSteelEngineGameToolkit/Data/Components/FSEGTFactory.h>
+#include <FSGL/Data/Matrix/FSGLMatrix.h>
+#include <unistd.h>
 
 using namespace std;
 using namespace FlameSteelCore::Utils;
@@ -44,6 +46,7 @@ void SceneController::initialize() {
 }
 
 void SceneController::step() {
+
     if (isInitialized == false) {
         initialize();
     }
@@ -70,7 +73,6 @@ void SceneController::step() {
     if (noclipPrintoutMode) {
         noclipCameraController->printout();
     }
-
 }
 
 void SceneController::cameraControllerDidFinish(shared_ptr<CameraController> ) {

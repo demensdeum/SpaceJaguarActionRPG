@@ -2178,6 +2178,7 @@ Vertex - x = 0.000892, y = 0.25322, z = 0.041021, u = 0.0008, v = 0.492605
 Vertex - x = 0.000892, y = 0.25796, z = 0.056647, u = 0.003167, v = 0.451515
 Vertex - x = -0.005327, y = 0.25796, z = 0.056035, u = 0.020071, v = 0.453126
 Node - WholeBody
+Matrix 4 - 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1
 Node End
 Bone - TesBone
 Bone End
@@ -4372,6 +4373,10 @@ Animations
                 VectorKeyframe - time = 0.0, x = 0.0, y = 0.0, z = 0.0
                 VectorKeyframe - time = 1.0, x = 0.0, y = 0.0, z = 1.0
             Position Keyframes End
+            Rotation Keyframes
+                QuaternionKeyframe - time = 0.0, w = 0, x = 0.0, y = 0.0, z = 0.0
+                QuaternionKeyframe - time = 1.0, w = 0, x = 1.0, y = 0.0, z = 0.0                
+            Rotation Keyframes End
         Node Animation End
     Animation End
 Animations End
