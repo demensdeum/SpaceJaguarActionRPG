@@ -4374,9 +4374,13 @@ Animations
                 VectorKeyframe - time = 1.0, x = 0.0, y = 0.0, z = 1.0
             Position Keyframes End
             Rotation Keyframes
-                QuaternionKeyframe - time = 0.0, w = 0, x = 0.0, y = 0.0, z = 0.0
-                QuaternionKeyframe - time = 1.0, w = 1, x = 1.0, y = 0.0, z = 1.0                
+                QuaternionKeyframe - time = 0.0, w = 0, x = 1.0, y = 0.0, z = 0.0
+                QuaternionKeyframe - time = 1.0, w = 0, x = 0.0, y = 0.0, z = 0.0                
             Rotation Keyframes End
+            Scaling Keyframes
+                VectorKeyframe - time = 0.0, x = 1.0, y = 1.0, z = 1.0
+                VectorKeyframe - time = 1.0, x = 2.0, y = 2.0, z = 2.0
+            Scaling Keyframes End
         Node Animation End
     Animation End
 Animations End
