@@ -4375,7 +4375,7 @@ Animations
             Position Keyframes End
             Rotation Keyframes
                 QuaternionKeyframe - time = 0.0, w = 0, x = 0.0, y = 0.0, z = 0.0
-                QuaternionKeyframe - time = 1.0, w = 0, x = 1.0, y = 0.0, z = 0.0                
+                QuaternionKeyframe - time = 1.0, w = 1, x = 1.0, y = 0.0, z = 1.0                
             Rotation Keyframes End
         Node Animation End
     Animation End
