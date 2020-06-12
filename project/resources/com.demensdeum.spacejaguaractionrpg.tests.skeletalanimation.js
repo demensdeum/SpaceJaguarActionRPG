@@ -7,13 +7,13 @@ if (initialized != true) {
     jaguar.modelPath = "chibihero.fsglmodel";
     
     var position = new Object();
-    position.x = 10;
-    position.y = 0;
-    position.z = 10;
+    position.x = 8;
+    position.y = -2;
+    position.z = 0;
    
     jaguar.position = position;
     
     addObject(jaguar);
 
-    jaguar.playAnimation("walk");
+    jaguar.playAnimation("Walk");
 }
