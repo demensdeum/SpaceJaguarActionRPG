@@ -19,7 +19,7 @@ function initializeIfNeeded() {
 
         var cube = createObject();
         cube.name = "Cube";
-        cube.modelPath = "com.flamesteelengine.cube.fsglmodel";
+        cube.modelPath = "com.flamesteelengine.plane.fsglmodel";
 
         var position = createObject();
         position.x = 0;
