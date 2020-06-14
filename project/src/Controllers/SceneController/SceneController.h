@@ -36,9 +36,7 @@ private:
     bool isInitialized = false;
     NotNull<Object> camera;
     NotNull<InputController> inputController;
-
-    NotNull<FreeCameraControlsController> noclipCameraController;
-    shared_ptr<AcuteAngleCameraController> cameraController;
+    shared_ptr<FreeCameraControlsController> noclipCameraController;
 
 };
 #endif

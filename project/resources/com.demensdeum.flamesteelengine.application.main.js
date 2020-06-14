@@ -2,36 +2,34 @@ kGameTitle = "Space Jaguar v0.0.1";
 
 function includeDependencies() {
     include("com.demensdeum.flamesteelengine.utils.js");
-    include("com.demensdeum.spacejaguaractionrpg.scripts.sceneController.constants.js");
-    include("com.demensdeum.spacejaguaractionrpg.scripts.wallsgenerator.js");
-    include("com.demensdeum.spacejaguaractionrpg.scripts.scenecontroller.enemies.js");
-    include("com.demensdeum.spacejaguaractionrpg.scripts.scenecontroller.jaguar.js");
-    include("com.demensdeum.spacejaguaractionrpg.scripts.towns.js");
 }
 
 function initializeIfNeeded() {
     if (initialized === undefined) {
+      initialized = true;
         print("initialize");
     }
     else {
         return;
     }
-    
-    initialized = true;
-    setWindowTitle(kGameTitle);    
-    includeDependencies();
-    addJaguarToScene();
-    addEnemiesToScene();
-    addWallsToScene();
-    addTownsToScene();
-    addDefaultCamera();
-    GRANNYPILLS();    
-};
 
-function step() {
-	initializeIfNeeded();
-    enemiesControllerStep();
-    jaguarControllerStep();
-};
+      setWindowTitle(kGameTitle); 
+        includeDependencies();
+        addDefaultCamera();
 
-step();
+        var cube = createObject();
+        cube.name = "Cube";
+        cube.modelPath = "com.flamesteelengine.cube.fsglmodel";
+
+        var position = createObject();
+        position.x = 0;
+        position.y = 0;
+        position.z = 0;
+
+        cube.position = position;
+        addObject(cube);
+
+        GRANNYPILLS();
+}
+
+initializeIfNeeded();

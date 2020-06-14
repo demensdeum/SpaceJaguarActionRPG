@@ -21,11 +21,6 @@ void SceneController::initialize() {
     isInitialized = true;
     inputController = toNotNull(ioSystem->inputController);
 
-	if (startScriptPath == "com.demensdeum.flamesteelengine.application.main.js") {
-		auto mapObject= toNotNull(make<MapBuilder>()->makeMap(0, 0, 0));
-		objectsContext->addObject(mapObject.sharedPointer());
-	}
-
     scriptController = make<SpaceJaguarScriptController>();
     scriptController->dataSource = shared_from_this();
     scriptController->delegate = shared_from_this();
@@ -40,19 +35,17 @@ void SceneController::step() {
     inputController->pollKey();
     scriptController->step();
 
-	if (cameraController.get() == nullptr) {
-		auto jagObject = objectsContext->objectWithInstanceIdentifier(make_shared<string>("Jaguar"));
-		camera = objectsContext->objectWithInstanceIdentifier(make_shared<string>("camera"));
-    		noclipCameraController = make<FreeCameraControlsController>(camera, toNotNull(ioSystem->inputController), shared_from_this());
-	    	cameraController = make_shared<AcuteAngleCameraController>(camera, jagObject, shared_from_this());
-	}
-
     if (noclipMode) {
+	if (noclipCameraController.get() == nullptr) {
+		camera = objectsContext->objectWithInstanceIdentifier(make_shared<string>("camera"));
+		if (camera.get() == nullptr) {
+			throwRuntimeException("Camera is null, so can't use GRANNYPILLS mode, crashing");
+		}
+		noclipCameraController = make_shared<FreeCameraControlsController>(camera, toNotNull(ioSystem->inputController), shared_from_this());
+	}
         noclipCameraController->step();
     }
-    else {
-        cameraController->step();
-    }
+
     renderer->render(gameData);
 
     if (inputController->isExitKeyPressed() == true) {
