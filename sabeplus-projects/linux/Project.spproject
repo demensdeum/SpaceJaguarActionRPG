@@ -3,5 +3,6 @@
     "relativeProjectDirectoryPath" : "/../../",
     "buildCommand" : "sh scripts/buildScripts/linux/build.sh",
     "cleanCommand" : "sh scripts/buildScripts/linux/clean.sh",
-    "runScript" : "sh scripts/buildScripts/linux/run.sh"
+    "runScript" : "sh scripts/buildScripts/linux/run.sh",
+    "debugScript" : "sh scripts/buildScripts/linux/debug.sh"
 }

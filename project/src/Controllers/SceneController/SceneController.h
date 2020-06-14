@@ -36,9 +36,9 @@ private:
     bool isInitialized = false;
     NotNull<Object> camera;
     NotNull<InputController> inputController;
-	shared_ptr<Object> jagObject;
 
     NotNull<FreeCameraControlsController> noclipCameraController;
-    NotNull<AcuteAngleCameraController> cameraController;
+    shared_ptr<AcuteAngleCameraController> cameraController;
+
 };
 #endif

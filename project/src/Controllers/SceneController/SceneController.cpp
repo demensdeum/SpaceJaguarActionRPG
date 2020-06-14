@@ -20,24 +20,11 @@ SceneController::SceneController(string startScriptPath) {
 void SceneController::initialize() {
     isInitialized = true;
     inputController = toNotNull(ioSystem->inputController);
-    camera = Factory::makeObject(
-                 make_shared<string>("camera"),
-                 make_shared<string>("camera"),
-                 0,0,0,
-                 1,1,1,
-                 0,0,0
-             );
-    objectsContext->addObject(camera.sharedPointer());
-    cout << "Make map" << endl;
 
 	if (startScriptPath == "com.demensdeum.flamesteelengine.application.main.js") {
 		auto mapObject= toNotNull(make<MapBuilder>()->makeMap(0, 0, 0));
 		objectsContext->addObject(mapObject.sharedPointer());
 	}
-
-
-    cout << "Make camera" << endl;
-    noclipCameraController = make<FreeCameraControlsController>(camera, toNotNull(ioSystem->inputController), shared_from_this());
 
     scriptController = make<SpaceJaguarScriptController>();
     scriptController->dataSource = shared_from_this();
@@ -53,9 +40,11 @@ void SceneController::step() {
     inputController->pollKey();
     scriptController->step();
 
-	if (jagObject.get() == nullptr) {
-		jagObject = objectsContext->objectWithInstanceIdentifier(make_shared<string>("Jaguar"));
-	    cameraController = make<AcuteAngleCameraController>(camera, jagObject, shared_from_this());
+	if (cameraController.get() == nullptr) {
+		auto jagObject = objectsContext->objectWithInstanceIdentifier(make_shared<string>("Jaguar"));
+		camera = objectsContext->objectWithInstanceIdentifier(make_shared<string>("camera"));
+    		noclipCameraController = make<FreeCameraControlsController>(camera, toNotNull(ioSystem->inputController), shared_from_this());
+	    	cameraController = make_shared<AcuteAngleCameraController>(camera, jagObject, shared_from_this());
 	}
 
     if (noclipMode) {
@@ -85,11 +74,17 @@ shared_ptr<Object> SceneController::spaceJaguarScriptControllerDidRequestObjectW
 }
 
 void SceneController::spaceJaguarScriptControllerDidRequestAddObjectWithPath(shared_ptr<SpaceJaguarScriptController>, string name, string  modelPath, float x, float y, float z) {
+
+	shared_ptr<string> modelPathSharedPtr;
+	if (modelPath != "undefined") {
+		modelPathSharedPtr = make_shared<string>(modelPath);
+	}
+
     auto object = FSEGTFactory::makeOnSceneObject(
                       make_shared<string>(name),
                       make_shared<string>(name),
                       shared_ptr<string>(),
-                      make_shared<string>(modelPath),
+                      modelPathSharedPtr,
                       shared_ptr<string>(),
                       x, y, z,
                       1, 1, 1,

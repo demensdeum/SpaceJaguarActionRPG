@@ -1,6 +1,7 @@
 kGameTitle = "Space Jaguar v0.0.1";
 
 function includeDependencies() {
+    include("com.demensdeum.flamesteelengine.utils.js");
     include("com.demensdeum.spacejaguaractionrpg.scripts.sceneController.constants.js");
     include("com.demensdeum.spacejaguaractionrpg.scripts.wallsgenerator.js");
     include("com.demensdeum.spacejaguaractionrpg.scripts.scenecontroller.enemies.js");
@@ -23,6 +24,8 @@ function initializeIfNeeded() {
     addEnemiesToScene();
     addWallsToScene();
     addTownsToScene();
+    addDefaultCamera();
+    GRANNYPILLS();    
 };
 
 function step() {
@@ -32,4 +35,3 @@ function step() {
 };
 
 step();
-GRANNYPILLS();
