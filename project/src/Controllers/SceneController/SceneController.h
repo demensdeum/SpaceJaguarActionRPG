@@ -19,7 +19,7 @@ public:
     void step();
     void cameraControllerDidFinish(shared_ptr<CameraController> cameraController);
     shared_ptr<Object> spaceJaguarScriptControllerDidRequestObjectWithName(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string  objectName);
-    void spaceJaguarScriptControllerDidRequestAddObjectWithPath(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string name, string  modelPath, float x, float y, float z);
+    void spaceJaguarScriptControllerDidRequestAddObjectWithPath(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string name, string  modelPath, float x, float y, float z, float rX, float rY, float rZ);
     void spaceJaguarScriptControllerDidRequestUpdateObjectWithNameAndPositionXYZ(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string name, float x, float y, float z);
     void spaceJaguarScriptControllerDidRequestChangeNoclipMode(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, bool noclipMode);
 	bool spaceJaguarScriptControllerAskingIsKeyPressed(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string  key);
@@ -27,7 +27,9 @@ public:
 	void spaceJaguarScriptControllerDidRequestPlayAnimationForObjectWithName(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string animationName, string objectName);
 
 private:
-    bool noclipPrintoutMode = false;
+
+	void cleanAndRestartScriptEngine();
+
     bool noclipMode = false;
 	string startScriptPath;
 

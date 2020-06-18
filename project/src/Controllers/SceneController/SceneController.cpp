@@ -21,10 +21,7 @@ void SceneController::initialize() {
     isInitialized = true;
     inputController = toNotNull(ioSystem->inputController);
 
-    scriptController = make<SpaceJaguarScriptController>();
-    scriptController->dataSource = shared_from_this();
-    scriptController->delegate = shared_from_this();
-    scriptController->setScriptFromFilePath(startScriptPath);
+	cleanAndRestartScriptEngine();
 }
 
 void SceneController::step() {
@@ -36,14 +33,12 @@ void SceneController::step() {
     scriptController->step();
 
     if (noclipMode) {
-	if (noclipCameraController.get() == nullptr) {
-		camera = objectsContext->objectWithInstanceIdentifier(make_shared<string>("camera"));
-		if (camera.get() == nullptr) {
-			throwRuntimeException("Camera is null, so can't use GRANNYPILLS mode, crashing");
-		}
-		noclipCameraController = make_shared<FreeCameraControlsController>(camera, toNotNull(ioSystem->inputController), shared_from_this());
+	noclipCameraController->step();
+	noclipCameraController->printout();
+	if (inputController->useKeyPressed) {
+		cout << "Use key pressed" << endl;
+		cleanAndRestartScriptEngine();
 	}
-        noclipCameraController->step();
     }
 
     renderer->render(gameData);
@@ -51,10 +46,22 @@ void SceneController::step() {
     if (inputController->isExitKeyPressed() == true) {
         exit(10);
     }
+}
 
-    if (noclipPrintoutMode) {
-        noclipCameraController->printout();
-    }
+void SceneController::cleanAndRestartScriptEngine() {
+	objectsContext->removeAllObjects();
+    scriptController = make<SpaceJaguarScriptController>();
+    scriptController->dataSource = shared_from_this();
+    scriptController->delegate = shared_from_this();
+    scriptController->setScriptFromFilePath(startScriptPath);	
+	scriptController->step();
+
+		camera = objectsContext->objectWithInstanceIdentifier(make_shared<string>("camera"));
+		if (camera.get() == nullptr) {
+			throwRuntimeException("Camera is null, so can't use GRANNYPILLS mode, crashing");
+		}
+		noclipCameraController = make_shared<FreeCameraControlsController>(camera, toNotNull(ioSystem->inputController), shared_from_this());
+
 }
 
 void SceneController::cameraControllerDidFinish(shared_ptr<CameraController> ) {
@@ -66,7 +73,7 @@ shared_ptr<Object> SceneController::spaceJaguarScriptControllerDidRequestObjectW
     return objectsContext->objectWithInstanceIdentifier(make_shared<string>(objectName));
 }
 
-void SceneController::spaceJaguarScriptControllerDidRequestAddObjectWithPath(shared_ptr<SpaceJaguarScriptController>, string name, string  modelPath, float x, float y, float z) {
+void SceneController::spaceJaguarScriptControllerDidRequestAddObjectWithPath(shared_ptr<SpaceJaguarScriptController>, string name, string  modelPath, float x, float y, float z, float rX, float rY, float rZ) {
 
 	shared_ptr<string> modelPathSharedPtr;
 	if (modelPath != "undefined") {
@@ -81,7 +88,7 @@ void SceneController::spaceJaguarScriptControllerDidRequestAddObjectWithPath(sha
                       shared_ptr<string>(),
                       x, y, z,
                       1, 1, 1,
-                      0, 0, 0,
+                      rX, rY, rZ,
                       0);
 
     cout << "SceneController addObject with name: " << name << endl;

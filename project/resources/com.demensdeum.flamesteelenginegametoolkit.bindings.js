@@ -19,7 +19,12 @@ function addObject(object) {
     var x = object.position.x;
     var y = object.position.y;
     var z = object.position.z;
-    addObject__private(object.name, object.modelPath, x, y, z);
+    
+    var rX = object.rotation.x;
+    var rY = object.rotation.y;
+    var rZ = object.rotation.z;
+        
+    addObject__private(object.name, object.modelPath, x, y, z, rX, rY, rZ);
 }
 
 function updateObject(object) {
