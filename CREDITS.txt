@@ -1,5 +1,6 @@
 Art:
     com.demensdeum.spacejaguaractionrpg.wall.texture.png (Altered) - Wall Texture by InvaderVeex https://www.deviantart.com/invaderveex/art/Forerunner-Tile-165450625
+    com.demensdeum.spacejaguaractionrpg.space.texture (Altered) - East Asia from Space by Kevin Gill https://www.flickr.com/photos/kevinmgill/ https://www.flickr.com/photos/kevinmgill/25870926061/
     
 Models:
     com.demensdeum.deathmaskgame.combatdrone.fsglmodel - Demensdeum

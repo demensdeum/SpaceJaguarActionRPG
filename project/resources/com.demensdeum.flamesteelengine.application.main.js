@@ -2,6 +2,7 @@ function includeDependencies() {
     include("com.demensdeum.flamesteelengine.utils.js");
     include("com.demensdeum.spacejaguaractionrpg.enginelogocontroller.js");
     include("com.demensdeum.spacejaguaractionrpg.companylogocontroller.js");
+    include("com.demensdeum.spacejaguaractionrpg.menucontroller.js");
 }
 
 function createContext() {
@@ -16,6 +17,7 @@ function createContext() {
                 
                 this.companyLogoController = CreateCompanyLogoController();
                 this.engineLogoController = CreateEngineLogoController();
+                this.menuController = CreateMenuController();
                 
                 this.setCurrentController(this.companyLogoController);
                 this.initialized = true;
@@ -33,6 +35,9 @@ function createContext() {
             removeAllObjects();
             if (controller == this.companyLogoController) {
                 this.setCurrentController(this.engineLogoController);
+            }
+            else if (controller == this.engineLogoController) {
+                this.setCurrentController(this.menuController);
             }
             
         }

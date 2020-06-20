@@ -1,4 +1,4 @@
-function CreateEngineLogoController() {
+function CreateMenuController() {
     var controller = {
         initializeIfNeeded : function() {
             if (this.initialized === undefined) {               
@@ -9,7 +9,7 @@ function CreateEngineLogoController() {
 
                 var cube = createObject();
                 cube.name = "Cube";
-                cube.modelPath = "com.flamesteelengine.plane.fsglmodel";
+                cube.modelPath = "com.demensdeum.spacejaguaractionrpg.space.fsglmodel";
 
                 var position = new Object();
                 position.x = 0;
@@ -23,12 +23,7 @@ function CreateEngineLogoController() {
         },
         step : function() {
             this.initializeIfNeeded();
-            this.timer += 1;
-            if (this.timer > 100) {
-                this.delegate.controllerDidFinish(this);
-            }
-            print(this.timer);            
-            print("Engine Logo Controller Step");
+            print("Menu Controller Step");
         }
     };
     return controller;
