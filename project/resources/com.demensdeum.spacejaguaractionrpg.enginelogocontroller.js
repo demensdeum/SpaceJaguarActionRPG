@@ -5,6 +5,7 @@ function CreateEngineLogoController() {
                 this.initialized = true;
 
                 setWindowTitle(kGameTitle); 
+                this.timer = 0;
                 addDefaultCameraAtXYZAndRotationXYZ(1.7762, 0.03278, 0, 90, 0, 0);
 
                 var cube = createObject();
@@ -19,12 +20,15 @@ function CreateEngineLogoController() {
                 cube.position = position;
                 print("INITIALIZE");
                 addObject(cube);
-
-                GRANNYPILLS();
             }
         },
         step : function() {
             this.initializeIfNeeded();
+            this.timer += 1;
+            if (this.timer > 100) {
+                this.delegate.controllerDidFinish(this);
+            }
+            print(this.timer);            
             print("Engine Logo Controller Step");
         }
     };

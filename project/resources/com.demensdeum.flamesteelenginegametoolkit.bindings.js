@@ -36,3 +36,7 @@ function updateObject(object) {
     }
     updateObject__private(object.name, x, y, z);    
 };
+
+function removeAllObjects() {
+    removeAllObjects__private();
+}

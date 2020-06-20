@@ -145,6 +145,17 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_UpdateObject__private(CScriptVa
     delegateLocked->spaceJaguarScriptControllerDidRequestUpdateObjectWithNameAndPositionXYZ(spaceJaguarScriptController, name, x, y, z);
 }
 
+void tinyjSBindingsToFlameSteelEngineGameToolkit_RemoveAllObjects__private(CScriptVar *, void *context) {
+    auto container = (SpaceJaguarScriptControllerCallContainer *) context;
+    shared_ptr<SpaceJaguarScriptController> spaceJaguarScriptController = container->spaceJaguarScriptController;
+    auto tinyJS = container->tinyJS;
+    auto delegateLocked = spaceJaguarScriptController->delegate.lock();
+    if (delegateLocked == nullptr) {
+        throwRuntimeException("tinyjSBindingsToFlameSteelEngineGameToolkit_UpdateObject error: can't lock delegate");
+    }
+    delegateLocked->spaceJaguarScriptControllerDidRequestRemoveAllObjects(spaceJaguarScriptController);
+}
+
 void tinyJSBindingsToFlameSteelEngineGameToolkit_Include(CScriptVar *v, void *pointerToTinyJS) {
     auto path = v->getParameter("text")->getString();
     cout << "Tiny-JS include: " << path << endl;
@@ -171,6 +182,7 @@ void SpaceJaguarScriptController::initialize() {
         tinyJS->addNative("function HANGOVER()", &tinyjSBindingsToFlameSteelEngineGameToolkit_DisableNoclip, callContainer.get());
 	 tinyJS->addNative("function isKeyPressed(key)", &tinyjSBindingsToFlameSteelEngineGameToolkit_IsKeyPressed, callContainer.get());
 	 tinyJS->addNative("function exit(exitCode)", &tinyjSBindingsToFlameSteelEngineGameToolkit_exit, nullptr);
+        tinyJS->addNative("function removeAllObjects__private()", &tinyjSBindingsToFlameSteelEngineGameToolkit_RemoveAllObjects__private, callContainer.get());
         tinyJS->execute("include(\"com.demensdeum.flamesteelenginegametoolkit.bindings.js\");");
         tinyJS->execute("include(\"com.demensdeumflamesteelenginegametoolkit.private.js\");");
         tinyJS->execute("print(\"Binding success\");");

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <Controllers/MainController/MainController.h>
+#include <FlameSteelCommonTraits/IOSystemParams.h>
 
 using namespace std;
 using namespace FlameSteelEngineProject;
@@ -11,7 +12,10 @@ int main(int argc, char *argv[]) {
 		startScriptPath = make_shared<string>(argv[1]);
 	}
 
-    auto controller = make_shared<MainController>(startScriptPath);
+	auto params = make<IOSystemParams>();
+	params->oldSchoolVibeEnabled = true;
+
+    auto controller = make_shared<MainController>(startScriptPath, params);
     controller->start();
     controller->switchToSceneController();
     controller->startGameLoop();

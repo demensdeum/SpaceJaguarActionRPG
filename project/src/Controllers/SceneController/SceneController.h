@@ -25,6 +25,7 @@ public:
 	bool spaceJaguarScriptControllerAskingIsKeyPressed(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string  key);
 	void spaceJaguarScriptControllerDidRequestSetWindowTitle(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string title);
 	void spaceJaguarScriptControllerDidRequestPlayAnimationForObjectWithName(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string animationName, string objectName);
+	void spaceJaguarScriptControllerDidRequestRemoveAllObjects(shared_ptr<SpaceJaguarScriptController> spaceJaguarController);
 
 private:
 

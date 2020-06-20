@@ -3,8 +3,9 @@
 
 using namespace FlameSteelEngineProject;
 
-MainController::MainController(shared_ptr<string> startScriptPath) {
+MainController::MainController(shared_ptr<string> startScriptPath, NotNull<IOSystemParams> params) {
 	this->startScriptPath = startScriptPath;
+	this->params = params;
 };
 
 void MainController::start() {
@@ -22,7 +23,7 @@ void MainController::start() {
     mainGameController->setControllerForState(sceneController, scene);
 
     ioSystem = make_shared<IOSystem>();
-    ioSystem->initialize();
+    ioSystem->initialize(params);
     window = ioSystem->getWindow();
 
     mainGameController->setIOSystem(ioSystem->getFSGLIOSystem());

@@ -64,6 +64,10 @@ void SceneController::cleanAndRestartScriptEngine() {
 
 }
 
+void SceneController::spaceJaguarScriptControllerDidRequestRemoveAllObjects(shared_ptr<SpaceJaguarScriptController> ) {
+	objectsContext->removeAllObjects();
+}
+
 void SceneController::cameraControllerDidFinish(shared_ptr<CameraController> ) {
     //cout << "camera controller did finish" << endl;
     objectsContext->updateObject(camera.sharedPointer());
