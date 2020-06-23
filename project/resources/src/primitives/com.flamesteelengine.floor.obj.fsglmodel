@@ -1,0 +1,16 @@
+Flame Steel Graphics Library Model @ Demens Deum
+Model version = Happy Sasquatch (1.0)
+Root Node - com.flamesteelengine.floor.obj
+	Node Childs
+		Node - Plane
+	Node Childs End
+Root Node End
+Mesh
+Vertex - x = -1, y = 0, z = -1, u = 0, v = 1
+Vertex - x = -1, y = 0, z = 1, u = 1, v = 1
+Vertex - x = 1, y = -0, z = 1, u = 1, v = 0
+Vertex - x = 1, y = -0, z = -1, u = 0, v = 0
+Index = 0, 1, 2
+Index = 0, 2, 3
+Material - Texture path = <No Path>
+

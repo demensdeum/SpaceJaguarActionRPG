@@ -1,9 +1,11 @@
- function CreateGameplayController() {
+include("com.demensdeum.spacejaguaractionrpg.mazegenerator.js");
+
+function CreateGameplayController() {
     var controller = {
         initializeIfNeeded : function() {
             if (this.initialized === undefined) {               
                 this.initialized = true;
-                this.cameraLockupEnabled = true;
+                this.cameraLockupEnabled = false;
 
                 addDefaultCameraAtXYZAndRotationXYZ(1, 0.03278, 0, 90, 0, 0);
 
@@ -20,6 +22,8 @@
                 addObject(this.hero);
                 
                 this.camera = getObject("camera");
+                
+                this.generateMaze();                
             }
         },
         lockCameraIfNeeded : function() {
@@ -41,6 +45,10 @@
             this.initializeIfNeeded();
             this.lockCameraIfNeeded();
             print("Game Controller step");
+        },
+        generateMaze : function() {
+            var mazeGenerator = CreateMazeGenerator();
+            mazeGenerator.generateMaze();
         }
     };
     return controller;

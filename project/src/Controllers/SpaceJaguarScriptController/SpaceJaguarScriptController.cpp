@@ -222,6 +222,8 @@ void SpaceJaguarScriptController::step() {
         cout << "---[SCRIPT ERROR START]---" << endl;
         cout << "Tiny-JS error: " << error->text << endl;
         cout << "---[SCRIPT ERROR END]---" << endl;
+
+	throwRuntimeException(error->text);
     }
 
 };

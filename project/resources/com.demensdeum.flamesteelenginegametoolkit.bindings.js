@@ -7,6 +7,19 @@ function createObject() {
         }
     };
     
+    var position = new Object();
+    position.x = 0;
+    position.y = 0;
+    position.z = 0;
+    
+    var rotation = new Object();
+    rotation.x = 0;
+    rotation.y = 0;
+    rotation.z = 0;
+    
+    object.position = position;
+    object.rotation = rotation;
+    
     return object;
 }
 
