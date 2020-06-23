@@ -31,10 +31,16 @@ function updateObject(object) {
     var x = object.position.x;
     var y = object.position.y;
     var z = object.position.z;
+    
+    var rX = object.rotation.x;
+    var rY = object.rotation.y;
+    var rZ = object.rotation.z;
+    
     if (BINDINGS_DEBUG) {
-        print("update object: " + object.name + "x: " + x + "y: " + y + "z: " + z);    
+        print("update object: " + object.name + "x: " + x + " y: " + y + " z: " + z + " rX: " + rX + " rY: " + rY + " rZ: " + rZ);    
     }
-    updateObject__private(object.name, x, y, z);    
+
+    updateObject__private(object.name, x, y, z, rX, rY, rZ);
 };
 
 function removeAllObjects() {

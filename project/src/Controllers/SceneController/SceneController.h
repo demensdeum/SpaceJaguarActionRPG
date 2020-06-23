@@ -20,7 +20,7 @@ public:
     void cameraControllerDidFinish(shared_ptr<CameraController> cameraController);
     shared_ptr<Object> spaceJaguarScriptControllerDidRequestObjectWithName(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string  objectName);
     void spaceJaguarScriptControllerDidRequestAddObjectWithPath(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string name, string  modelPath, float x, float y, float z, float rX, float rY, float rZ);
-    void spaceJaguarScriptControllerDidRequestUpdateObjectWithNameAndPositionXYZ(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string name, float x, float y, float z);
+    void spaceJaguarScriptControllerDidRequestUpdateObjectWithNameAndPositionXYZrXrYrZ(shared_ptr<SpaceJaguarScriptController>, string name, float x, float y, float z, float rX, float rY, float rZ);
     void spaceJaguarScriptControllerDidRequestChangeNoclipMode(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, bool noclipMode);
 	bool spaceJaguarScriptControllerAskingIsKeyPressed(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string  key);
 	void spaceJaguarScriptControllerDidRequestSetWindowTitle(shared_ptr<SpaceJaguarScriptController> spaceJaguarController, string title);

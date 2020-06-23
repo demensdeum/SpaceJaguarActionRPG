@@ -23,7 +23,9 @@ function CreateMenuController() {
         },
         step : function() {
             this.initializeIfNeeded();
-            print("Menu Controller Step");
+            if (isKeyPressed("jumpKey")) {
+                this.delegate.controllerDidFinish(this);
+            }
         }
     };
     return controller;

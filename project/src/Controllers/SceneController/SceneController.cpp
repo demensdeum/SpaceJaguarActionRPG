@@ -104,7 +104,7 @@ void SceneController::spaceJaguarScriptControllerDidRequestSetWindowTitle(shared
 	ioSystem->setWindowTitle(title);
 };
 
-void SceneController::spaceJaguarScriptControllerDidRequestUpdateObjectWithNameAndPositionXYZ(shared_ptr<SpaceJaguarScriptController>, string name, float x, float y, float z) {
+void SceneController::spaceJaguarScriptControllerDidRequestUpdateObjectWithNameAndPositionXYZrXrYrZ(shared_ptr<SpaceJaguarScriptController>, string name, float x, float y, float z, float rX, float rY, float rZ) {
     auto object = objectsContext->objectWithInstanceIdentifier(make_shared<string>(name));
     if (object.get() == nullptr) {
         auto errorString = string("SceneController update object error, no object with name: ");
@@ -115,6 +115,12 @@ void SceneController::spaceJaguarScriptControllerDidRequestUpdateObjectWithNameA
     position->x = x;
     position->y = y;
     position->z = z;
+
+    auto rotation = FSEGTUtils::getObjectRotation(object);
+    rotation->x = rX;
+    rotation->y = rY;
+    rotation->z = rZ;
+
     objectsContext->updateObject(object);
 };
 
@@ -134,6 +140,9 @@ bool SceneController::spaceJaguarScriptControllerAskingIsKeyPressed(shared_ptr<S
 	}
 	else if (key == "downKey") {
 		return inputController->isDownKeyPressed();
+	}
+	else if (key == "jumpKey") {
+		return inputController->isJumpKeyPressed();
 	}
 	return false;
 }
