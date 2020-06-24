@@ -1,4 +1,5 @@
 include("com.demensdeum.spacejaguaractionrpg.mazegenerator.js");
+include("com.demensdeum.spacejaguaractionrpg.enemiesgenerator.js");
 
 function CreateGameplayController() {
     var controller = {
@@ -49,6 +50,8 @@ function CreateGameplayController() {
         generateMaze : function() {
             var mazeGenerator = CreateMazeGenerator();
             mazeGenerator.generateMaze();
+            var enemiesGenerator = CreateEnemiesGenerator();
+            enemiesGenerator.generateEnemies();
         }
     };
     return controller;
