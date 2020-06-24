@@ -21,7 +21,7 @@ function createContext() {
                 this.menuController = CreateMenuController();
                 this.gameplayController = CreateGameplayController();
                 
-                this.setCurrentController(this.gameplayController);
+                this.setCurrentController(this.companyLogoController);
                 this.initialized = true;
             }
         },
