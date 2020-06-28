@@ -21,3 +21,7 @@ function addDefaultCameraAtXYZAndRotationXYZ(x, y, z, rX, rY, rZ) {
 function addDefaultCamera() {
     addDefaultCameraAtXYZ(0,0,0);
 }
+
+function pushBackValueToArray(value, array) {
+    array[length] = value;
+}

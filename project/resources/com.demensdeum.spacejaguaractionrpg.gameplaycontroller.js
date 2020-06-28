@@ -6,7 +6,7 @@ function CreateGameplayController() {
         initializeIfNeeded : function() {
             if (this.initialized === undefined) {               
                 this.initialized = true;
-                this.cameraLockupEnabled = false;
+                this.cameraLockupEnabled = true;
 
                 addDefaultCameraAtXYZAndRotationXYZ(1, 0.03278, 0, 90, 0, 0);
 
@@ -20,6 +20,34 @@ function CreateGameplayController() {
                 position.z = 0;
 
                 this.hero.position = position;
+                
+                this.hero.abilities = [];
+                
+                var bladeFightingAbility = new Object();
+                bladeFightingAbility.name = "BLADFG";
+                bladeFightingAbility.description = "Blade fighting ability";
+                bladeFightingAbility.points = 3;
+                
+                var shadyDealsAbility = new Object();
+                shadyDealsAbility.name = "SHADYD";
+                shadyDealsAbility.description = "Shady deals - ability to make not very law abiding deals";
+                shadyDealsAbility.points = 4;
+                
+                var theftTraitsAbility = new Object();
+                theftTraitsAbility.name = "THEFTT";
+                theftTraitsAbility.description = "Theft traits ability - lockpicking, pocketpicking etc.";
+                theftTraitsAbility.points = 3;
+                
+                var healthAbility = new Object();
+                healthAbility.name = "HEALTH";
+                healthAbility.description = "Health ability, on zero you are dead or become zombie/ghost?";
+                healthAbility.points = 10;
+                
+                pushBackValueToArray(bladeFightingAbility, this.hero.abilities);
+                pushBackValueToArray(shadyDealsAbility, this.hero.abilities);
+                pushBackValueToArray(theftTraitsAbility, this.hero.abilities);
+                pushBackValueToArray(healthAbility, this.hero.abilities);
+                
                 addObject(this.hero);
                 
                 this.camera = getObject("camera");
