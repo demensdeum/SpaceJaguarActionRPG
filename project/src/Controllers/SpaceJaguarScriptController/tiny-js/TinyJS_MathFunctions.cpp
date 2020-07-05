@@ -181,6 +181,11 @@ void scMathATan(CScriptVar *c, void *) {
     scReturnDouble( atan( scGetDouble("a") ) );
 }
 
+//Math.atan2(a) - returns trig. arctangent of given angle in radians
+void scMathATan2(CScriptVar *c, void *) {
+    scReturnDouble( atan2( scGetDouble("a"), scGetDouble("b") ) );
+}
+
 //Math.sinh(a) - returns trig. hyperbolic sine of given angle in radians
 void scMathSinh(CScriptVar *c, void *) {
     scReturnDouble( sinh( scGetDouble("a") ) );
@@ -266,6 +271,7 @@ void registerMathFunctions(CTinyJS *tinyJS) {
     tinyJS->addNative("function Math.acos(a)", scMathACos, 0);
     tinyJS->addNative("function Math.tan(a)", scMathTan, 0);
     tinyJS->addNative("function Math.atan(a)", scMathATan, 0);
+    tinyJS->addNative("function Math.atan2(a, b)", scMathATan2, 0);
     tinyJS->addNative("function Math.sinh(a)", scMathSinh, 0);
     tinyJS->addNative("function Math.asinh(a)", scMathASinh, 0);
     tinyJS->addNative("function Math.cosh(a)", scMathCosh, 0);

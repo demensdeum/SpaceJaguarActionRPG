@@ -121,6 +121,8 @@ void SceneController::spaceJaguarScriptControllerDidRequestUpdateObjectWithNameA
     rotation->y = rY;
     rotation->z = rZ;
 
+	cout << "spaceJaguarScriptControllerDidRequestUpdateObjectWithNameAndPositionXYZrXrYrZ: " << rZ << endl;
+
     objectsContext->updateObject(object);
 };
 

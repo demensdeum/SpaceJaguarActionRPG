@@ -42,9 +42,10 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_GetObject__private(CScriptVar *
 
     auto id = object->getInstanceIdentifier();
     auto position = FSEGTUtils::getObjectPosition(object);
+    auto rotation = FSEGTUtils::getObjectRotation(object);
 
     auto executeString = string("");
-    executeString += "getObject__private__CallResult = newObjectWithIdAndPositionXYZ__private(\"";
+    executeString += "getObject__private__CallResult = newObjectWithIdAndPositionXYZrXrYrZ__private(\"";
     executeString += *id.get();
     executeString += "\",";
     executeString += to_string(position->x);
@@ -52,6 +53,12 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_GetObject__private(CScriptVar *
     executeString += to_string(position->y);
     executeString += ",";
     executeString += to_string(position->z);
+    executeString += ",";
+    executeString += to_string(rotation->x);
+    executeString += ",";
+    executeString += to_string(rotation->y);
+    executeString += ",";
+    executeString += to_string(rotation->z);
     executeString += ");";
 
 	cout << "Get object execute string: " << executeString << endl;
@@ -127,7 +134,7 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_AddObject__private(CScriptVar *
         throwRuntimeException("tinyjSBindingsToFlameSteelEngineGameToolkit_AddObject error: can't lock delegate");
     }
     delegateLocked->spaceJaguarScriptControllerDidRequestAddObjectWithPath(spaceJaguarScriptController, name, modelPath, x, y, z, rX, rY, rZ);
-    tinyJS->execute("addObject__private__CallResult = newObjectWithIdAndPositionXYZ__private(0,0,0,0);");
+    tinyJS->execute("addObject__private__CallResult = newObjectWithIdAndPositionXYZrXrYrZ__private(0,0,0,0,0,0,0);");
 }
 
 void tinyjSBindingsToFlameSteelEngineGameToolkit_UpdateObject__private(CScriptVar *v, void *context) {
@@ -138,13 +145,16 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_UpdateObject__private(CScriptVa
     auto z = v->getParameter("z")->getDouble();
     auto rX = v->getParameter("rX")->getDouble();
     auto rY = v->getParameter("rY")->getDouble();
-    auto rZ = v->getParameter("rz")->getDouble();
+    auto rZ = v->getParameter("rZ")->getDouble();
     shared_ptr<SpaceJaguarScriptController> spaceJaguarScriptController = container->spaceJaguarScriptController;
     auto tinyJS = container->tinyJS;
     auto delegateLocked = spaceJaguarScriptController->delegate.lock();
     if (delegateLocked == nullptr) {
         throwRuntimeException("tinyjSBindingsToFlameSteelEngineGameToolkit_UpdateObject error: can't lock delegate");
     }
+
+	cout << "rZ: " << rZ << endl;
+
     delegateLocked->spaceJaguarScriptControllerDidRequestUpdateObjectWithNameAndPositionXYZrXrYrZ(spaceJaguarScriptController, name, x, y, z, rX, rY, rZ);
 }
 
