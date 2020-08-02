@@ -5,15 +5,22 @@ function printVector(vector) {
 function printMatrix(matrix) {
     print("Print Matrix");
     var outputString = "\n";    
-    var rows = [matrix.firstRow, matrix.secondRow, matrix.thirdRow, matrix.fourRow];
-    for (var x = 0; x < rows.length; x++) {
-        var row = rows[x];
+    for (var x = 0; x < matrix.length; x++) {
+        var row = matrix[x];
         for (var y = 0; y < row.length; y++) {
             outputString = outputString + row[y] + ",";
         }
         outputString = outputString + "\n";
     }
     print(outputString);    
+}
+
+function copyVector(vector) {
+    var outputVector = new Object();
+    outputVector.x = vector.x;
+    outputVector.y = vector.y;
+    outputVector.z = vector.z;
+    return outputVector;
 }
 
 function normalizeVector(vector) {
@@ -33,91 +40,126 @@ function crossVectors(lhsVector, rhsVector) {
     return outputVector;
 }
 
-function mat4MulMat4(lhsMatrix, rhsMatrix) {
-    
-    printMatrix(lhsMatrix);
-    printMatrix(rhsMatrix);
-    exit(1);
-    
-    var outputMatrix = new Object();
-    outputMatrix.firstRow = [0, 0, 0, 0];
-    outputMatrix.secondRow = [0, 0, 0, 0];
-    outputMatrix.thirdRow = [0, 0, 0, 0];
-    outputMatrix.fourRow = [0, 0, 0, 0];
-    
-    outputMatrix.firstRow[0] = (lhsMatrix.firstRow[0] * lhsMatrix.firstRow[1] * lhsMatrix.firstRow[2] * lhsMatrix.firstRow[3]) * (rhsMatrix.firstRow[0] * rhsMatrix.secondRow[0] * rhsMatrix.thirdRow[0] * rhsMatrix.fourRow[0]);
-    outputMatrix.firstRow[1] = (lhsMatrix.firstRow[0] * lhsMatrix.firstRow[1] * lhsMatrix.firstRow[2] * lhsMatrix.firstRow[3]) * (rhsMatrix.firstRow[1] * rhsMatrix.secondRow[1] * rhsMatrix.thirdRow[1] * rhsMatrix.fourRow[1]);
-    outputMatrix.firstRow[2] = (lhsMatrix.firstRow[0] * lhsMatrix.firstRow[1] * lhsMatrix.firstRow[2] * lhsMatrix.firstRow[3]) * (rhsMatrix.firstRow[2] * rhsMatrix.secondRow[2] * rhsMatrix.thirdRow[2] * rhsMatrix.fourRow[2]);
-    outputMatrix.firstRow[3] = (lhsMatrix.firstRow[0] * lhsMatrix.firstRow[1] * lhsMatrix.firstRow[2] * lhsMatrix.firstRow[3]) * (rhsMatrix.firstRow[3] * rhsMatrix.secondRow[3] * rhsMatrix.thirdRow[3] * rhsMatrix.fourRow[3]);
-    
-    outputMatrix.secondRow[0] = (lhsMatrix.secondRow[0] * lhsMatrix.secondRow[1] * lhsMatrix.secondRow[2] * lhsMatrix.secondRow[3]) * (rhsMatrix.firstRow[0] * rhsMatrix.secondRow[0] * rhsMatrix.thirdRow[0] * rhsMatrix.fourRow[0]);
-    outputMatrix.secondRow[1] = (lhsMatrix.secondRow[0] * lhsMatrix.secondRow[1] * lhsMatrix.secondRow[2] * lhsMatrix.secondRow[3]) * (rhsMatrix.firstRow[1] * rhsMatrix.secondRow[1] * rhsMatrix.thirdRow[1] * rhsMatrix.fourRow[1]);
-    outputMatrix.secondRow[2] = (lhsMatrix.secondRow[0] * lhsMatrix.secondRow[1] * lhsMatrix.secondRow[2] * lhsMatrix.secondRow[3]) * (rhsMatrix.firstRow[2] * rhsMatrix.secondRow[2] * rhsMatrix.thirdRow[2] * rhsMatrix.fourRow[2]);
-    outputMatrix.secondRow[3] = (lhsMatrix.secondRow[0] * lhsMatrix.secondRow[1] * lhsMatrix.secondRow[2] * lhsMatrix.secondRow[3]) * (rhsMatrix.firstRow[3] * rhsMatrix.secondRow[3] * rhsMatrix.thirdRow[3] * rhsMatrix.fourRow[3]);
-
-    outputMatrix.thirdRow[0] = (lhsMatrix.thirdRow[0] * lhsMatrix.thirdRow[1] * lhsMatrix.thirdRow[2] * lhsMatrix.thirdRow[3]) * (rhsMatrix.firstRow[0] * rhsMatrix.secondRow[0] * rhsMatrix.thirdRow[0] * rhsMatrix.fourRow[0]);
-    outputMatrix.thirdRow[1] = (lhsMatrix.thirdRow[0] * lhsMatrix.thirdRow[1] * lhsMatrix.thirdRow[2] * lhsMatrix.thirdRow[3]) * (rhsMatrix.firstRow[1] * rhsMatrix.secondRow[1] * rhsMatrix.thirdRow[1] * rhsMatrix.fourRow[1]);
-    outputMatrix.thirdRow[2] = (lhsMatrix.thirdRow[0] * lhsMatrix.thirdRow[1] * lhsMatrix.thirdRow[2] * lhsMatrix.thirdRow[3]) * (rhsMatrix.firstRow[2] * rhsMatrix.secondRow[2] * rhsMatrix.thirdRow[2] * rhsMatrix.fourRow[2]);
-    outputMatrix.thirdRow[3] = (lhsMatrix.thirdRow[0] * lhsMatrix.thirdRow[1] * lhsMatrix.thirdRow[2] * lhsMatrix.thirdRow[3]) * (rhsMatrix.firstRow[3] * rhsMatrix.secondRow[3] * rhsMatrix.thirdRow[3] * rhsMatrix.fourRow[3]);    
-
-    outputMatrix.fourRow[0] = (lhsMatrix.fourRow[0] * lhsMatrix.fourRow[1] * lhsMatrix.fourRow[2] * lhsMatrix.fourRow[3]) * (rhsMatrix.firstRow[0] * rhsMatrix.secondRow[0] * rhsMatrix.thirdRow[0] * rhsMatrix.fourRow[0]);
-    outputMatrix.fourRow[1] = (lhsMatrix.fourRow[0] * lhsMatrix.fourRow[1] * lhsMatrix.fourRow[2] * lhsMatrix.fourRow[3]) * (rhsMatrix.firstRow[1] * rhsMatrix.secondRow[1] * rhsMatrix.thirdRow[1] * rhsMatrix.fourRow[1]);
-    outputMatrix.fourRow[2] = (lhsMatrix.fourRow[0] * lhsMatrix.fourRow[1] * lhsMatrix.fourRow[2] * lhsMatrix.fourRow[3]) * (rhsMatrix.firstRow[2] * rhsMatrix.secondRow[2] * rhsMatrix.thirdRow[2] * rhsMatrix.fourRow[2]);
-    outputMatrix.fourRow[3] = (lhsMatrix.fourRow[0] * lhsMatrix.fourdRow[1] * lhsMatrix.fourRow[2] * lhsMatrix.fourdRow[3]) * (rhsMatrix.firstRow[3] * rhsMatrix.secondRow[3] * rhsMatrix.thirdRow[3] * rhsMatrix.fourRow[3]);    
-    
-    printMatrix(outputMatrix);
-    
-    return outputMatrix;
+function dotVectors(l, r) {
+    var o = l.x * r.x + l.y * r.y + l.z * r.z;
+    return o;
 }
 
-function eulerRotationVectorFromMat4(matrix) {
-    var rotationVector = new Object();
-    rotationVector.x = Math.asin(-matrix.thirdRow[2]);
-    if (Math.cos(rotationVector.x) > 0.0001)
-    {
-        rotationVector.y = Math.atan2(matrix.firstRow[3], matrix.thirdRow[3]);
-        rotationVector.z = Math.atan2(matrix.secondRow[1], matrix.secondRow[2]);
-    }
-    else
-    {
-        rotationVector.y = 0.0f;
-        rotationVector.z = Math.atan2(-matrix.firstRow[2], mat.firstRow[1]);
-    }    
+function mat4MulMat4(l, r) {
+        
+    var m = [];
+    m[0] = [0, 0, 0, 0];
+    m[1] = [0, 0, 0, 0];
+    m[2] = [0, 0, 0, 0];
+    m[3] = [0, 0, 0, 0];
+
+    m[0][0] = l[0][0] * r[0][0] + l[0][1] * r[1][0] + l[0][2] * r[2][0] + l[0][3] * r[3][0];
+    m[0][1] = l[0][0] * r[0][1] + l[0][1] * r[1][1] + l[0][2] * r[2][1] + l[0][3] * r[3][1];
+    m[0][2] = l[0][0] * r[0][2] + l[0][1] * r[1][2] + l[0][2] * r[2][2] + l[0][3] * r[3][2];
+    m[0][3] = l[0][0] * r[0][3] + l[0][1] * r[1][3] + l[0][2] * r[2][3] + l[0][3] * r[3][3];
     
+    m[1][0] = l[1][0] * r[0][0] + l[1][1] * r[1][0] + l[1][2] * r[2][0] + l[1][3] * r[3][0];
+    m[1][1] = l[1][0] * r[0][1] + l[1][1] * r[1][1] + l[1][2] * r[2][1] + l[1][3] * r[3][1];
+    m[1][2] = l[1][0] * r[0][2] + l[1][1] * r[1][2] + l[1][2] * r[2][2] + l[1][3] * r[3][2];
+    m[1][3] = l[1][0] * r[0][3] + l[1][1] * r[1][3] + l[1][2] * r[2][3] + l[1][3] * r[3][3];
+
+    m[2][0] = l[2][0] * r[0][0] + l[2][1] * r[1][0] + l[2][2] * r[2][0] + l[2][3] * r[3][0];
+    m[2][1] = l[2][0] * r[0][1] + l[2][1] * r[1][1] + l[2][2] * r[2][1] + l[2][3] * r[3][1];
+    m[2][2] = l[2][0] * r[0][2] + l[2][1] * r[1][2] + l[2][2] * r[2][2] + l[2][3] * r[3][2];
+    m[2][3] = l[2][0] * r[0][3] + l[2][1] * r[1][3] + l[2][2] * r[2][3] + l[2][3] * r[3][3];
+    
+    m[3][0] = l[3][0] * r[0][0] + l[3][1] * r[1][0] + l[3][2] * r[2][0] + l[3][3] * r[3][0];
+    m[3][1] = l[3][0] * r[0][1] + l[3][1] * r[1][1] + l[3][2] * r[2][1] + l[3][3] * r[3][1];
+    m[3][2] = l[3][0] * r[0][2] + l[3][1] * r[1][2] + l[3][2] * r[2][2] + l[3][3] * r[3][2];
+    m[3][3] = l[3][0] * r[0][3] + l[3][1] * r[1][3] + l[3][2] * r[2][3] + l[3][3] * r[3][3];
+    
+    return m;
+}
+
+function eulerRotationVectorFromMat4(m) {
+    var rotationVector = new Object();
+    rotationVector.x = Math.atan2(m[2][1], m[2][2]);
+    rotationVector.y = Math.atan2(-m[2][0], Math.sqrt(m[2][1] * m[2][1] + m[2][2] * m[2][2]));
+    rotationVector.z = Math.atan2(m[1][0], m[0][0]);
     return rotationVector;
 }
 
-function lookAt(sourceVector, frontVector) {
+function toRadians(angle) {
+    return angle * 0.0174;
+}
+
+function vec3minusVec3(l, r) {
     
-    print("lookAt");
-    printVector(sourceVector);
-    printVector(frontVector);
+    var o = new Object();
+    o.x = l.x - r.x;
+    o.y = l.y - r.y;
+    o.z = l.z - r.z;
     
-    var upVector = new Object();
-    upVector.x = 0;
-    upVector.y = 1;
-    upVector.z = 0;
+    return o;
+}
+
+function lookAt(eye, center, up) {
     
-    var rightVector = normalizeVector(crossVectors(frontVector, upVector));    
+    var m = [];
+    m[0] = [1, 0, 0, 0];
+    m[1] = [0, 1, 0, 0];
+    m[2] = [0, 0, 1, 0];
+    m[3] = [0, 0, 0, 1];
     
-    print("Right vector");
-    printVector(rightVector);
-    
-    var lhsMatrix = new Object();
-    lhsMatrix.firstRow  = [rightVector.x, rightVector.y, rightVector.z, 0];
-    lhsMatrix.secondRow = [upVector.x, upVector.y, upVector.z, 0];
-    lhsMatrix.thirdRow  = [frontVector.x, frontVector.y, frontVector.z, 0];
-    lhsMatrix.fourRow  = [0, 0, 0, 1];
-    
-    var rhsMatrix = new Object();
-    rhsMatrix.firstRow = [1, 0, 0, -sourceVector.x];
-    rhsMatrix.secondRow = [0, 1, 0, -sourceVector.y];
-    rhsMatrix.thirdRow = [0, 0, 1, -sourceVector.z];
-    rhsMatrix.fourRow = [0, 0, 0, 1];
+ 		var f = normalizeVector(vec3minusVec3(center, eye));
+ 		var s = normalizeVector(crossVectors(up, f));
+ 		var u = crossVectors(f, s);
+
+		m[0][0] = s.x;
+		m[1][0] = s.y;
+		m[2][0] = s.z;
         
-    var matrix = mat4MulMat4(lhsMatrix, rhsMatrix);
+		m[0][1] = u.x;
+		m[1][1] = u.y;
+		m[2][1] = u.z;
+        
+ 		m[0][2] = f.x;
+ 		m[1][2] = f.y;
+ 		m[2][2] = f.z;
+        
+		m[3][0] = -dotVectors(s, eye);
+		m[3][1] = -dotVectors(u, eye);
+		m[3][2] = -dotVectors(f, eye);    
     
-    return matrix;
+    
+    return m;
+}
+
+function positionVectorToFront(object, distance) {
+    
+            var cameraPosition = object.position;
+            var cameraRotation = object.rotation;
+            
+            var yaw = degreesToRadians(-90 - cameraRotation.x);
+            var pitch = degreesToRadians(0 - cameraRotation.y);
+            
+            var frontVector = new Object();
+            frontVector.x = Math.cos(pitch) * Math.cos(yaw);
+            frontVector.x = frontVector.x * distance;
+            
+            frontVector.y = Math.sin(pitch);
+            frontVector.y = frontVector.y * distance;
+            
+            frontVector.z = Math.cos(pitch) * Math.sin(yaw);
+            frontVector.z = frontVector.z * distance;
+            
+            var targetPosition = copyVector(cameraPosition);
+            targetPosition.x += frontVector.x;
+            targetPosition.y += frontVector.y;
+            targetPosition.z += frontVector.z;
+            
+            var outputVector = new Object();
+            
+            outputVector.x = targetPosition.x;
+            outputVector.y = targetPosition.y;
+            outputVector.z = targetPosition.z;
+            
+            return outputVector;
 }
 
 function degreesToRadians(radians) {

@@ -1,2 +1,2 @@
 cd build/linux/FlameSteelEngineProject/
-konsole -e ./FlameSteelEngineProject
+konsole --hold -e "./FlameSteelEngineProject"
