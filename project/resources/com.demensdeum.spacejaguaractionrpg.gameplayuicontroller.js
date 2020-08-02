@@ -42,8 +42,8 @@ function createGameplayUIController() {
             print("RROOTTATION VECTOR");
             printVector(rotation);
             this.healthBar.rotation.x = rotation.x;
-            this.healthBar.rotation.y = rotation.y;
-            this.healthBar.rotation.z = rotation.z;
+            this.healthBar.rotation.y = rotation.y + toRadians(90);;
+            this.healthBar.rotation.z = -rotation.z;
             
             updateObject(this.healthBar);
         }

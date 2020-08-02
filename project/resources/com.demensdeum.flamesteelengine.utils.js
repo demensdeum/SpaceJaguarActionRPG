@@ -77,11 +77,24 @@ function mat4MulMat4(l, r) {
 }
 
 function eulerRotationVectorFromMat4(m) {
-    var rotationVector = new Object();
-    rotationVector.x = Math.atan2(m[2][1], m[2][2]);
-    rotationVector.y = Math.atan2(-m[2][0], Math.sqrt(m[2][1] * m[2][1] + m[2][2] * m[2][2]));
-    rotationVector.z = Math.atan2(m[1][0], m[0][0]);
-    return rotationVector;
+    var r = new Object();
+     r.z = Math.atan2(m[2][1], m[2][2]);
+     r.y = Math.atan2(-m[2][0], Math.sqrt(m[2][1] * m[2][1] + m[2][2] * m[2][2]));
+     r.x = Math.atan2(m[1][0], m[0][0]);
+    
+//     r.x = Math.asin(-m[2][1]);
+//     if (Math.cos(r.x) > 0.0001)
+//     {
+//         r.y = Math.atan2(m[2][0], m[2][2]);
+//         r.z = Math.atan2(m[0][1], m[1][1]);
+//     }
+//     else
+//     {
+//         r.y = 0.0;
+//         r.z = Math.atan2(-m[1][0], m[0][0]);
+//     }
+    
+    return r;
 }
 
 function toRadians(angle) {
