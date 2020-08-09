@@ -16,6 +16,15 @@ function CreateMenuController() {
                 starsPosition.z = 0;
                 stars.position = starsPosition;
                 
+                var logo = createObject();
+                logo.name = "Logo";
+                logo.modelPath = "com.demensdeum.spacejaguaractionrpg.logo.fsglmodel";
+                logo.position.x = 0.8;
+                logo.position.z = 0.48; 
+                logo.position.y = 0.26;
+                logo.scale.y = 0.14;
+                logo.scale.z = 0.6;
+                
                 var planet = createObject();
                 planet.name = "Planet";
                 planet.modelPath = "com.flamesteelengine.sphere.fsglmodel";
@@ -30,6 +39,7 @@ function CreateMenuController() {
                 scale.z = 0.5;
                 planet.scale = scale;
                 
+                addObject(logo);
                 addObject(stars);
                 addObject(planet);
                 
