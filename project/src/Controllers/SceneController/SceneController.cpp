@@ -77,7 +77,7 @@ shared_ptr<Object> SceneController::spaceJaguarScriptControllerDidRequestObjectW
     return objectsContext->objectWithInstanceIdentifier(make_shared<string>(objectName));
 }
 
-void SceneController::spaceJaguarScriptControllerDidRequestAddObjectWithPath(shared_ptr<SpaceJaguarScriptController>, string name, string  modelPath, float x, float y, float z, float rX, float rY, float rZ) {
+void SceneController::spaceJaguarScriptControllerDidRequestAddObjectWithPath(shared_ptr<SpaceJaguarScriptController>, string name, string  modelPath, float x, float y, float z, float rX, float rY, float rZ, float sX, float sY, float sZ) {
 
 	shared_ptr<string> modelPathSharedPtr;
 	if (modelPath != "undefined") {
@@ -91,7 +91,7 @@ void SceneController::spaceJaguarScriptControllerDidRequestAddObjectWithPath(sha
                       modelPathSharedPtr,
                       shared_ptr<string>(),
                       x, y, z,
-                      1, 1, 1,
+                      sX, sY, sZ,
                       rX, rY, rZ,
                       0);
 

@@ -6,11 +6,10 @@ Root Node - com.flamesteelengine.plane.obj
 	Node Childs End
 Root Node End
 Mesh
-Vertex - x = 0, y = -1, z = 1, u = 0, v = 1
+Vertex - x = 0, y = -1, z = 2, u = 0, v = 1
 Vertex - x = 0, y = -1, z = -1, u = 1, v = 1
 Vertex - x = 0, y = 1, z = -1, u = 1, v = 0
-Vertex - x = -0, y = 1, z = 1, u = 0, v = 0
+Vertex - x = 0, y = 1, z = 2, u = 0, v = 0
 Index = 0, 1, 2
 Index = 0, 2, 3
-Material - Texture path = com.demensdeum.spacejaguaractionrpg.space.texture
-
+Material - Texture path = com.demensdeum.spacejaguaractionrpg.stars.texture

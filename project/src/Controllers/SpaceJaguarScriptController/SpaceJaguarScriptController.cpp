@@ -43,9 +43,10 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_GetObject__private(CScriptVar *
     auto id = object->getInstanceIdentifier();
     auto position = FSEGTUtils::getObjectPosition(object);
     auto rotation = FSEGTUtils::getObjectRotation(object);
+	auto scale = FSEGTUtils::getObjectScale(object);
 
     auto executeString = string("");
-    executeString += "getObject__private__CallResult = newObjectWithIdAndPositionXYZrXrYrZ__private(\"";
+    executeString += "getObject__private__CallResult = newObjectWithIdAndPositionXYZrXrYrZsXsYsZ__private(\"";
     executeString += *id.get();
     executeString += "\",";
     executeString += to_string(position->x);
@@ -59,6 +60,12 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_GetObject__private(CScriptVar *
     executeString += to_string(rotation->y);
     executeString += ",";
     executeString += to_string(rotation->z);
+	executeString += ",";
+	executeString += to_string(scale->x);
+	executeString += ",";
+	executeString += to_string(scale->y);
+	executeString += ",";
+	executeString += to_string(scale->z);
     executeString += ");";
 
 	cout << "Get object execute string: " << executeString << endl;
@@ -125,16 +132,19 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_AddObject__private(CScriptVar *
     auto y = v->getParameter("y")->getDouble();
     auto z = v->getParameter("z")->getDouble();
 	auto rX = v->getParameter("rX")->getDouble();
-	auto rY = v->getParameter("rY")->getDouble();;
-	auto rZ = v->getParameter("rZ")->getDouble();;
+	auto rY = v->getParameter("rY")->getDouble();
+	auto rZ = v->getParameter("rZ")->getDouble();
+	auto sX = v->getParameter("sX")->getDouble();
+	auto sY = v->getParameter("sY")->getDouble();
+	auto sZ = v->getParameter("sZ")->getDouble();
     shared_ptr<SpaceJaguarScriptController> spaceJaguarScriptController = container->spaceJaguarScriptController;
     auto tinyJS = container->tinyJS;
     auto delegateLocked = spaceJaguarScriptController->delegate.lock();
     if (delegateLocked == nullptr) {
         throwRuntimeException("tinyjSBindingsToFlameSteelEngineGameToolkit_AddObject error: can't lock delegate");
     }
-    delegateLocked->spaceJaguarScriptControllerDidRequestAddObjectWithPath(spaceJaguarScriptController, name, modelPath, x, y, z, rX, rY, rZ);
-    tinyJS->execute("addObject__private__CallResult = newObjectWithIdAndPositionXYZrXrYrZ__private(0,0,0,0,0,0,0);");
+    delegateLocked->spaceJaguarScriptControllerDidRequestAddObjectWithPath(spaceJaguarScriptController, name, modelPath, x, y, z, rX, rY, rZ, sX, sY, sZ);
+    tinyJS->execute("addObject__private__CallResult = newObjectWithIdAndPositionXYZrXrYrZsXsYsZ__private(0,0,0,0,0,0,0,0,0,0);");
 }
 
 void tinyjSBindingsToFlameSteelEngineGameToolkit_UpdateObject__private(CScriptVar *v, void *context) {
@@ -188,7 +198,7 @@ void SpaceJaguarScriptController::initialize() {
         tinyJS->addNative("function include(text)", &tinyJSBindingsToFlameSteelEngineGameToolkit_Include, tinyJS.get());
         tinyJS->addNative("function print(text)", &tinyJSBindingsToFlameSteelEngineGameToolkit_Print, 0);
         tinyJS->addNative("function getObject__private(text)", &tinyjSBindingsToFlameSteelEngineGameToolkit_GetObject__private, callContainer.get());
-        tinyJS->addNative("function addObject__private(name, modelPath, x, y, z, rX, rY, rZ)", &tinyjSBindingsToFlameSteelEngineGameToolkit_AddObject__private, callContainer.get());
+        tinyJS->addNative("function addObject__private(name, modelPath, x, y, z, rX, rY, rZ, sX, sY, sZ)", &tinyjSBindingsToFlameSteelEngineGameToolkit_AddObject__private, callContainer.get());
         tinyJS->addNative("function updateObject__private(name, x, y, z, rX, rY, rZ)", &tinyjSBindingsToFlameSteelEngineGameToolkit_UpdateObject__private, callContainer.get());
 	tinyJS->addNative("function playAnimation__private(objectName, animationName)", &tinyjSBindingsToFlameSteelEngineGameToolkit_PlayAnimation__private, callContainer.get());
         tinyJS->addNative("function GRANNYPILLS()", &tinyjSBindingsToFlameSteelEngineGameToolkit_EnableNoclip, callContainer.get());

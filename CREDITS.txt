@@ -1,7 +1,8 @@
 Art:
     com.demensdeum.spacejaguaractionrpg.wall.texture.png (Altered) - Wall Texture by InvaderVeex https://www.deviantart.com/invaderveex/art/Forerunner-Tile-165450625
     com.demensdeum.spacejaguaractionrpg.space.texture (Altered) - East Asia from Space by Kevin Gill https://www.flickr.com/photos/kevinmgill/ https://www.flickr.com/photos/kevinmgill/25870926061/
-    
+    com.demensdeum.spacejaguaractionrpg.stars.texture (Altered) - Blue Sky Sky Stars Blue Stars Milky Way Night by Canon EOS https://www.maxpixel.net/camera/Canon-EOS-6d-24
+    com.demensdeum.spacejaguaractionrpg.planet.texture (Altered) - Chris Laurel https://commons.wikimedia.org/wiki/File:Generic_Celestia_asteroid_texture.jpg
 Models:
     com.demensdeum.deathmaskgame.combatdrone.fsglmodel - Demensdeum
     com.demensdeum.spacejaguaractionrpg.town.fsglmodel - Demensdeum

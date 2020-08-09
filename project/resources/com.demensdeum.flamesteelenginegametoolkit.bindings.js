@@ -17,8 +17,14 @@ function createObject() {
     rotation.y = 0;
     rotation.z = 0;
     
+    var scale = new Object();
+    scale.x = 1;
+    scale.y = 1;
+    scale.z = 1;
+    
     object.position = position;
     object.rotation = rotation;
+    object.scale = scale;
     
     return object;
 }
@@ -36,8 +42,12 @@ function addObject(object) {
     var rX = object.rotation.x;
     var rY = object.rotation.y;
     var rZ = object.rotation.z;
+    
+    var sX = object.scale.x;
+    var sY = object.scale.y;
+    var sZ = object.scale.z;
         
-    addObject__private(object.name, object.modelPath, x, y, z, rX, rY, rZ);
+    addObject__private(object.name, object.modelPath, x, y, z, rX, rY, rZ, sX, sY, sZ);
 }
 
 function updateObject(object) {
