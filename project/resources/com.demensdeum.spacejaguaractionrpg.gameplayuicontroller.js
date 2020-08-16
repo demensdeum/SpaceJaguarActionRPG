@@ -6,14 +6,18 @@ function createGameplayUIController() {
                 
                 this.healthBar = createObject();
                 this.healthBar.name = "Health Bar";
-                this.healthBar.modelPath = "com.flamesteelengine.smallCenteredCubeTest.fsglmodel";                 
+                //this.healthBar.modelPath = "com.flamesteelengine.smallCenteredCubeTest.fsglmodel";
+		this.healthBar.modelPath = "com.demensdeum.health.plane.fsglmodel";                 
                 
                 var position = new Object();
                 position.x = 0;
                 position.y = 0;
                 position.z = 0;
 
+			this.healthBar.scale.y = 2;
+
                 this.healthBar.position = position;
+			
                 addObject(this.healthBar);
             }
         },
@@ -21,7 +25,7 @@ function createGameplayUIController() {
             print("Game UI Controller step");
             var camera = getObject("camera");
             
-            var frontPosition = positionVectorToFront(camera, 0.7);
+            var frontPosition = positionVectorToFront(camera, 2);
             this.healthBar.position.x = frontPosition.x;
             this.healthBar.position.y = frontPosition.y;
             this.healthBar.position.z = frontPosition.z;
@@ -41,9 +45,9 @@ function createGameplayUIController() {
             var rotation = eulerRotationVectorFromMat4(lookAtMatrix);
             print("RROOTTATION VECTOR");
             printVector(rotation);
-            this.healthBar.rotation.x = rotation.x;
-            this.healthBar.rotation.y = rotation.y + toRadians(90);;
-            this.healthBar.rotation.z = -rotation.z;
+            this.healthBar.rotation.x = rotation.x + toRadians(35);
+            this.healthBar.rotation.y = rotation.y + toRadians(-5);
+            this.healthBar.rotation.z = rotation.z + toRadians(20);
             
             updateObject(this.healthBar);
         }

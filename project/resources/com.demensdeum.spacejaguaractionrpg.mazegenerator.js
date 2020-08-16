@@ -15,7 +15,8 @@ function CreateMazeGenerator() {
             var cursor = new Object();
             this.randomizeCursorPosition(cursor);
             
-            var maxLines = Math.randInt(60, 100);
+            //var maxLines = Math.randInt(60, 100);
+		var maxLines = 0;
             var directions = ["left", "right", "up", "down"];
             
             for (var linesCount = 0; linesCount < maxLines; linesCount++) {

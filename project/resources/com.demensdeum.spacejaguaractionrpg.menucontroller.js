@@ -59,13 +59,13 @@ function CreateMenuController() {
         },
         step : function() {
             this.initializeIfNeeded();
-            if (isKeyPressed("jumpKey")) {
-                //this.delegate.controllerDidFinish(this);
-            }
             var planet = getObject("Planet");
             planet.rotation.x += 0.001;
             planet.rotation.y += 0.001;
             updateObject(planet);
+            if (isKeyPressed("jumpKey")) {
+                this.delegate.controllerDidFinish(this);
+            }
         }
     };
     return controller;

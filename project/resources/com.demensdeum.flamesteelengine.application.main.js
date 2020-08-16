@@ -21,7 +21,7 @@ function createContext() {
                 this.menuController = CreateMenuController();
                 this.gameplayController = CreateGameplayController();
                 
-                this.setCurrentController(this.menuController);
+                this.setCurrentController(this.gameplayController);
                 this.initialized = true;
             }
         },
