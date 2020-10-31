@@ -1,0 +1,8 @@
+{
+    "name" : "Space Jaguar Action RPG (WebAssembly)",
+    "relativeProjectDirectoryPath" : "/../../",
+    "buildCommand" : "bash scripts/buildScripts/webassembly/build.sh",
+    "cleanCommand" : "sh scripts/buildScripts/webassembly/clean.sh",
+    "runScript" : "sh scripts/buildScripts/webassembly/run.sh",
+    "debugScript" : "sh scripts/buildScripts/webassembly/debug.sh"
+}
