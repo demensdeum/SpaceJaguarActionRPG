@@ -1,9 +1,12 @@
 #include <iostream>
+#include <memory>
 #include <Controllers/MainController/MainController.h>
-#include <FlameSteelCommonTraits/IOSystemParams.h>
+#include <FSGL/Data/SystemParams.h>
 
 using namespace std;
+using namespace FlameSteelEngine::GameToolkit;
 using namespace FlameSteelEngineProject;
+using namespace FSGL;
 
 int main(int argc, char *argv[]) {
 
@@ -12,10 +15,13 @@ int main(int argc, char *argv[]) {
 		startScriptPath = make_shared<string>(argv[1]);
 	}
 
-	auto params = make<IOSystemParams>();
-	params->oldSchoolVibeEnabled = true;
+	auto params = make_shared<SystemParams>();
+	params->oldSchoolVibeEnabled = false;
+	params->raiseExecutionWhenModelLoadingTooLong = true;
 
-    auto controller = make_shared<MainController>(startScriptPath, params);
+	auto castedParams = static_pointer_cast<IOSystemParams>(params);
+
+    auto controller = make_shared<MainController>(startScriptPath, castedParams);
     controller->start();
     controller->switchToSceneController();
     controller->startGameLoop();
