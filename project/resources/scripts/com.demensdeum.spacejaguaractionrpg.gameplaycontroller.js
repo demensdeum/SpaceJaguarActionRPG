@@ -87,8 +87,6 @@ function CreateGameplayController() {
             print("Game Controller step");
         },
         generateMaze : function() {
-            var mazeGenerator = CreateMazeGenerator();
-            mazeGenerator.generateMaze();
             var enemiesGenerator = CreateEnemiesGenerator();
             enemiesGenerator.generateEnemies();
         }

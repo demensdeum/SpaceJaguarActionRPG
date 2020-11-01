@@ -20,6 +20,7 @@ function createContext() {
                 this.companyLogoController = CreateCompanyLogoController();
                 this.engineLogoController = CreateEngineLogoController();
                 this.menuController = CreateMenuController();
+                this.gameplayController = CreateGameplayController();
                 this.newGameController = CreateNewGameController();
                 
                 this.setCurrentController(this.newGameController);
