@@ -1,9 +1,9 @@
 function CreateMazeGenerator() {
     var mazeGenerator = {
         generateMaze : function() {
-            
+
             this.wallsMap = [];
-            
+
             var floor = createObject();
             floor.name = "floor";
             floor.modelPath = "com.demensdeum.spacejaguaractionrpg.floor.fsglmodel";
@@ -11,14 +11,14 @@ function CreateMazeGenerator() {
             floor.position.x = x*2;
             floor.position.z = z*2;
             addObject(floor);
-            
+
             var cursor = new Object();
             this.randomizeCursorPosition(cursor);
-            
-            //var maxLines = Math.randInt(60, 100);
-		var maxLines = 0;
+
+            var maxLines = Math.randInt(60, 100);
+		          //var maxLines = 0;
             var directions = ["left", "right", "up", "down"];
-            
+
             for (var linesCount = 0; linesCount < maxLines; linesCount++) {
                 var direction = directions[Math.randInt(0, directions.length - 1)];
                 this.drawLine(cursor, direction);
@@ -40,7 +40,7 @@ function CreateMazeGenerator() {
                 }
                 else {
                     var wall = this.createWallObject(cursor.x, cursor.z);
-                    addObject(wall);                
+                    addObject(wall);
                     var name = cursor.x + "_" + cursor.z;
                     this.wallsMap[name] = true;
 
@@ -69,7 +69,7 @@ function CreateMazeGenerator() {
                             cursor.z = 99;
                         }
                     }
-                    
+
                 }
             }
         },
