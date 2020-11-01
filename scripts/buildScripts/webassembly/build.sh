@@ -6,7 +6,11 @@ mkdir -p $buildDirectory/resources || true
 cp scripts/buildScripts/webassembly/resources/CMakeLists.txt $buildDirectory/CMakeLists.txt
 FLAME_STEEL_PROJECT_ROOT_DIRECTORY=${PWD}
 FLAME_STEEL_PROJECT_ROOT_DIRECTORY_RESOURCES=${PWD}/project/resources/
-cp ${FLAME_STEEL_PROJECT_ROOT_DIRECTORY_RESOURCES}/* $buildDirectory/resources/ || true
+cp ${FLAME_STEEL_PROJECT_ROOT_DIRECTORY_RESOURCES}/textures/* $buildDirectory/resources/ || true
+cp ${FLAME_STEEL_PROJECT_ROOT_DIRECTORY_RESOURCES}/scripts/* $buildDirectory/resources/ || true
+cp ${FLAME_STEEL_PROJECT_ROOT_DIRECTORY_RESOURCES}/models/* $buildDirectory/resources/ || true
+
+
 mkdir $buildDirectory/FlameSteelEngineProject || true
 cp scripts/buildScripts/webassembly/resources/index.html $buildDirectory/FlameSteelEngineProject/
 cp scripts/utils/texturesScaler.py $buildDirectory
