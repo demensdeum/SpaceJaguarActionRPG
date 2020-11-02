@@ -2,7 +2,7 @@ function CreateMazeGenerator() {
     var mazeGenerator = {
         generateMaze : function(mazeGeneratorParams) {
             this.generatedMap = {};
-            this.clearMap();
+            this.clearMap(mazeGeneratorParams);
             
             for (var i = 0; i < mazeGeneratorParams.numberOfRuns; i++) {
                 var cursor = new Object();
@@ -17,21 +17,26 @@ function CreateMazeGenerator() {
                 }
             }
             
-            this.printGeneratedMap();
+		var output = new Object();
+		output.maze = this.generatedMap;
+		output.width = mazeGeneratorParams.mapWidth;
+		output.height = mazeGeneratorParams.mapHeight;
+
+            return output;
         },
-        clearMap : function() {
-            for (var y = 0; y < 100; y++) {
-                for (var x = 0; x < 100; x++) {
+        clearMap : function(mazeGeneratorParams) {
+            for (var y = 0; y < mazeGeneratorParams.mapHeight; y++) {
+                for (var x = 0; x < mazeGeneratorParams.mapWidth; x++) {
                     var name = x + "_" + y;
                     this.generatedMap[name] = "#";
                 }
             }            
         },
-        printGeneratedMap : function() {
+        printGeneratedMap : function(mazeGeneratorParams) {
             print("Printed generated map");
-            for (var y = 0; y < 100; y++) {
+            for (var y = 0; y < mazeGeneratorParams.mapHeight; y++) {
                 var line = "";
-                for (var x = 0; x < 100; x++) {
+                for (var x = 0; x < mazeGeneratorParams.mapWidth; x++) {
                     var name = x + "_" + y;
                     line += this.generatedMap[name];
                 }
