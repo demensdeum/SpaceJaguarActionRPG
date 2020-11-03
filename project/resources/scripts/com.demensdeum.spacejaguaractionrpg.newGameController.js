@@ -13,6 +13,10 @@ function CreateNewGameController() {
                 mazeGeneratorParams.numberOfRuns = Math.randInt(5, 10);
                 mazeGeneratorParams.cursorSizeWidth = 3;
                 mazeGeneratorParams.cursorSizeHeight = 3;
+		   mazeGeneratorParams.enemyChance = 40;
+		   mazeGeneratorParams.chestChance = 20;
+		   mazeGeneratorParams.mazeChance = 300;
+		   mazeGeneratorParams.townChance = 300;
                 
                 var generatedMaze = CreateMazeGenerator().generateMaze(mazeGeneratorParams);
 			this.representMaze(generatedMaze);
@@ -41,7 +45,8 @@ function CreateNewGameController() {
 
 		for (var x = 0; x < generatedMaze.width; x++) {
 			for (var y = 0; y < generatedMaze.height; y++) {
-				if (generatedMaze.maze[x + "_" + y] == "#") {
+				var cell = generatedMaze.maze[x + "_" + y];
+				if (cell == "#") {
 		                var cube = createObject();
              			   cube.name = "Mountain" + mountainCount;
 		                cube.modelPath = "com.demensdeum.spacejaguaractionrpg.mountain.fsglmodel";
@@ -54,9 +59,73 @@ function CreateNewGameController() {
 		                cube.position = position;
 		                addObject(cube);		
 				}
+				else if (cell == "S") {
+		                var cube = createObject();
+             			   cube.name = "Jag";
+		                cube.modelPath = "com.demensdeum.spacejaguaractionrpg.jag.fsglmodel";
+
+		                var position = new Object();
+		                position.x = x;
+		                position.y = 0;
+		                position.z = y;
+
+		                cube.position = position;
+		                addObject(cube);
+			}
+			else if (cell == "C") {
+		                var cube = createObject();
+             			   cube.name = "Chest";
+		                cube.modelPath = "com.demensdeum.spacejaguaractionrpg.chest.fsglmodel";
+
+		                var position = new Object();
+		                position.x = x;
+		                position.y = 0;
+		                position.z = y;
+
+		                cube.position = position;
+		                addObject(cube);
+			}
+			else if (cell == "M") {
+		                var cube = createObject();
+             			   cube.name = "Chest";
+		                cube.modelPath = "com.demensdeum.spacejaguaractionrpg.maze.fsglmodel";
+
+		                var position = new Object();
+		                position.x = x;
+		                position.y = 0;
+		                position.z = y;
+
+		                cube.position = position;
+		                addObject(cube);
+			}
+			else if (cell == "E") {
+		                var cube = createObject();
+             			   cube.name = "Enemy";
+		                cube.modelPath = "com.demensdeum.spacejaguaractionrpg.enemy.fsglmodel";
+
+		                var position = new Object();
+		                position.x = x;
+		                position.y = 0;
+		                position.z = y;
+
+		                cube.position = position;
+		                addObject(cube);
+			}
+			else if (cell == "T") {
+		                var cube = createObject();
+             			   cube.name = "Chest";
+		                cube.modelPath = "com.demensdeum.spacejaguaractionrpg.town.fsglmodel";
+
+		                var position = new Object();
+		                position.x = x;
+		                position.y = 0;
+		                position.z = y;
+
+		                cube.position = position;
+		                addObject(cube);
+				}
 			}
 		}
-
 
 			GRANNYPILLS();		
 	},

@@ -17,13 +17,21 @@ function CreateMazeGenerator() {
                 }
             }
             
+		this.putStartPoint(cursor);
+
 		var output = new Object();
 		output.maze = this.generatedMap;
 		output.width = mazeGeneratorParams.mapWidth;
 		output.height = mazeGeneratorParams.mapHeight;
 
+		this.printGeneratedMap(mazeGeneratorParams);
+
             return output;
         },
+	putStartPoint : function(cursor) {
+		 var name = cursor.x + "_" + cursor.z;
+		this.generatedMap[name] = "S";
+	},
         clearMap : function(mazeGeneratorParams) {
             for (var y = 0; y < mazeGeneratorParams.mapHeight; y++) {
                 for (var x = 0; x < mazeGeneratorParams.mapWidth; x++) {
@@ -42,7 +50,7 @@ function CreateMazeGenerator() {
                 }
                 print(line);
             }
-            exit(1);
+		//exit(1);
         },
         putFreeSpaceAtCursor : function(cursor) {
             for (var x = 0; x < cursor.sizeWidth; x++) {
@@ -52,9 +60,31 @@ function CreateMazeGenerator() {
                 }
             }
         },
+	putSomethingAtCursorIfNeeded : function(cursor, mazeGeneratorParams) {
+		   var enemyChance = mazeGeneratorParams.enemyChance;
+		   var chestChance = mazeGeneratorParams.chestChance;
+		   var mazeChance = mazeGeneratorParams.mazeChance;
+		   var townChance = mazeGeneratorParams.townChance;
+
+                    var name = (cursor.x + x) + "_" + (cursor.z + y);
+
+		if (Math.randInt(0, enemyChance) == 1) {
+                    this.generatedMap[name] = "E";			
+		}
+		else if (Math.randInt(0, chestChance) == 1) {
+                    this.generatedMap[name] = "C";			
+		}
+		else if (Math.randInt(0, mazeChance) == 1) {
+                    this.generatedMap[name] = "M";			
+		}
+		else if (Math.randInt(0, townChance) == 1) {
+                    this.generatedMap[name] = "T";	
+		}
+	},
         drawLine : function(cursor, direction, mazeGeneratorParams) {
             for (var blocksCount = 0; blocksCount < mazeGeneratorParams.lineLength; blocksCount++) {
                     this.putFreeSpaceAtCursor(cursor);
+			this.putSomethingAtCursorIfNeeded(cursor, mazeGeneratorParams);
 
                     var diff = 1;
                     if (direction == "left") {
