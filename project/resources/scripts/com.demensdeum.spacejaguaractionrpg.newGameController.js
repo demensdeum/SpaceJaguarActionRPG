@@ -1,3 +1,6 @@
+include("com.demensdeum.spacejaguaractionrpg.playerControls.js");
+include("com.demensdeum.spacejaguaractionrpg.cameraControls.js");
+
 function CreateNewGameController() {
 
     var controller = {
@@ -6,8 +9,8 @@ function CreateNewGameController() {
                 addDefaultCameraAtXYZAndRotationXYZ(1, 0.03278, 0, 90, 0, 0);
                 
                 var mazeGeneratorParams = new Object();
-                mazeGeneratorParams.mapWidth  = 80; 
-                mazeGeneratorParams.mapHeight = 80; 
+                mazeGeneratorParams.mapWidth  = 60; 
+                mazeGeneratorParams.mapHeight = 60; 
                 mazeGeneratorParams.maxLines = Math.randInt(60, 100);
                 mazeGeneratorParams.lineLength = Math.randInt(2, 8);
                 mazeGeneratorParams.numberOfRuns = Math.randInt(5, 10);
@@ -20,6 +23,10 @@ function CreateNewGameController() {
                 
                 var generatedMaze = CreateMazeGenerator().generateMaze(mazeGeneratorParams);
 			this.representMaze(generatedMaze);
+            
+                this.playerControls = CreatePlayerControls("Jag");
+                this.cameraControls = CreateCameraControls("Jag");
+            
                 this.initialized = true;
             }
         },
@@ -60,17 +67,17 @@ function CreateNewGameController() {
 		                addObject(cube);		
 				}
 				else if (cell == "S") {
-		                var cube = createObject();
-             			   cube.name = "Jag";
-		                cube.modelPath = "com.demensdeum.spacejaguaractionrpg.jag.fsglmodel";
+		  	          var jag = createObject();
+             			   jag.name = "Jag";
+		                jag.modelPath = "com.demensdeum.spacejaguaractionrpg.jag.fsglmodel";
 
 		                var position = new Object();
 		                position.x = x;
 		                position.y = 0;
 		                position.z = y;
 
-		                cube.position = position;
-		                addObject(cube);
+		                jag.position = position;
+		                addObject(jag);
 			}
 			else if (cell == "C") {
 		                var cube = createObject();
@@ -126,11 +133,11 @@ function CreateNewGameController() {
 				}
 			}
 		}
-
-			GRANNYPILLS();		
 	},
         step : function() {
             this.initializeIfNeeded();
+            this.playerControls.step();
+            this.cameraControls.step();
             print("Create new game controller!");
         }
     };

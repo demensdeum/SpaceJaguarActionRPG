@@ -147,6 +147,16 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_AddObject__private(CScriptVar *
     tinyJS->execute("addObject__private__CallResult = newObjectWithIdAndPositionXYZrXrYrZsXsYsZ__private(0,0,0,0,0,0,0,0,0,0);");
 }
 
+void tinyjSBindingsToFlameSteelEngineGameToolkit_Prompt(CScriptVar *v, void *context) {
+	auto container = (SpaceJaguarScriptControllerCallContainer *) context;
+	auto tinyJS = container->tinyJS;
+	auto text = v->getParameter("text")->getString();
+	string inputText;
+	cout << text << endl;
+	getline (cin, inputText);
+	v->getReturnVar()->setString(inputText);
+}
+
 void tinyjSBindingsToFlameSteelEngineGameToolkit_UpdateObject__private(CScriptVar *v, void *context) {
     auto container = (SpaceJaguarScriptControllerCallContainer *) context;
     auto name = v->getParameter("name")->getString();
@@ -201,6 +211,7 @@ void SpaceJaguarScriptController::initialize() {
         tinyJS->addNative("function addObject__private(name, modelPath, x, y, z, rX, rY, rZ, sX, sY, sZ)", &tinyjSBindingsToFlameSteelEngineGameToolkit_AddObject__private, callContainer.get());
         tinyJS->addNative("function updateObject__private(name, x, y, z, rX, rY, rZ)", &tinyjSBindingsToFlameSteelEngineGameToolkit_UpdateObject__private, callContainer.get());
         tinyJS->addNative("function playAnimation__private(objectName, animationName)", &tinyjSBindingsToFlameSteelEngineGameToolkit_PlayAnimation__private, callContainer.get());
+        tinyJS->addNative("function prompt(text)", &tinyjSBindingsToFlameSteelEngineGameToolkit_Prompt, callContainer.get());
         tinyJS->addNative("function GRANNYPILLS()", &tinyjSBindingsToFlameSteelEngineGameToolkit_EnableNoclip, callContainer.get());
         tinyJS->addNative("function HANGOVER()", &tinyjSBindingsToFlameSteelEngineGameToolkit_DisableNoclip, callContainer.get());
         tinyJS->addNative("function isKeyPressed(key)", &tinyjSBindingsToFlameSteelEngineGameToolkit_IsKeyPressed, callContainer.get());
