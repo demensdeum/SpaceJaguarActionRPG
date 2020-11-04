@@ -4,9 +4,12 @@ function includeDependencies() {
     include("com.demensdeum.spacejaguaractionrpg.companylogocontroller.js");
     include("com.demensdeum.spacejaguaractionrpg.menucontroller.js");
     include("com.demensdeum.spacejaguaractionrpg.newGameController.js");
+    include("com.demensdeum.spacejaguaractionrpg.object.state.js");
+    include("com.demensdeum.spacejaguaractionrpg.objectAbilitiesFactory.js");
+    include("com.demensdeum.spacejaguaractionrpg.objectsFactory.js");
 }
 
-function createContext() {
+function CreateContext() {
     var context = {    
         initializeIfNeeded : function () {
             if (this.initialized === undefined) {
@@ -18,10 +21,10 @@ function createContext() {
                 
                 this.companyLogoController = CreateCompanyLogoController();
                 this.engineLogoController = CreateEngineLogoController();
-                this.menuController = CreateMenuController();
+                this.menuController = CreateMenuController(this);
                 this.newGameController = CreateNewGameController();
                 
-                this.setCurrentController(this.newGameController);
+                this.setCurrentController(this.menuController);
                 this.initialized = true;
             }
         },
@@ -45,6 +48,9 @@ function createContext() {
                 this.setCurrentController(this.newGameController);
             }
             
+        },
+        menuControllerDidRequestNewGame : function(controller) {
+            this.setCurrentController(this.newGameController);
         }
     };
     return context;
@@ -52,6 +58,6 @@ function createContext() {
 
 if (GLOBAL_CONTEXT === undefined) {
     includeDependencies();
-    GLOBAL_CONTEXT = createContext();
+    GLOBAL_CONTEXT = CreateContext();
 }
 GLOBAL_CONTEXT.step();

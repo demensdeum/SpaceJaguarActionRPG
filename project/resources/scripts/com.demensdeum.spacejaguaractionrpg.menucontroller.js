@@ -1,5 +1,6 @@
-function CreateMenuController() {
+function CreateMenuController(outputDelegate) {
     var controller = {
+        delegate : outputDelegate,
         initializeIfNeeded : function() {
             if (this.initialized === undefined) {               
                 this.initialized = true;
@@ -27,7 +28,7 @@ function CreateMenuController() {
                 
                 var planet = createObject();
                 planet.name = "Planet";
-                planet.modelPath = "com.flamesteelengine.sphere.fsglmodel";
+                planet.modelPath = "com.demensdeum.flamesteelengine.sphere.fsglmodel";
                 var planetPosition = new Object();
                 planetPosition.x = 0;
                 planetPosition.y = 0;
@@ -64,7 +65,19 @@ function CreateMenuController() {
             planet.rotation.y += 0.001;
             updateObject(planet);
             if (isKeyPressed("jumpKey")) {
-                this.delegate.controllerDidFinish(this);
+                var inputText = prompt("\
+                1. New Game\
+                2. Load Game\
+                3. Settings\
+                4. Credits\
+                5. Exit
+                ");
+                if (inputText == "1") {
+                    this.delegate.menuControllerDidRequestNewGame(this);
+                }
+                else if (inputText == "4") {
+                    print("See Credits.txt");
+                }
             }
         }
     };

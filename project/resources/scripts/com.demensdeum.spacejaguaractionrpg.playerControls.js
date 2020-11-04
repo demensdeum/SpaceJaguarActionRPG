@@ -1,8 +1,9 @@
-function CreatePlayerControls(outputTargetName, outputDelegate) {
+function CreatePlayerControls(outputTargetName, outputDelegate, outputGameData) {
     var playerControls = {
 
     delegate: outputDelegate,
-    targetName : outputTargetName,       
+    targetName : outputTargetName,
+    gameData : outputGameData,
 
 	step : function() {
 		var target = getObject(this.targetName);
@@ -24,6 +25,9 @@ function CreatePlayerControls(outputTargetName, outputDelegate) {
             updateObject(target);
 		}
 		if (isKeyPressed("jumpKey")) {
+            print("Jag");
+            print("Health: " + this.gameData.jag.health.points + "/" + this.gameData.jag.maxHealth.points);
+            print("Blade:  " + this.gameData.jag.bladeFightMin.points + "-" + this.gameData.jag.bladeFightMax.points);
             var inputText = prompt("Menu:\n1 - Regenerate maze");
             if (inputText == "1") {
                 this.delegate.playerControlsDidRequestRegenerateMaze(this);

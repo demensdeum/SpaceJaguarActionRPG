@@ -152,7 +152,7 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_Prompt(CScriptVar *v, void *con
 	auto tinyJS = container->tinyJS;
 	auto text = v->getParameter("text")->getString();
 	string inputText;
-	cout << text << endl;
+	cout << "Tiny-JS print: "<< text << endl;
 	getline (cin, inputText);
 	v->getReturnVar()->setString(inputText);
 }
