@@ -1,3 +1,4 @@
+include("com.demensdeum.spacejaguaractionrpg.mazegenerator.js");
 include("com.demensdeum.spacejaguaractionrpg.playerControls.js");
 include("com.demensdeum.spacejaguaractionrpg.cameraControls.js");
 

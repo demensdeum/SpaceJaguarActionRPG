@@ -3,7 +3,6 @@ function includeDependencies() {
     include("com.demensdeum.spacejaguaractionrpg.enginelogocontroller.js");
     include("com.demensdeum.spacejaguaractionrpg.companylogocontroller.js");
     include("com.demensdeum.spacejaguaractionrpg.menucontroller.js");
-    include("com.demensdeum.spacejaguaractionrpg.gameplaycontroller.js");
     include("com.demensdeum.spacejaguaractionrpg.newGameController.js");
 }
 
@@ -20,7 +19,6 @@ function createContext() {
                 this.companyLogoController = CreateCompanyLogoController();
                 this.engineLogoController = CreateEngineLogoController();
                 this.menuController = CreateMenuController();
-                this.gameplayController = CreateGameplayController();
                 this.newGameController = CreateNewGameController();
                 
                 this.setCurrentController(this.newGameController);
@@ -44,7 +42,7 @@ function createContext() {
                 this.setCurrentController(this.menuController);
             }
             else if (controller == this.menuController) {
-                this.setCurrentController(this.gameplayController);
+                this.setCurrentController(this.newGameController);
             }
             
         }
