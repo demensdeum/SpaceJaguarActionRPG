@@ -12,7 +12,7 @@ void FSCHEST_writeStringToFD(const char *string, FILE *fd) {
 size_t FSCHEST_fileSize(char *path) {
     FILE *file = fopen(path, "r");
     fseek(file, 0L, SEEK_END);
-    size_t size = ftell(file);    
+    size_t size = ftell(file);
     fclose(file);
     return size;
 }
@@ -37,18 +37,18 @@ void FSCHEST_readFileFromFdWithNameOffsetSizeToDestinationDirectory(FILE *inputF
     fwrite(buffer, sizeof(char), size, outputFile);
     fclose(outputFile);
     free(buffer);
-    
+
 }
 
 void FSCHEST_packDirectory(char *path) {
 
     FILE *outputChest = fopen("files.fschest", "wb");
-    
+
     struct dirent *dir;
     DIR *directory = opendir(path);
-    
+
     while ((dir = readdir(directory)) != 0) {
-        if (dir->d_type == DT_REG){
+        if (dir->d_type == DT_REG) {
             char *fileName = dir->d_name;
             char filePath[512];
             sprintf(filePath, "%s/%s", path, fileName);
@@ -56,7 +56,7 @@ void FSCHEST_packDirectory(char *path) {
             FSCHEST_writeStringToFD("\n", outputChest);
             size_t fileSize = FSCHEST_fileSize(filePath);
             char fileSizeString[256];
-            sprintf(fileSizeString, "%zu", fileSize);            
+            sprintf(fileSizeString, "%zu", fileSize);
             FSCHEST_writeStringToFD(fileSizeString, outputChest);
             FSCHEST_writeStringToFD("\n", outputChest);
             FSCHEST_writeFileAtPathToFD(filePath, outputChest);
@@ -75,7 +75,7 @@ void FSCHEST_extractChestToDirectory(const char *chestPath, const char *destinat
     char filename[256];
     size_t size = 0;
     while(fgets(buffer, bufferLength, file)) {
-        printf("line: %s", buffer);        
+        printf("line: %s", buffer);
         if (lineCounter % 2 == 0) {
             sprintf(filename, "%s", buffer);
             filename[strlen(buffer) - 1] = 0;
@@ -83,7 +83,7 @@ void FSCHEST_extractChestToDirectory(const char *chestPath, const char *destinat
         else if (lineCounter % 2 == 1) {
             sscanf(buffer, "%zu", &size);
             FSCHEST_readFileFromFdWithNameOffsetSizeToDestinationDirectory(file, filename, size, destinationDirectory);
-        }     
+        }
         lineCounter += 1;
     }
     fclose(file);

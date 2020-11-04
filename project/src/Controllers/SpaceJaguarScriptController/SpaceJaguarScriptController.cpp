@@ -7,7 +7,7 @@ using namespace SpaceJaguarActionRPG;
 
 void tinyjSBindingsToFlameSteelEngineGameToolkit_IsKeyPressed(CScriptVar *v, void *context) {
     auto container = (SpaceJaguarScriptControllerCallContainer *) context;
-	auto key = v->getParameter("key")->getString();
+    auto key = v->getParameter("key")->getString();
     shared_ptr<SpaceJaguarScriptController> spaceJaguarScriptController = container->spaceJaguarScriptController;
     auto tinyJS = container->tinyJS;
     auto dataSourceLocked = spaceJaguarScriptController->dataSource.lock();
@@ -15,7 +15,7 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_IsKeyPressed(CScriptVar *v, voi
         throwRuntimeException("tinyjSBindingsToFlameSteelEngineGameToolkit_IsKeyPressed error: can't lock dataSource");
     }
     auto isPressed = dataSourceLocked->spaceJaguarScriptControllerAskingIsKeyPressed(spaceJaguarScriptController, key);
-	v->getReturnVar()->setInt(isPressed);
+    v->getReturnVar()->setInt(isPressed);
 }
 
 void tinyJSBindingsToFlameSteelEngineGameToolkit_Print(CScriptVar *v, void *) {
@@ -43,7 +43,7 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_GetObject__private(CScriptVar *
     auto id = object->getInstanceIdentifier();
     auto position = FSEGTUtils::getObjectPosition(object);
     auto rotation = FSEGTUtils::getObjectRotation(object);
-	auto scale = FSEGTUtils::getObjectScale(object);
+    auto scale = FSEGTUtils::getObjectScale(object);
 
     auto executeString = string("");
     executeString += "getObject__private__CallResult = newObjectWithIdAndPositionXYZrXrYrZsXsYsZ__private(\"";
@@ -60,22 +60,22 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_GetObject__private(CScriptVar *
     executeString += to_string(rotation->y);
     executeString += ",";
     executeString += to_string(rotation->z);
-	executeString += ",";
-	executeString += to_string(scale->x);
-	executeString += ",";
-	executeString += to_string(scale->y);
-	executeString += ",";
-	executeString += to_string(scale->z);
+    executeString += ",";
+    executeString += to_string(scale->x);
+    executeString += ",";
+    executeString += to_string(scale->y);
+    executeString += ",";
+    executeString += to_string(scale->z);
     executeString += ");";
 
-	cout << "Get object execute string: " << executeString << endl;
+    cout << "Get object execute string: " << executeString << endl;
 
     tinyJS->execute(executeString);
 }
 
 void tinyjSBindingsToFlameSteelEngineGameToolkit_exit(CScriptVar *v, void *) {
-	auto exitCode = v->getParameter("exitCode")->getInt();
-	exit(exitCode);	
+    auto exitCode = v->getParameter("exitCode")->getInt();
+    exit(exitCode);
 }
 
 void tinyjSBindingsToFlameSteelEngineGameToolkit_EnableNoclip(CScriptVar *, void *context) {
@@ -93,7 +93,7 @@ void tinyJSBindingsToFlameSteelEngineGameToolkit_setWindowTitle(CScriptVar *v, v
     auto container = (SpaceJaguarScriptControllerCallContainer *) context;
     shared_ptr<SpaceJaguarScriptController> spaceJaguarScriptController = container->spaceJaguarScriptController;
     auto tinyJS = container->tinyJS;
-	auto text = v->getParameter("text")->getString();
+    auto text = v->getParameter("text")->getString();
     auto delegateLocked = spaceJaguarScriptController->delegate.lock();
     if (delegateLocked == nullptr) {
         throwRuntimeException("tinyJSBindingsToFlameSteelEngineGameToolkit_SetWindowTitle error: can't lock delegate");
@@ -102,11 +102,11 @@ void tinyJSBindingsToFlameSteelEngineGameToolkit_setWindowTitle(CScriptVar *v, v
 }
 
 void tinyjSBindingsToFlameSteelEngineGameToolkit_PlayAnimation__private(CScriptVar *v, void *context) {
-	auto container = (SpaceJaguarScriptControllerCallContainer *) context;
-	shared_ptr<SpaceJaguarScriptController> spaceJaguarScriptController = container->spaceJaguarScriptController;
-	auto animationName = v->getParameter("animationName")->getString();
-	auto objectName = v->getParameter("objectName")->getString();
-	auto delegateLocked = spaceJaguarScriptController->delegate.lock();
+    auto container = (SpaceJaguarScriptControllerCallContainer *) context;
+    shared_ptr<SpaceJaguarScriptController> spaceJaguarScriptController = container->spaceJaguarScriptController;
+    auto animationName = v->getParameter("animationName")->getString();
+    auto objectName = v->getParameter("objectName")->getString();
+    auto delegateLocked = spaceJaguarScriptController->delegate.lock();
     if (delegateLocked == nullptr) {
         throwRuntimeException("tinyjSBindingsToFlameSteelEngineGameToolkit_PlayAnimation__private error: can't lock delegate");
     }
@@ -131,12 +131,12 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_AddObject__private(CScriptVar *
     auto x = v->getParameter("x")->getDouble();
     auto y = v->getParameter("y")->getDouble();
     auto z = v->getParameter("z")->getDouble();
-	auto rX = v->getParameter("rX")->getDouble();
-	auto rY = v->getParameter("rY")->getDouble();
-	auto rZ = v->getParameter("rZ")->getDouble();
-	auto sX = v->getParameter("sX")->getDouble();
-	auto sY = v->getParameter("sY")->getDouble();
-	auto sZ = v->getParameter("sZ")->getDouble();
+    auto rX = v->getParameter("rX")->getDouble();
+    auto rY = v->getParameter("rY")->getDouble();
+    auto rZ = v->getParameter("rZ")->getDouble();
+    auto sX = v->getParameter("sX")->getDouble();
+    auto sY = v->getParameter("sY")->getDouble();
+    auto sZ = v->getParameter("sZ")->getDouble();
     shared_ptr<SpaceJaguarScriptController> spaceJaguarScriptController = container->spaceJaguarScriptController;
     auto tinyJS = container->tinyJS;
     auto delegateLocked = spaceJaguarScriptController->delegate.lock();
@@ -163,7 +163,7 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_UpdateObject__private(CScriptVa
         throwRuntimeException("tinyjSBindingsToFlameSteelEngineGameToolkit_UpdateObject error: can't lock delegate");
     }
 
-	cout << "rZ: " << rZ << endl;
+    cout << "rZ: " << rZ << endl;
 
     delegateLocked->spaceJaguarScriptControllerDidRequestUpdateObjectWithNameAndPositionXYZrXrYrZ(spaceJaguarScriptController, name, x, y, z, rX, rY, rZ);
 }
@@ -200,11 +200,11 @@ void SpaceJaguarScriptController::initialize() {
         tinyJS->addNative("function getObject__private(text)", &tinyjSBindingsToFlameSteelEngineGameToolkit_GetObject__private, callContainer.get());
         tinyJS->addNative("function addObject__private(name, modelPath, x, y, z, rX, rY, rZ, sX, sY, sZ)", &tinyjSBindingsToFlameSteelEngineGameToolkit_AddObject__private, callContainer.get());
         tinyJS->addNative("function updateObject__private(name, x, y, z, rX, rY, rZ)", &tinyjSBindingsToFlameSteelEngineGameToolkit_UpdateObject__private, callContainer.get());
-	tinyJS->addNative("function playAnimation__private(objectName, animationName)", &tinyjSBindingsToFlameSteelEngineGameToolkit_PlayAnimation__private, callContainer.get());
+        tinyJS->addNative("function playAnimation__private(objectName, animationName)", &tinyjSBindingsToFlameSteelEngineGameToolkit_PlayAnimation__private, callContainer.get());
         tinyJS->addNative("function GRANNYPILLS()", &tinyjSBindingsToFlameSteelEngineGameToolkit_EnableNoclip, callContainer.get());
         tinyJS->addNative("function HANGOVER()", &tinyjSBindingsToFlameSteelEngineGameToolkit_DisableNoclip, callContainer.get());
-	 tinyJS->addNative("function isKeyPressed(key)", &tinyjSBindingsToFlameSteelEngineGameToolkit_IsKeyPressed, callContainer.get());
-	 tinyJS->addNative("function exit(exitCode)", &tinyjSBindingsToFlameSteelEngineGameToolkit_exit, nullptr);
+        tinyJS->addNative("function isKeyPressed(key)", &tinyjSBindingsToFlameSteelEngineGameToolkit_IsKeyPressed, callContainer.get());
+        tinyJS->addNative("function exit(exitCode)", &tinyjSBindingsToFlameSteelEngineGameToolkit_exit, nullptr);
         tinyJS->addNative("function removeAllObjects__private()", &tinyjSBindingsToFlameSteelEngineGameToolkit_RemoveAllObjects__private, callContainer.get());
         tinyJS->execute("include(\"com.demensdeum.flamesteelenginegametoolkit.bindings.js\");");
         tinyJS->execute("include(\"com.demensdeumflamesteelenginegametoolkit.private.js\");");
@@ -243,7 +243,7 @@ void SpaceJaguarScriptController::step() {
         cout << "Tiny-JS error: " << error->text << endl;
         cout << "---[SCRIPT ERROR END]---" << endl;
 
-	throwRuntimeException(error->text);
+        throwRuntimeException(error->text);
     }
 
 };

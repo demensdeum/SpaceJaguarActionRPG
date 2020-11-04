@@ -14,14 +14,14 @@ using namespace FlameSteelCore::Utils;
 using namespace FlameSteelEngine::GameToolkit::Utils;
 
 SceneController::SceneController(string startScriptPath) {
-	this->startScriptPath = startScriptPath;
+    this->startScriptPath = startScriptPath;
 };
 
 void SceneController::initialize() {
     isInitialized = true;
     inputController = toNotNull(ioSystem->inputController);
 
-	cleanAndRestartScriptEngine();
+    cleanAndRestartScriptEngine();
 }
 
 void SceneController::step() {
@@ -33,12 +33,12 @@ void SceneController::step() {
     scriptController->step();
 
     if (noclipMode) {
-	noclipCameraController->step();
-	noclipCameraController->printout();
-	if (inputController->useKeyPressed) {
-		cout << "Use key pressed" << endl;
-		cleanAndRestartScriptEngine();
-	}
+        noclipCameraController->step();
+        noclipCameraController->printout();
+        if (inputController->useKeyPressed) {
+            cout << "Use key pressed" << endl;
+            cleanAndRestartScriptEngine();
+        }
     }
 
     renderer->render(gameData);
@@ -49,23 +49,23 @@ void SceneController::step() {
 }
 
 void SceneController::cleanAndRestartScriptEngine() {
-	objectsContext->removeAllObjects();
+    objectsContext->removeAllObjects();
     scriptController = make<SpaceJaguarScriptController>();
     scriptController->dataSource = shared_from_this();
     scriptController->delegate = shared_from_this();
-    scriptController->setScriptFromFilePath(startScriptPath);	
-	scriptController->step();
+    scriptController->setScriptFromFilePath(startScriptPath);
+    scriptController->step();
 
-		camera = objectsContext->objectWithInstanceIdentifier(make_shared<string>("camera"));
-		if (camera.get() == nullptr) {
-			throwRuntimeException("Camera is null, so can't use GRANNYPILLS mode, crashing");
-		}
-		noclipCameraController = make_shared<FreeCameraControlsController>(camera, toNotNull(ioSystem->inputController), shared_from_this());
+    camera = objectsContext->objectWithInstanceIdentifier(make_shared<string>("camera"));
+    if (camera.get() == nullptr) {
+        throwRuntimeException("Camera is null, so can't use GRANNYPILLS mode, crashing");
+    }
+    noclipCameraController = make_shared<FreeCameraControlsController>(camera, toNotNull(ioSystem->inputController), shared_from_this());
 
 }
 
 void SceneController::spaceJaguarScriptControllerDidRequestRemoveAllObjects(shared_ptr<SpaceJaguarScriptController> ) {
-	objectsContext->removeAllObjects();
+    objectsContext->removeAllObjects();
 }
 
 void SceneController::cameraControllerDidFinish(shared_ptr<CameraController> ) {
@@ -79,10 +79,10 @@ shared_ptr<Object> SceneController::spaceJaguarScriptControllerDidRequestObjectW
 
 void SceneController::spaceJaguarScriptControllerDidRequestAddObjectWithPath(shared_ptr<SpaceJaguarScriptController>, string name, string  modelPath, float x, float y, float z, float rX, float rY, float rZ, float sX, float sY, float sZ) {
 
-	shared_ptr<string> modelPathSharedPtr;
-	if (modelPath != "undefined") {
-		modelPathSharedPtr = make_shared<string>(modelPath);
-	}
+    shared_ptr<string> modelPathSharedPtr;
+    if (modelPath != "undefined") {
+        modelPathSharedPtr = make_shared<string>(modelPath);
+    }
 
     auto object = FSEGTFactory::makeOnSceneObject(
                       make_shared<string>(name),
@@ -100,8 +100,8 @@ void SceneController::spaceJaguarScriptControllerDidRequestAddObjectWithPath(sha
     objectsContext->addObject(object);
 }
 
-void SceneController::spaceJaguarScriptControllerDidRequestSetWindowTitle(shared_ptr<SpaceJaguarScriptController> , string title) {
-	ioSystem->setWindowTitle(title);
+void SceneController::spaceJaguarScriptControllerDidRequestSetWindowTitle(shared_ptr<SpaceJaguarScriptController>, string title) {
+    ioSystem->setWindowTitle(title);
 };
 
 void SceneController::spaceJaguarScriptControllerDidRequestUpdateObjectWithNameAndPositionXYZrXrYrZ(shared_ptr<SpaceJaguarScriptController>, string name, float x, float y, float z, float rX, float rY, float rZ) {
@@ -121,7 +121,7 @@ void SceneController::spaceJaguarScriptControllerDidRequestUpdateObjectWithNameA
     rotation->y = rY;
     rotation->z = rZ;
 
-	cout << "spaceJaguarScriptControllerDidRequestUpdateObjectWithNameAndPositionXYZrXrYrZ: " << rZ << endl;
+    cout << "spaceJaguarScriptControllerDidRequestUpdateObjectWithNameAndPositionXYZrXrYrZ: " << rZ << endl;
 
     objectsContext->updateObject(object);
 };
@@ -130,32 +130,32 @@ void SceneController::spaceJaguarScriptControllerDidRequestChangeNoclipMode(shar
     this->noclipMode = noclipMode;
 }
 
-bool SceneController::spaceJaguarScriptControllerAskingIsKeyPressed(shared_ptr<SpaceJaguarScriptController> , string  key) {
-	if (key == "leftKey") {
-		return inputController->isLeftKeyPressed();
-	}
-	else if (key == "rightKey") {
-		return inputController->isRightKeyPressed();
-	}
-	else if (key == "upKey") {
-		return inputController->isUpKeyPressed();
-	}
-	else if (key == "downKey") {
-		return inputController->isDownKeyPressed();
-	}
-	else if (key == "jumpKey") {
-		return inputController->isJumpKeyPressed();
-	}
-	return false;
+bool SceneController::spaceJaguarScriptControllerAskingIsKeyPressed(shared_ptr<SpaceJaguarScriptController>, string  key) {
+    if (key == "leftKey") {
+        return inputController->isLeftKeyPressed();
+    }
+    else if (key == "rightKey") {
+        return inputController->isRightKeyPressed();
+    }
+    else if (key == "upKey") {
+        return inputController->isUpKeyPressed();
+    }
+    else if (key == "downKey") {
+        return inputController->isDownKeyPressed();
+    }
+    else if (key == "jumpKey") {
+        return inputController->isJumpKeyPressed();
+    }
+    return false;
 }
 
 void SceneController::spaceJaguarScriptControllerDidRequestPlayAnimationForObjectWithName(
-	shared_ptr<SpaceJaguarScriptController> , 
-	string animationName, 
-	string objectName
-) 
+    shared_ptr<SpaceJaguarScriptController>,
+    string animationName,
+    string objectName
+)
 {
-	cout << "requested animation play: \"" << animationName << "\" for object with name: \"" << objectName << "\"" << endl;
+    cout << "requested animation play: \"" << animationName << "\" for object with name: \"" << objectName << "\"" << endl;
     auto object = objectsContext->objectWithInstanceIdentifier(make_shared<string>(objectName));
     if (object.get() == nullptr) {
         auto errorString = string("SceneController play animation error, no object with name: ");
@@ -163,6 +163,6 @@ void SceneController::spaceJaguarScriptControllerDidRequestPlayAnimationForObjec
         throwRuntimeException(errorString);
     }
 
-	FSEGTUtils::setCurrentAnimationNameForObject(animationName, object);
-	objectsContext->updateObject(object);
+    FSEGTUtils::setCurrentAnimationNameForObject(animationName, object);
+    objectsContext->updateObject(object);
 };

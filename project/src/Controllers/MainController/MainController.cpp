@@ -7,7 +7,7 @@ using namespace FlameSteelEngineProject;
 #ifdef SPACEJUARACTIONRPG_ANDROID_BUILD
 #include "fschest.h"
 
-void extractResourcesForAndroid() {        
+void extractResourcesForAndroid() {
     char *archiveBuffer = nullptr;
     size_t size = 0;
     SDL_RWops *io = SDL_RWFromFile("files.fschest", "r");
@@ -17,9 +17,9 @@ void extractResourcesForAndroid() {
         SDL_RWread(io, archiveBuffer, sizeof(char), size);
     }
     io->close(io);
-    
+
     chdir(SDL_AndroidGetInternalStoragePath());
-    
+
     string outputPath = "files.fschest";
     auto fd = fopen(outputPath.c_str(), "wb");
     fwrite(archiveBuffer, sizeof(char), size, fd);
@@ -30,25 +30,25 @@ void extractResourcesForAndroid() {
 #endif
 
 MainController::MainController(shared_ptr<string> startScriptPath, NotNull<IOSystemParams> params) {
-	this->startScriptPath = startScriptPath;
-	this->params = params;
+    this->startScriptPath = startScriptPath;
+    this->params = params;
 };
 
 void MainController::start() {
     cout << "MainController::start()" << endl;
 
 #ifdef SPACEJUARACTIONRPG_ANDROID_BUILD
-    extractResourcesForAndroid();    
+    extractResourcesForAndroid();
 #endif
-    
+
     mainGameController = make_shared<FlameSteelEngine::GameToolkit::MainGameController>();
-	string mainScript = "com.demensdeum.flamesteelengine.application.main.js";
+    string mainScript = "com.demensdeum.flamesteelengine.application.main.js";
 
-	if (startScriptPath.get()) {
-		mainScript = *startScriptPath.get();
-	}
+    if (startScriptPath.get()) {
+        mainScript = *startScriptPath.get();
+    }
 
-	sceneController = make_shared<SceneController>(mainScript);
+    sceneController = make_shared<SceneController>(mainScript);
 
     mainGameController->setControllerForState(sceneController, scene);
 

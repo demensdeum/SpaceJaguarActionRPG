@@ -14,7 +14,7 @@ namespace FlameSteelEngineProject {
 class MainController {
 
 public:
-	MainController(shared_ptr<string> startScriptPath = nullptr, NotNull<IOSystemParams> params = make<IOSystemParams>());
+    MainController(shared_ptr<string> startScriptPath = nullptr, NotNull<IOSystemParams> params = make<IOSystemParams>());
     void start();
     void switchToSceneController();
     void startGameLoop();
@@ -23,8 +23,8 @@ private:
     shared_ptr<IOSystem> ioSystem;
     shared_ptr<Window> window;
     State state  =  started;
-	shared_ptr<string> startScriptPath;
-	NotNull<IOSystemParams> params;
+    shared_ptr<string> startScriptPath;
+    NotNull<IOSystemParams> params;
 
     shared_ptr<FlameSteelEngine::GameToolkit::MainGameController> mainGameController;
     shared_ptr<SceneController> sceneController;
