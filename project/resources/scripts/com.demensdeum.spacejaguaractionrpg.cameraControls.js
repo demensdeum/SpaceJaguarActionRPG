@@ -2,7 +2,7 @@ function CreateCameraControls(outputTargetName) {
     var cameraControls = {
     targetName : outputTargetName,       
 	step : function() {
-        var target = getObject("Jag");
+        var target = getObject(this.targetName);
 		var camera = getObject("camera");
 
 		camera.position.x = target.position.x;
