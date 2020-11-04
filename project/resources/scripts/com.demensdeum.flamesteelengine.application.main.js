@@ -13,8 +13,8 @@ function createContext() {
                 print("context initialize");
                 includeDependencies();
 
-                var kGameTitle = "Space Jaguar v0.0.1";                
-                setWindowTitle(kGameTitle); 
+                var kGameTitle = "Space Jaguar v0.0.2";
+                setWindowTitle(kGameTitle);
                 
                 this.companyLogoController = CreateCompanyLogoController();
                 this.engineLogoController = CreateEngineLogoController();
