@@ -136,14 +136,14 @@ function CreateMazeGenerator() {
             this.representMaze(generatedMaze);
         },
         representMaze : function(generatedMaze) {
-            var mountainCount = 0;
+            var enemyCount = 0;
             
             for (var x = 0; x < generatedMaze.width; x++) {
                 for (var y = 0; y < generatedMaze.height; y++) {
                     var cell = generatedMaze.maze[x + "_" + y];
                     if (cell == "#") {
                         var cube = createObject();
-                        cube.name = "Mountain" + mountainCount;
+                        cube.name = "Mountain";
                         cube.modelPath = "com.demensdeum.spacejaguaractionrpg.mountain.fsglmodel";
                         
                         var position = new Object();
@@ -195,7 +195,7 @@ function CreateMazeGenerator() {
                     }
                     else if (cell == "E") {
                         var cube = createObject();
-                        cube.name = "Enemy";
+                        cube.name = "Enemy" + enemyCount;
                         cube.modelPath = "com.demensdeum.spacejaguaractionrpg.enemy.fsglmodel";
                         
                         var position = new Object();
@@ -205,6 +205,8 @@ function CreateMazeGenerator() {
                         
                         cube.position = position;
                         addObject(cube);
+                        
+                        enemyCount += 1;
                     }
                     else if (cell == "T") {
                         var cube = createObject();
