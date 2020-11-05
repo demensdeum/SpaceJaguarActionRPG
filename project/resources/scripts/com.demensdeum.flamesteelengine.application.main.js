@@ -7,6 +7,7 @@ function includeDependencies() {
     include("com.demensdeum.spacejaguaractionrpg.object.state.js");
     include("com.demensdeum.spacejaguaractionrpg.objectAbilitiesFactory.js");
     include("com.demensdeum.spacejaguaractionrpg.objectsFactory.js");
+    include("com.demensdeum.spacejaguaractionrpg.namesFactory.js");
 }
 
 function CreateContext() {
@@ -24,7 +25,7 @@ function CreateContext() {
                 this.menuController = CreateMenuController(this);
                 this.newGameController = CreateNewGameController();
                 
-                this.setCurrentController(this.menuController);
+                this.setCurrentController(this.newGameController);
                 this.initialized = true;
             }
         },
