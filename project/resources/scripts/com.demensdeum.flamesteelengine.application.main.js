@@ -1,37 +1,24 @@
-function includeDependencies() {
-    include("com.demensdeum.flamesteelengine.utils.js");
-    include("com.demensdeum.spacejaguaractionrpg.enginelogocontroller.js");
-    include("com.demensdeum.spacejaguaractionrpg.companylogocontroller.js");
-    include("com.demensdeum.spacejaguaractionrpg.menucontroller.js");
-    include("com.demensdeum.spacejaguaractionrpg.newGameController.js");
-    include("com.demensdeum.spacejaguaractionrpg.object.state.js");
-    include("com.demensdeum.spacejaguaractionrpg.objectAbilitiesFactory.js");
-    include("com.demensdeum.spacejaguaractionrpg.objectsFactory.js");
-    include("com.demensdeum.spacejaguaractionrpg.namesFactory.js");
-}
-
 function CreateContext() {
-    var context = {    
+    var context = {
         initializeIfNeeded : function () {
             if (this.initialized === undefined) {
-                print("context initialize");
-                includeDependencies();
+                print("Context initialized");
 
                 var kGameTitle = "Space Jaguar v0.0.2";
                 setWindowTitle(kGameTitle);
-                
+
                 this.companyLogoController = CreateCompanyLogoController();
                 this.engineLogoController = CreateEngineLogoController();
                 this.menuController = CreateMenuController(this);
-                this.newGameController = CreateNewGameController();
-                
+                this.newGameController = new NewGameController();
+
                 this.setCurrentController(this.newGameController);
                 this.initialized = true;
             }
         },
         setCurrentController : function(currentController) {
                 this.currentController = currentController;
-                this.currentController.delegate = this;            
+                this.currentController.delegate = this;
         },
         step : function() {
             this.initializeIfNeeded();
@@ -48,7 +35,7 @@ function CreateContext() {
             else if (controller == this.menuController) {
                 this.setCurrentController(this.newGameController);
             }
-            
+
         },
         menuControllerDidRequestNewGame : function(controller) {
             this.setCurrentController(this.newGameController);
@@ -58,7 +45,8 @@ function CreateContext() {
 }
 
 if (GLOBAL_CONTEXT === undefined) {
-    includeDependencies();
+    include("com.demensdeum.spacejaguaractionrpg.includes.js");
+    IncludeDependencies();
     GLOBAL_CONTEXT = CreateContext();
 }
 GLOBAL_CONTEXT.step();

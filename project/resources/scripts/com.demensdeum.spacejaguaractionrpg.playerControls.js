@@ -29,9 +29,9 @@ function CreatePlayerControls(outputTargetName, outputDelegate, outputGameData) 
             print("Jag");
             print("Health: " + this.gameData.jag.health.points + "/" + this.gameData.jag.maxHealth.points);
             print("Blade:  " + this.gameData.jag.bladeFightMin.points + "-" + this.gameData.jag.bladeFightMax.points);
-            var inputText = prompt("Menu:\n1 - Regenerate maze");
+            var inputText = prompt(">");
             if (inputText == "1") {
-                //this.delegate.playerControlsDidRequestRegenerateMaze(this);
+                
             }
         }
 	}
