@@ -1,10 +1,12 @@
 function CreateMazeGenerator() {
     var mazeGenerator = {
         generateMaze : function(mazeGeneratorParams) {
+            this.isExitPointSet = false;
             this.generatedMap = {};
             this.clearMap(mazeGeneratorParams);
-            
-            for (var i = 0; i < mazeGeneratorParams.numberOfRuns; i++) {
+
+            for (var i = 0; (i < mazeGeneratorParams.numberOfRuns) || (this.isExitPointSet == false); i++) {
+                print("Generator run: " + i);
                 var cursor = new Object();
                 cursor.x = mazeGeneratorParams.mapWidth / 2;
                 cursor.z = mazeGeneratorParams.mapHeight / 2;
@@ -16,16 +18,16 @@ function CreateMazeGenerator() {
                     this.drawLine(cursor, direction, mazeGeneratorParams);
                 }
             }
-            
+
             this.putStartPoint(cursor);
-            
+
             var output = new Object();
             output.maze = this.generatedMap;
             output.width = mazeGeneratorParams.mapWidth;
             output.height = mazeGeneratorParams.mapHeight;
-            
+
             this.printGeneratedMap(mazeGeneratorParams);
-            
+
             return output;
         },
         putStartPoint : function(cursor) {
@@ -38,7 +40,7 @@ function CreateMazeGenerator() {
                     var name = x + "_" + y;
                     this.generatedMap[name] = "#";
                 }
-            }            
+            }
         },
         printGeneratedMap : function(mazeGeneratorParams) {
             print("Print generated map");
@@ -50,42 +52,55 @@ function CreateMazeGenerator() {
                 }
                 print(line);
             }
-            //prompt(">");
+            prompt(">");
         },
         putFreeSpaceAtCursor : function(cursor) {
             for (var x = 0; x < cursor.sizeWidth; x++) {
                 for (var y = 0; y < cursor.sizeHeight; y++) {
                     var name = (cursor.x + x) + "_" + (cursor.z + y);
-                    this.generatedMap[name] = "_"; 
+                    var cell = this.generatedMap[name];
+                    if (cell == "#") {
+                      this.generatedMap[name] = "_";
+                    }
                 }
             }
+        },
+        putIdIfCellIsEmpty : function(identifier, name) {
+          var cell = this.generatedMap[name];
+          if (cell == "_") {
+            this.generatedMap[name] = identifier;
+          }
         },
         putSomethingAtCursorIfNeeded : function(cursor, mazeGeneratorParams) {
             var enemyChance = mazeGeneratorParams.enemyChance;
             var chestChance = mazeGeneratorParams.chestChance;
             var mazeChance = mazeGeneratorParams.mazeChance;
             var townChance = mazeGeneratorParams.townChance;
-            
+
             var name = (cursor.x + x) + "_" + (cursor.z + y);
-            
+
             if (Math.randInt(0, enemyChance) == 1) {
-                this.generatedMap[name] = "E";			
+                this.putIdIfCellIsEmpty("E", name);
             }
             else if (Math.randInt(0, chestChance) == 1) {
-                this.generatedMap[name] = "C";			
+                this.putIdIfCellIsEmpty("C", name);
             }
             else if (Math.randInt(0, mazeChance) == 1) {
-                this.generatedMap[name] = "M";			
+                this.putIdIfCellIsEmpty("M", name);
             }
             else if (Math.randInt(0, townChance) == 1) {
-                this.generatedMap[name] = "T";	
+                this.putIdIfCellIsEmpty("T", name);
+            }
+            else if (Math.randInt(0, 20) == 1 && this.isExitPointSet == false) {
+                this.putIdIfCellIsEmpty("X", name);
+                this.isExitPointSet = true;
             }
         },
         drawLine : function(cursor, direction, mazeGeneratorParams) {
             for (var blocksCount = 0; blocksCount < mazeGeneratorParams.lineLength; blocksCount++) {
                 this.putFreeSpaceAtCursor(cursor);
                 this.putSomethingAtCursorIfNeeded(cursor, mazeGeneratorParams);
-                
+
                 var diff = 1;
                 if (direction == "left") {
                     cursor.x -= diff;
@@ -111,17 +126,17 @@ function CreateMazeGenerator() {
                         cursor.z = mazeGeneratorParams.mapHeight - 1;
                     }
                 }
-                
+
             }
         },
         cleanAndGenerateAndRepresentMaze : function() {
             removeAllObjects();
-            
-            addDefaultCameraAtXYZAndRotationXYZ(1, 0.03278, 0, 90, 0, 0);
-            
+
+            addDefaultCamera();
+
             var mazeGeneratorParams = new Object();
-            mazeGeneratorParams.mapWidth  = 30; 
-            mazeGeneratorParams.mapHeight = 30; 
+            mazeGeneratorParams.mapWidth  = 30;
+            mazeGeneratorParams.mapHeight = 30;
             mazeGeneratorParams.maxLines = Math.randInt(60, 100);
             mazeGeneratorParams.lineLength = Math.randInt(2, 8);
             mazeGeneratorParams.numberOfRuns = Math.randInt(5, 10);
@@ -131,7 +146,7 @@ function CreateMazeGenerator() {
             mazeGeneratorParams.chestChance = 20;
             mazeGeneratorParams.mazeChance = 300;
             mazeGeneratorParams.townChance = 300;
-            
+
             var generatedMaze = CreateMazeGenerator().generateMaze(mazeGeneratorParams);
             this.representMaze(generatedMaze);
         },

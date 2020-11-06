@@ -1,0 +1,45 @@
+Flame Steel Graphics Library Model @ Demens Deum
+Model version = Happy Sasquatch (1.0)
+Root Node - Cube
+	Node Childs
+	Node Childs End
+Root Node End
+Mesh
+Vertex - x = 0, y = 1, z = 0, u = 0, v = 0
+Vertex - x = 1, y = 1, z = 1, u = 1, v = 1
+Vertex - x = 1, y = 1, z = 0, u = 1, v = 0
+Vertex - x = 1, y = 1, z = 1, u = 1, v = 0
+Vertex - x = 0, y = 0, z = 1, u = 0, v = 1
+Vertex - x = 1, y = 0, z = 1, u = 1, v = 1
+Vertex - x = 0, y = 1, z = 1, u = 0, v = 0
+Vertex - x = 0, y = 0, z = 0, u = 1, v = 1
+Vertex - x = 0, y = 0, z = 1, u = 0, v = 1
+Vertex - x = 1, y = 0, z = 0, u = 1, v = 0
+Vertex - x = 0, y = 0, z = 1, u = 0, v = 1
+Vertex - x = 0, y = 0, z = 0, u = 0, v = 0
+Vertex - x = 1, y = 1, z = 0, u = 1, v = 0
+Vertex - x = 1, y = 0, z = 1, u = 0, v = 1
+Vertex - x = 1, y = 0, z = 0, u = 1, v = 1
+Vertex - x = 0, y = 1, z = 0, u = 0, v = 0
+Vertex - x = 1, y = 0, z = 0, u = 1, v = 1
+Vertex - x = 0, y = 0, z = 0, u = 0, v = 1
+Vertex - x = 0, y = 1, z = 1, u = 0, v = 1
+Vertex - x = 0, y = 1, z = 1, u = 0, v = 0
+Vertex - x = 0, y = 1, z = 0, u = 1, v = 0
+Vertex - x = 1, y = 0, z = 1, u = 1, v = 1
+Vertex - x = 1, y = 1, z = 1, u = 0, v = 0
+Vertex - x = 1, y = 1, z = 0, u = 1, v = 0
+Index = 0, 1, 2
+Index = 3, 4, 5
+Index = 6, 7, 8
+Index = 9, 10, 11
+Index = 12, 13, 14
+Index = 15, 16, 17
+Index = 0, 18, 1
+Index = 3, 19, 4
+Index = 6, 20, 7
+Index = 9, 21, 10
+Index = 12, 22, 13
+Index = 15, 23, 16
+Material - Texture path = com.demensdeum.spacejaguaractionrpg.exitPoint.texture
+

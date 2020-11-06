@@ -18,7 +18,7 @@ function NewGameController() {
             this.gameplayData.location = startLocation;
             var mazeRepresenter = new MazeRepresenter();
             mazeRepresenter.representMaze(startLocation);
-            addDefaultCameraAtXYZAndRotationXYZ(1, 0.03278, 0, 90, 0, 0);
+            addDefaultCamera();
             this.playerControls = CreatePlayerControls("Jag", this, this.gameplayData);
             this.cameraControls = CreateCameraControls("Jag");
   };
@@ -27,5 +27,15 @@ function NewGameController() {
             this.initializeIfNeeded();
             this.playerControls.step();
             this.cameraControls.step();
+  };
+
+  this.playerControlsDidRequestFreeFlyMode = function(playerControls) {
+            GRANNYPILLS();
+            this.cameraControls.isEnabled = false;
+            this.playerControls.isEnabled = false;
+  };
+
+  this.playerControlsDidRequestInteraction = function(playerControls) {
+    print("Interact");
   };
 };

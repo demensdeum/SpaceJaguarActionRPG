@@ -1,6 +1,5 @@
-function CreateContext() {
-    var context = {
-        initializeIfNeeded : function () {
+function Context() {
+        this.initializeIfNeeded = function () {
             if (this.initialized === undefined) {
                 print("Context initialized");
 
@@ -15,16 +14,16 @@ function CreateContext() {
                 this.setCurrentController(this.newGameController);
                 this.initialized = true;
             }
-        },
-        setCurrentController : function(currentController) {
+        };
+        this.setCurrentController = function(currentController) {
                 this.currentController = currentController;
                 this.currentController.delegate = this;
-        },
-        step : function() {
+        };
+        this.step = function() {
             this.initializeIfNeeded();
             this.currentController.step();
-        },
-        controllerDidFinish : function(controller) {
+        };
+        this.controllerDidFinish = function(controller) {
             removeAllObjects();
             if (controller == this.companyLogoController) {
                 this.setCurrentController(this.engineLogoController);
@@ -35,18 +34,15 @@ function CreateContext() {
             else if (controller == this.menuController) {
                 this.setCurrentController(this.newGameController);
             }
-
-        },
-        menuControllerDidRequestNewGame : function(controller) {
+        };
+        this.menuControllerDidRequestNewGame = function(controller) {
             this.setCurrentController(this.newGameController);
-        }
+        };
     };
-    return context;
-}
 
 if (GLOBAL_CONTEXT === undefined) {
     include("com.demensdeum.spacejaguaractionrpg.includes.js");
     IncludeDependencies();
-    GLOBAL_CONTEXT = CreateContext();
+    GLOBAL_CONTEXT = new Context();
 }
 GLOBAL_CONTEXT.step();
