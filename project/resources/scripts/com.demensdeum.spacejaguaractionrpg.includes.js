@@ -14,4 +14,8 @@ function IncludeDependencies() {
   include("com.demensdeum.spacejaguaractionrpg.objectsFactory.js");
   include("com.demensdeum.spacejaguaractionrpg.objectAbilitiesFactory.js");
   include("com.demensdeum.spacejaguaractionrpg.namesFactory.js");
+  include("com.demensdeum.spacejaguaractionrpg.interactionController.js");
+  include("com.demensdeum.spacejaguaractionrpg.location.js");
+  include("com.demensdeum.spacejaguaractionrpg.spaceShipController.js");
+  include("com.demensdeum.spacejaguaractionrpg.context.js");
 };

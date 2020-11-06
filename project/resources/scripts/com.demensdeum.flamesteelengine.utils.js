@@ -1,3 +1,11 @@
+function debugConsole() {
+  var command = " ";
+  while (command.length > 0) {
+    command = prompt("--- Debug Console ---");
+    eval(command);
+  }
+}
+
 function printVector(vector) {
     print("Vector: x: " + vector.x + " y: " + vector.y + " z: " + vector.z);
 }

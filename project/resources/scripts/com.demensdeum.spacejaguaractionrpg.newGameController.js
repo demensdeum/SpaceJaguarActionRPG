@@ -1,4 +1,6 @@
-function NewGameController() {
+function NewGameController(delegate) {
+
+  this.delegate = delegate;
 
   this.initializeIfNeeded = function() {
             if (this.initialized === undefined) {
@@ -7,20 +9,20 @@ function NewGameController() {
                 var objectsFactory = new ObjectsFactory();
                 this.gameplayData = new GameplayData();
                 this.gameplayData.jag = objectsFactory.jag();
-
                 this.generateStartLocation();
+                this.interactionController = new InteractionController(this.gameplayData, this);
             }
   };
 
   this.generateStartLocation = function() {
             var mapsFactory = new MapsFactory();
             var startLocation = mapsFactory.generateDestroyedSpaceStation();
-            this.gameplayData.location = startLocation;
             var mazeRepresenter = new MazeRepresenter();
             mazeRepresenter.representMaze(startLocation);
             addDefaultCamera();
             this.playerControls = CreatePlayerControls("Jag", this, this.gameplayData);
             this.cameraControls = CreateCameraControls("Jag");
+            this.gameplayData.location = new Location(startLocation);
   };
 
   this.step = function() {
@@ -36,6 +38,10 @@ function NewGameController() {
   };
 
   this.playerControlsDidRequestInteraction = function(playerControls) {
-    print("Interact");
+    this.interactionController.handlePlayerInteractionIfNeeded();
+  };
+
+  this.interactionControllerDidRequestExitFromLocation = function(interactionController) {
+    this.delegate.newGameControllerDidRequestExit(this);
   };
 };

@@ -52,7 +52,7 @@ function CreateMazeGenerator() {
                 }
                 print(line);
             }
-            prompt(">");
+            //prompt(">");
         },
         putFreeSpaceAtCursor : function(cursor) {
             for (var x = 0; x < cursor.sizeWidth; x++) {
