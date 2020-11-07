@@ -6,11 +6,13 @@ function Context() {
                 var kGameTitle = "Space Jaguar v0.0.2";
                 setWindowTitle(kGameTitle);
 
+                this.gameplayData = new GameplayData();
                 this.companyLogoController = CreateCompanyLogoController();
                 this.engineLogoController = CreateEngineLogoController();
                 this.menuController = CreateMenuController(this);
-                this.newGameController = new NewGameController(this);
-                this.spaceShipController = new SpaceShipController(this);
+                this.newGameController = new NewGameController(this, this.gameplayData);
+                this.spaceShipController = new SpaceShipController(this, this.gameplayData);
+                this.intergalacticNavigatorController = new IntergalacticNavigatorController(this);
 
                 this.setCurrentController(this.newGameController);
                 this.initialized = true;
@@ -46,5 +48,17 @@ function Context() {
 
         this.newGameControllerDidRequestExit = function(newGameController) {
             this.setCurrentController(this.spaceShipController);
+        };
+
+        this.shipControllerDidRequestGoToDockedLocation = function(shipController) {
+          this.setCurrentController(this.newGameController);
+        };
+
+        this.shipControllerDidRequestFlyToAnotherPlace = function(shipController) {
+          this.setCurrentController(this.intergalacticNavigatorController);
+        };
+
+        this.didRequestIntergalacticNavigatorControllerGoToCaptainSeat = function(intergalacticNavigatorController) {
+          this.setCurrentController(this.spaceShipController);
         };
     };

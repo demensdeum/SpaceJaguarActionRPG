@@ -1,14 +1,13 @@
-function NewGameController(delegate) {
-
+function NewGameController(delegate, gameplayData) {
   this.delegate = delegate;
+  this.gameplayData = gameplayData;
 
   this.initializeIfNeeded = function() {
             if (this.initialized === undefined) {
                 this.initialized = true;
-
                 var objectsFactory = new ObjectsFactory();
-                this.gameplayData = new GameplayData();
                 this.gameplayData.jag = objectsFactory.jag();
+                this.gameplayData.ship = objectsFactory.startShip();
                 this.generateStartLocation();
                 this.interactionController = new InteractionController(this.gameplayData, this);
             }
@@ -39,6 +38,10 @@ function NewGameController(delegate) {
 
   this.playerControlsDidRequestInteraction = function(playerControls) {
     this.interactionController.handlePlayerInteractionIfNeeded();
+  };
+
+  this.playerControlsDidRequestTeleportToSpaceship = function(playerControls) {
+    this.delegate.newGameControllerDidRequestExit(this);
   };
 
   this.interactionControllerDidRequestExitFromLocation = function(interactionController) {

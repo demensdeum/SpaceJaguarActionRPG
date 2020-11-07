@@ -9,4 +9,16 @@ function ObjectsFactory() {
         jag.bladeFightMax = abilitiesFactory.bladeFightMax(6);
         return jag;
     };
+
+    this.startShip = function() {
+      var namesFactory = new NamesFactory();
+      var abilitiesFactory = new ObjectAbilitiesFactory();
+      var ship = new Object();
+      ship.name = namesFactory.generateShipName();
+      ship.health = abilitiesFactory.health(70);
+      ship.maxHealth = abilitiesFactory.maxHealth(100);
+      ship.fusion = abilitiesFactory.fusion(100);
+      ship.maxFusion = abilitiesFactory.maxFusion(300);
+      return ship;
+    };
 };

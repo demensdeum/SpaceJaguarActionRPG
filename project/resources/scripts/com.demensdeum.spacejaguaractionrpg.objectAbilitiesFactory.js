@@ -7,6 +7,14 @@ function ObjectAbilitiesFactory() {
         var ability = new ObjectAbility("MHEAL", "Max health", points);
         return ability;
     };
+    this.fusion = function(points) {
+        var ability = new ObjectAbility("FUSIN", "Current fusion fuel tank", points);
+        return ability;
+    };
+    this.maxFusion = function(points) {
+        var ability = new ObjectAbility("MFUSN", "Max fusion fuel tank", points);
+        return ability;
+    };
     this.bladeFightMin = function(points) {
         var ability = new ObjectAbility("BLDMIN", "Blade fighting ability minimal", points);
         return ability;

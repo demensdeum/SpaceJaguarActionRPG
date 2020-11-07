@@ -35,13 +35,17 @@ function CreatePlayerControls(outputTargetName, outputDelegate, outputGameData) 
             print("Blade:  " + this.gameData.jag.bladeFightMin.points + "-" + this.gameData.jag.bladeFightMax.points);
             var inputText = prompt("\
             1. Freefly\
-            2. Interact
+            2. Interact\
+            3. Teleport to spaceship
             ");
             if (inputText == "1") {
               this.delegate.playerControlsDidRequestFreeFlyMode(this);
             }
             else if (inputText == "2") {
               this.delegate.playerControlsDidRequestInteraction(this);
+            }
+            else if (inputText == "3") {
+              this.delegate.playerControlsDidRequestTeleportToSpaceship(this);
             }
         }
 	}
