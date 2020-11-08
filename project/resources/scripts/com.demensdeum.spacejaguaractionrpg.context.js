@@ -15,6 +15,7 @@ function Context() {
                 this.intergalacticNavigatorController = new IntergalacticNavigatorController(this);
                 this.mapSceneController = new MapSceneController(this, this.gameplayData);
                 this.locationGeneratorController = new LocationGeneratorController(this, this.gameplayData);
+                this.shipTravelController = new ShipTravelController(this, this.gameplayData);
 
                 this.setCurrentController(this.newGameController);
                 this.initialized = true;
@@ -47,6 +48,9 @@ function Context() {
             else if (controller == this.locationGeneratorController) {
               this.setCurrentController(this.mapSceneController);
             }
+            else if (controller == this.shipTravelController) {
+              this.setCurrentController(this.locationGeneratorController);
+            }
         };
 
         this.menuControllerDidRequestNewGame = function(controller) {
@@ -70,6 +74,6 @@ function Context() {
         };
 
         this.intergalacticNavigatorControllerDidRequestGoToRandomLocation = function(intergalacticNavigatorController) {
-          this.setCurrentController(this.locationGeneratorController);
+          this.setCurrentController(this.shipTravelController);
         };
     };
