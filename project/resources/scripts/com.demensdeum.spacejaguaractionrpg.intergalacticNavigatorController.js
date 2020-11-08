@@ -6,6 +6,7 @@ function IntergalacticNavigatorController(delegate) {
     2. Back to captain seat\
     ");
     if (action == "1") {
+      removeAllObjects();
       this.delegate.intergalacticNavigatorControllerDidRequestGoToRandomLocation(this);
     }
     else if (action == "2") {
