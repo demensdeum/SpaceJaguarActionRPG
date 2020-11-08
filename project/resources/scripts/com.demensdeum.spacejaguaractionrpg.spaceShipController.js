@@ -19,6 +19,10 @@ function SpaceShipController(delegate, gameplayData) {
       4. Repair ship\
       ");
       if (action == "1") {
+		    if (this.gameplayData.location == null) {
+			    prompt("Not docked to any location!");
+			    return;
+		    }
         this.delegate.shipControllerDidRequestGoToDockedLocation(this);
       }
       else if (action == "2") {
