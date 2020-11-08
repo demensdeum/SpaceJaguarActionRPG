@@ -1,0 +1,2 @@
+build & run scripts:
+    python3 project/resourcesSourcesAndTools/tools/compileIncludes.py && scripts/buildScripts/linux/build.sh && scripts/buildScripts/linux/run.sh 

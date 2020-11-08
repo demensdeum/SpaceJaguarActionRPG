@@ -13,6 +13,7 @@ function Context() {
                 this.newGameController = new NewGameController(this, this.gameplayData);
                 this.spaceShipController = new SpaceShipController(this, this.gameplayData);
                 this.intergalacticNavigatorController = new IntergalacticNavigatorController(this);
+                this.mapSceneController = new MapSceneController(this, this.gameplayData);
 
                 this.setCurrentController(this.newGameController);
                 this.initialized = true;
@@ -30,7 +31,6 @@ function Context() {
         };
 
         this.controllerDidFinish = function(controller) {
-            removeAllObjects();
             if (controller == this.companyLogoController) {
                 this.setCurrentController(this.engineLogoController);
             }
@@ -39,6 +39,9 @@ function Context() {
             }
             else if (controller == this.menuController) {
                 this.setCurrentController(this.newGameController);
+            }
+            else if (controller == this.newGameController) {
+              this.setCurrentController(this.mapSceneController);
             }
         };
 
@@ -51,14 +54,18 @@ function Context() {
         };
 
         this.shipControllerDidRequestGoToDockedLocation = function(shipController) {
-          this.setCurrentController(this.newGameController);
+          this.setCurrentController(this.mapSceneController);
         };
 
         this.shipControllerDidRequestFlyToAnotherPlace = function(shipController) {
           this.setCurrentController(this.intergalacticNavigatorController);
         };
 
-        this.didRequestIntergalacticNavigatorControllerGoToCaptainSeat = function(intergalacticNavigatorController) {
+        this.intergalacticNavigatorControllerDidRequestGoToCaptainSeat = function(intergalacticNavigatorController) {
           this.setCurrentController(this.spaceShipController);
+        };
+
+        this.intergalactionNavigatorControllerDidRequestGoToRandomLocation = function(intergalacticNavigatorController) {
+          
         };
     };

@@ -2,7 +2,7 @@ function CreateMenuController(outputDelegate) {
     var controller = {
         delegate : outputDelegate,
         initializeIfNeeded : function() {
-            if (this.initialized === undefined) {               
+            if (this.initialized === undefined) {
                 this.initialized = true;
 
                 this.timer = 0;
@@ -16,16 +16,16 @@ function CreateMenuController(outputDelegate) {
                 starsPosition.y = 0;
                 starsPosition.z = 0;
                 stars.position = starsPosition;
-                
+
                 var logo = createObject();
                 logo.name = "Logo";
                 logo.modelPath = "com.demensdeum.spacejaguaractionrpg.logo.fsglmodel";
                 logo.position.x = 0.8;
-                logo.position.z = 0.48; 
+                logo.position.z = 0.48;
                 logo.position.y = 0.26;
                 logo.scale.y = 0.14;
                 logo.scale.z = 0.6;
-                
+
                 var planet = createObject();
                 planet.name = "Planet";
                 planet.modelPath = "com.demensdeum.flamesteelengine.sphere.fsglmodel";
@@ -39,22 +39,22 @@ function CreateMenuController(outputDelegate) {
                 scale.y = 0.5;
                 scale.z = 0.5;
                 planet.scale = scale;
-                
+
                 addObject(logo);
                 addObject(stars);
                 addObject(planet);
-                
+
                 var camera = getObject("camera");
                 camera.position.x = 1.4762;
                 camera.position.y = 0.03278;
                 camera.position.z = 0.5;
-                
+
                 camera.rotation.x = -270;
                 camera.rotation.y = 0;
                 camera.rotation.z = 0;
-                
+
                 updateObject(camera);
-                
+
                 //GRANNYPILLS();
             }
         },
@@ -73,10 +73,14 @@ function CreateMenuController(outputDelegate) {
                 5. Exit
                 ");
                 if (inputText == "1") {
+                    removeAllObjects();
                     this.delegate.menuControllerDidRequestNewGame(this);
                 }
                 else if (inputText == "4") {
-                    print("See Credits.txt");
+                    prompt("See Credits.txt");
+                }
+                else if (inputText == "5") {
+                  exit(0);
                 }
             }
         }

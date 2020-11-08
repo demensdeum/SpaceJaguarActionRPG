@@ -1,7 +1,7 @@
 function CreateEngineLogoController() {
     var controller = {
         initializeIfNeeded : function() {
-            if (this.initialized === undefined) {               
+            if (this.initialized === undefined) {
                 this.initialized = true;
 
                 this.timer = 0;
@@ -25,9 +25,10 @@ function CreateEngineLogoController() {
             this.initializeIfNeeded();
             this.timer += 1;
             if (this.timer > 100) {
+                removeAllObjects();
                 this.delegate.controllerDidFinish(this);
             }
-            print(this.timer);            
+            print(this.timer);
             print("Engine Logo Controller Step");
         }
     };

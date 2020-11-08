@@ -56,10 +56,9 @@ void SceneController::cleanAndRestartScriptEngine() {
     scriptController->setScriptFromFilePath(startScriptPath);
     scriptController->step();
 
-    camera = objectsContext->objectWithInstanceIdentifier(make_shared<string>("camera"));
-    if (camera.get() == nullptr) {
-        throwRuntimeException("Camera is null, so can't use GRANNYPILLS mode, crashing");
-    }
+    auto rawCamera = objectsContext->objectWithInstanceIdentifier(make_shared<string>("camera"));
+	camera = NotNull<Object>(rawCamera, "Camera is null, add camera object to scene please, CRASHING!");
+
     noclipCameraController = make_shared<FreeCameraControlsController>(camera, toNotNull(ioSystem->inputController), shared_from_this());
 
 }

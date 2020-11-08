@@ -1,4 +1,4 @@
-function InteractionController(gameplayData, delegate) {
+function InteractionController(delegate, gameplayData) {
   this.delegate = delegate;
   this.gameplayData = gameplayData;
   this.handlePlayerInteractionIfNeeded = function() {

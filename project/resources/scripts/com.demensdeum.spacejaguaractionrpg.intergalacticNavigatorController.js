@@ -2,14 +2,14 @@ function IntergalacticNavigatorController(delegate) {
   this.delegate = delegate;
   this.step = function() {
     var action = prompt("\
-    1. Go to random space!\
+    1. Go to random location!\
     2. Back to captain seat\
     ");
     if (action == "1") {
-      prompt("TODO: Implement");
+      this.delegate.intergalacticNavigatorControllerDidRequestGoToRandomLocation(this);
     }
     else if (action == "2") {
-      this.delegate.didRequestIntergalacticNavigatorControllerGoToCaptainSeat(this);
+      this.delegate.intergalacticNavigatorControllerDidRequestGoToCaptainSeat(this);
     }
   };
 };

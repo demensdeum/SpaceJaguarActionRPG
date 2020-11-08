@@ -1,5 +1,5 @@
 if (GLOBAL_CONTEXT === undefined) {
-    include("com.demensdeum.spacejaguaractionrpg.includes.js");
+    include("com.demensdeum.flamesteelengine.application.includes.js");
     IncludeDependencies();
     GLOBAL_CONTEXT = new Context();
 }
