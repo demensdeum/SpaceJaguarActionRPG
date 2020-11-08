@@ -3,12 +3,16 @@ function SpaceShipController(delegate, gameplayData) {
   this.gameplayData = gameplayData;
   this.step = function() {
       var location = this.gameplayData.location;
+      var locationName = "<NO>";
+      if (location != null) {
+        locationName = location.name();
+      }
       var ship = this.gameplayData.ship;
       var action = prompt("\
       Ship: " + ship.name +"\
       Health: " + ship.health.points + "/" + ship.maxHealth.points + "\
       Fusion: " + ship.fusion.points + "/" + ship.maxFusion.points + "\
-      Docked location: " + location.name() + "\n
+      Docked location: " + locationName + "\n
       1. Go to docked location\
       2. Fly to another place\
       3. Fill fusion tank\

@@ -48,9 +48,14 @@ function Context() {
             else if (controller == this.locationGeneratorController) {
               this.setCurrentController(this.mapSceneController);
             }
-            else if (controller == this.shipTravelController) {
-              this.setCurrentController(this.locationGeneratorController);
-            }
+        };
+
+        this.shipTravelControllerDidArriveAtSomeRandomLocation = function(shipTravelController) {
+          this.setCurrentController(this.locationGeneratorController);
+        };
+
+        this.shipTravelControllerDidOutOfFuel= function (shipTravelController) {
+          this.setCurrentController(this.spaceShipController);
         };
 
         this.menuControllerDidRequestNewGame = function(controller) {

@@ -13,7 +13,7 @@ function ObjectsFactory() {
     this.startShip = function() {
       var namesFactory = new NamesFactory();
       var abilitiesFactory = new ObjectAbilitiesFactory();
-      var ship = new Object();
+      var ship = new Ship();
       ship.name = namesFactory.generateShipName();
       ship.health = abilitiesFactory.health(70);
       ship.maxHealth = abilitiesFactory.maxHealth(100);
