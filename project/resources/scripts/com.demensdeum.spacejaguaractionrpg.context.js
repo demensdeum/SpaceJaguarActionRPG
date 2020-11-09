@@ -81,4 +81,8 @@ function Context() {
         this.intergalacticNavigatorControllerDidRequestGoToRandomLocation = function(intergalacticNavigatorController) {
           this.setCurrentController(this.shipTravelController);
         };
+
+        this.spaceShipControllerDidRequestGameOver = function(spaceShipController) {
+          this.setCurrentController(this.companyLogoController);
+        };
     };

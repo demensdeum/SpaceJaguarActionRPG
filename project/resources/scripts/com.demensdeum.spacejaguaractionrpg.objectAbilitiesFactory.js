@@ -16,11 +16,19 @@ function ObjectAbilitiesFactory() {
         return ability;
     };
     this.bladeFightMin = function(points) {
-        var ability = new ObjectAbility("BLDMIN", "Blade fighting ability minimal", points);
+        var ability = new ObjectAbility("BLDMN", "Blade fighting ability minimal", points);
         return ability;
     };
     this.bladeFightMax = function(points) {
-        var ability = new ObjectAbility("BLDMAX", "Blade fighting ability maximal", points);
+        var ability = new ObjectAbility("BLDMX", "Blade fighting ability maximal", points);
         return ability;
+    };
+    this.hunger = function(points) {
+      var ability = new ObjectAbility("HUNGR", "Hunger", points);
+      return ability;
+    };
+    this.hungerMax = function(points) {
+      var ability = new ObjectAbility("HUNGM", "Maximal hunger", points);
+      return ability;
     };
 };

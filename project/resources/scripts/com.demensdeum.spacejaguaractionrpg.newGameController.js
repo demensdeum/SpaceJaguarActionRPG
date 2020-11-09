@@ -6,6 +6,7 @@ function NewGameController(delegate, gameplayData) {
     var objectsFactory = new ObjectsFactory();
     this.gameplayData.jag = objectsFactory.jag();
     this.gameplayData.ship = objectsFactory.startShip();
+    this.gameplayData.bits = 500;
     var mapsFactory = new MapsFactory();
     var startLocation = mapsFactory.generateDestroyedSpaceStation();
     var mazeRepresenter = new MazeRepresenter();

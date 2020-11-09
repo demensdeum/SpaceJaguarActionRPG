@@ -9,7 +9,7 @@ function CreateCompanyLogoController() {
 
                 var cube = createObject();
                 cube.name = "Cube";
-                cube.modelPath = "com.companylogo.plane.fsglmodel";
+                cube.modelPath = "com.demensdeum.companylogo.plane.fsglmodel";
 
                 var position = new Object();
                 position.x = 0;

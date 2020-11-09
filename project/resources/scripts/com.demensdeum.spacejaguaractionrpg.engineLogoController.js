@@ -9,7 +9,7 @@ function CreateEngineLogoController() {
 
                 var cube = createObject();
                 cube.name = "Cube";
-                cube.modelPath = "com.flamesteelengine.plane.fsglmodel";
+                cube.modelPath = "com.demensdeum.flamesteelengine.plane.fsglmodel";
 
                 var position = new Object();
                 position.x = 0;

@@ -7,6 +7,14 @@ function ObjectsFactory() {
         jag.maxHealth = abilitiesFactory.maxHealth(10);
         jag.bladeFightMin = abilitiesFactory.bladeFightMin(3);
         jag.bladeFightMax = abilitiesFactory.bladeFightMax(6);
+        jag.hunger = abilitiesFactory.hunger(24);
+        jag.hungerMax = abilitiesFactory.hungerMax(48);
+        jag.liveForHours = function(hours) {
+          this.hunger.points -= hours;
+        };
+        jag.isDead = function() {
+          return this.health.points < 1 || this.hunger.points < 1;
+        };
         return jag;
     };
 
