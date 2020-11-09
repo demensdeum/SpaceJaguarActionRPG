@@ -13,6 +13,9 @@ function NamesFactory() {
         for (var i = 0; i < 4; i++) {
             name += dictionary[Math.randInt(0, dictionary.length - 1)];
         };
+        if (Math.randInt(0, 400) == 310) {
+          name = "CALEPEP";
+        }
         return name;
     };
 };
