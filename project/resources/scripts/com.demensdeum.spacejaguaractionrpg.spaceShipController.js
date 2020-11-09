@@ -60,13 +60,8 @@ function SpaceShipController(delegate, gameplayData) {
     if (someoneArrivedToHelp) {
     var action = prompt("Ship arrived to help: - Fill fusion for 200B?\n1.Yes\n2.No");
     if (action == 1) {
-      if (this.gameplayData.bits < 200) {
-        prompt("Not enough bits!");
-      }
-      else {
         this.gameplayData.bits -= 200;
         this.gameplayData.ship.fillFusion(100);
-      }
     }
   }
   else {

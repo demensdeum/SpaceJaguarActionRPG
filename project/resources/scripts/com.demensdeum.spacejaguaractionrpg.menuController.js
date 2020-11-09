@@ -2,7 +2,7 @@ function CreateMenuController(outputDelegate) {
     var controller = {
         delegate : outputDelegate,
         initializeIfNeeded : function() {
-            if (this.initialized === undefined) {
+            if (this.initialized != true) {
                 this.initialized = true;
 
                 this.timer = 0;
@@ -73,6 +73,7 @@ function CreateMenuController(outputDelegate) {
                 5. Exit
                 ");
                 if (inputText == "1") {
+                    this.initialized = false;
                     removeAllObjects();
                     this.delegate.menuControllerDidRequestNewGame(this);
                 }

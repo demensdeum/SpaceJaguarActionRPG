@@ -1,7 +1,7 @@
 function CreateCompanyLogoController() {
     var controller = {
         initializeIfNeeded : function() {
-            if (this.initialized === undefined) {
+            if (this.initialized != true) {
                 this.initialized = true;
 
                 this.timer = 0;
@@ -24,6 +24,8 @@ function CreateCompanyLogoController() {
             this.initializeIfNeeded();
             this.timer += 1;
             if (this.timer > 100) {
+                this.timer = 0;
+                this.initialized = false;
                 removeAllObjects();
                 this.delegate.controllerDidFinish(this);
             }
