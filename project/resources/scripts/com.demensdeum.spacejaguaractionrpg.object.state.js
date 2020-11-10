@@ -1,5 +1,5 @@
-function ObjectState(health, maxHealth) {
+function ObjectState(health, healthMax) {
     var factory = new ObjectAbilitiesFactory();
     this.health = factory.health(health);
-    this.maxHealth = factory.maxHealth(maxHealth);
+    this.healthMax = factory.healthMax(healthMax);
 };

@@ -207,5 +207,5 @@ function addDefaultCamera() {
 }
 
 function pushBackValueToArray(value, array) {
-    array[length] = value;
+    array[array.length] = value;
 }

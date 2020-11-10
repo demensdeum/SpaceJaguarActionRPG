@@ -1,0 +1,3 @@
+var ItemType = {
+  food : "FOOD"
+};

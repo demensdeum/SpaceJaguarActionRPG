@@ -31,7 +31,7 @@ function CreatePlayerControls(outputTargetName, outputDelegate, outputGameData) 
 		if (isKeyPressed("jumpKey")) {
             print("Location: " + this.gameData.location.name);
             print("Jag");
-            print("Health: " + this.gameData.jag.health.points + "/" + this.gameData.jag.maxHealth.points);
+            print("Health: " + this.gameData.jag.health.points + "/" + this.gameData.jag.healthMax.points);
             print("Blade:  " + this.gameData.jag.bladeFightMin.points + "-" + this.gameData.jag.bladeFightMax.points);
             var inputText = prompt("\
             1. Freefly\

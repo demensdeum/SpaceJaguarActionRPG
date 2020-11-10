@@ -3,7 +3,7 @@ function ObjectAbilitiesFactory() {
         var ability = new ObjectAbility("CHEAL", "Current health", points);
         return ability;
     };
-    this.maxHealth = function(points) {
+    this.healthMax = function(points) {
         var ability = new ObjectAbility("MHEAL", "Max health", points);
         return ability;
     };
@@ -29,6 +29,14 @@ function ObjectAbilitiesFactory() {
     };
     this.hungerMax = function(points) {
       var ability = new ObjectAbility("HUNGM", "Maximal hunger", points);
+      return ability;
+    };
+    this.energy = function(points) {
+      var ability = new ObjectAbility("ENERG", "Energy", points);
+      return ability;
+    };
+    this.energyMax = function(points) {
+      var ability = new ObjectAbility("ENRMX", "Energy max", points);
       return ability;
     };
 };
