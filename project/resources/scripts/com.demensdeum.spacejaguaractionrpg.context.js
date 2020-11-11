@@ -16,6 +16,7 @@ function Context() {
                 this.mapSceneController = new MapSceneController(this, this.gameplayData);
                 this.locationGeneratorController = new LocationGeneratorController(this, this.gameplayData);
                 this.shipTravelController = new ShipTravelController(this, this.gameplayData);
+                this.spaceStationController = new SpaceStationController(this, this.gameplayData);
 
                 this.setCurrentController(this.newGameController);
                 this.initialized = true;
@@ -84,5 +85,13 @@ function Context() {
 
         this.spaceShipControllerDidRequestGameOver = function(spaceShipController) {
           this.setCurrentController(this.companyLogoController);
+        };
+
+        this.shipTravelControllerDidArriveAtSpaceStation = function(shipTravelController) {
+          this.setCurrentController(this.spaceStationController);
+        };
+
+        this.spaceShipControllerDidRequestGoBackToSpaceShip = function(spaceStationController) {
+          this.setCurrentController(this.spaceShipController);
         };
     };

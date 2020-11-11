@@ -8,6 +8,7 @@ function IncludeDependencies() {
 	include("com.demensdeum.spacejaguaractionrpg.storage.js");
 	include("com.demensdeum.spacejaugaractionrpg.callResult.js");
 	include("com.demensdeum.spacejaguaractionrpg.itemType.js");
+	include("com.demensdeum.spacejaguaractionrpg.jag.js");
 	include("com.demensdeum.spacejaguaractionrpg.namesFactory.js");
 	include("com.demensdeum.spacejaguaractionrpg.interactionController.js");
 	include("com.demensdeum.spacejaguaractionrpg.mapsFactory.js");
@@ -22,6 +23,7 @@ function IncludeDependencies() {
 	include("com.demensdeum.flamesteelengine.list.js");
 	include("com.demensdeum.spacejaguaractionrpg.mapSceneController.js");
 	include("com.demensdeum.spacejaguaractionrpg.spaceShipController.js");
+	include("com.demensdeum.spacejaguaractionrpg.spaceStationController.js");
 	include("com.demensdeum.spacejaguaractionrpg.companyLogoController.js");
 	include("com.demensdeum.spacejaguaractionrpg.shipTravelController.js");
 	include("com.demensdeum.spacejaguaractionrpg.newGameController.js");

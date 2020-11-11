@@ -59,6 +59,7 @@ function SpaceShipController(delegate, gameplayData) {
   };
 
   this.eat = function() {
+    var didEat = false;
     var shouldLoop = true;
     var iterator = this.gameplayData.ship.storage.iterator();
     while (shouldLoop) {
@@ -73,6 +74,7 @@ function SpaceShipController(delegate, gameplayData) {
           if (result.success) {
             iterator.remove();
             shouldLoop = false;
+            didEat = true;
           }
           else {
             prompt(result.message);
@@ -82,6 +84,10 @@ function SpaceShipController(delegate, gameplayData) {
         print("Not food item: " + item.name + " of type: " + item.type);
         print("Not food type: " + ItemType.food);
       }
+    }
+
+    if (didEat == false) {
+      prompt("Nothing to eat");
     }
   };
 
