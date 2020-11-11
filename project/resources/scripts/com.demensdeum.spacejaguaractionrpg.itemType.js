@@ -1,3 +1,5 @@
 var ItemType = {
-  food : "FOOD"
+  food : "FOOD",
+  repairBot : "REPAIRBOT",
+  fusionBlock : "FUSIONBLOCK"
 };

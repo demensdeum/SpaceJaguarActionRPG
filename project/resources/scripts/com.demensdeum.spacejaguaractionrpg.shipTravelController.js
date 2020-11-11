@@ -3,12 +3,16 @@ function ShipTravelController(delegate, gameplayData) {
   this.gameplayData = gameplayData;
   this.output = "o";
 
+  this.sosEncounter = function() {
+    prompt("TODO: SOS Encounter");
+  };
+
   this.step = function() {
     if (this.gameplayData.location != null) {
       this.gameplayData.location = null;
     }
     var fusion = this.gameplayData.ship.fusion.points;
-    var maxFusion = this.gameplayData.ship.maxFusion.points;
+    var fusionMax = this.gameplayData.ship.fusionMax.points;
 
     if (fusion < 1) {
       this.output = "o";
@@ -17,7 +21,7 @@ function ShipTravelController(delegate, gameplayData) {
     }
     else {
       this.output += "-";
-      print("[Fusion: " + fusion + "/" + maxFusion + "] " +  this.output + ">");
+      print("[Fusion: " + fusion + "/" + fusionMax + "] " +  this.output + ">");
       this.gameplayData.ship.drainFusion(1);
       var travelEvent = Math.randInt(0, 100);
       if (travelEvent == 1) {
@@ -45,6 +49,14 @@ function ShipTravelController(delegate, gameplayData) {
         if (action == "1") {
           this.output = "o";
           this.delegate.shipTravelControllerDidArriveAtSpaceStation(this);
+        }
+      }
+      else if (travelEvent == 4) {
+        var action = prompt("SOS signal received. Travel to source of signal?\
+        1.Yes\
+        2.No");
+        if (action == 1) {
+          this.sosEncounter();
         }
       }
     }

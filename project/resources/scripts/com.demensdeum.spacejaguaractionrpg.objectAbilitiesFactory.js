@@ -1,42 +1,42 @@
 function ObjectAbilitiesFactory() {
     this.health = function(points) {
-        var ability = new ObjectAbility("CHEAL", "Current health", points);
+        var ability = new ObjectAbility("CUHEAL", "Current health", points);
         return ability;
     };
     this.healthMax = function(points) {
-        var ability = new ObjectAbility("MHEAL", "Max health", points);
+        var ability = new ObjectAbility("MXHEAL", "Max health", points);
         return ability;
     };
     this.fusion = function(points) {
-        var ability = new ObjectAbility("FUSIN", "Current fusion fuel tank", points);
+        var ability = new ObjectAbility("CFUSIN", "Current fusion fuel tank", points);
         return ability;
     };
-    this.maxFusion = function(points) {
-        var ability = new ObjectAbility("MFUSN", "Max fusion fuel tank", points);
+    this.fusionMax = function(points) {
+        var ability = new ObjectAbility("MXFUSN", "Max fusion fuel tank", points);
         return ability;
     };
     this.bladeFightMin = function(points) {
-        var ability = new ObjectAbility("BLDMN", "Blade fighting ability minimal", points);
+        var ability = new ObjectAbility("BLDMIN", "Blade fighting ability minimal", points);
         return ability;
     };
     this.bladeFightMax = function(points) {
-        var ability = new ObjectAbility("BLDMX", "Blade fighting ability maximal", points);
+        var ability = new ObjectAbility("BLDMAX", "Blade fighting ability maximal", points);
         return ability;
     };
     this.hunger = function(points) {
-      var ability = new ObjectAbility("HUNGR", "Hunger", points);
+      var ability = new ObjectAbility("HUNGER", "Hunger", points);
       return ability;
     };
     this.hungerMax = function(points) {
-      var ability = new ObjectAbility("HUNGM", "Maximal hunger", points);
+      var ability = new ObjectAbility("HUNGMX", "Maximal hunger", points);
       return ability;
     };
     this.energy = function(points) {
-      var ability = new ObjectAbility("ENERG", "Energy", points);
+      var ability = new ObjectAbility("ENERGY", "Energy", points);
       return ability;
     };
     this.energyMax = function(points) {
-      var ability = new ObjectAbility("ENRMX", "Energy max", points);
+      var ability = new ObjectAbility("ENRMAX", "Energy max", points);
       return ability;
     };
 };

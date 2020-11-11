@@ -11,7 +11,6 @@ function Jag() {
   this.energy = abilitiesFactory.energy(6);
   this.energyMax = abilitiesFactory.energyMax(48);
 
-
 this.liveForHours = function(hours) {
   if (this.hunger.points > 0) {
     this.hunger.points -= hours;
@@ -41,6 +40,10 @@ this.eat = function(item) {
   else {
     return new CallResult(false, "Jag can't eat: " + item.name + " of type: " + item.type);
   }
+};
+
+this.healAll = function() {
+  this.jag.health.points = this.jag.healthMax.points;
 };
 
 this.sleep = function(hours) {

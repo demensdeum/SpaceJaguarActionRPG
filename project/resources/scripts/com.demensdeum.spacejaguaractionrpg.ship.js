@@ -1,6 +1,14 @@
 function Ship() {
   this.storage = new Storage(10);
 
+  this.repair = function(points) {
+    this.health.points += points;
+    if (this.health.points > this.healthMax.points) {
+      this.health.points = this.healthMax.points;
+    }
+    return new CallResult(true, "");
+  };
+
   this.addItemToStorage = function(item) {
     var result = this.storage.addItem(item);
     if (result.success == false) {
@@ -19,8 +27,9 @@ function Ship() {
 
   this.fillFusion = function(points) {
     this.fusion.points += points;
-    if (this.fusion.points < this.fusionMax.points) {
+    if (this.fusion.points > this.fusionMax.points) {
       this.fusion.points = this.fusionMax.points;
     }
+    return new CallResult(true, "");
   };
 };

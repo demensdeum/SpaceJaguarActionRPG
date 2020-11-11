@@ -4,6 +4,20 @@ function ObjectsFactory() {
         return jag;
     };
 
+    this.repairBot = function() {
+      var repairBot = new Object();
+      repairBot.name = "Repair-Bot";
+      repairBot.type = ItemType.repairBot;
+      return repairBot;
+    };
+
+    this.fusionBlock = function() {
+      var fusionBlock = new Object();
+      fusionBlock.name = "Fusion Block";
+      fusionBlock.type = ItemType.fusionBlock;
+      return fusionBlock;
+    };
+
     this.startShip = function() {
       var namesFactory = new NamesFactory();
       var abilitiesFactory = new ObjectAbilitiesFactory();
@@ -12,7 +26,7 @@ function ObjectsFactory() {
       ship.health = abilitiesFactory.health(70);
       ship.healthMax = abilitiesFactory.healthMax(100);
       ship.fusion = abilitiesFactory.fusion(100);
-      ship.maxFusion = abilitiesFactory.maxFusion(300);
+      ship.fusionMax = abilitiesFactory.fusionMax(300);
       return ship;
     };
 

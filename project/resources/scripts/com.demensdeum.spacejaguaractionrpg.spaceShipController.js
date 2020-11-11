@@ -17,7 +17,7 @@ function SpaceShipController(delegate, gameplayData) {
     var action = prompt("\
     Ship: " + ship.name +"\
     Health: " + ship.health.points + "/" + ship.healthMax.points + "\
-    Fusion: " + ship.fusion.points + "/" + ship.maxFusion.points + "\
+    Fusion: " + ship.fusion.points + "/" + ship.fusionMax.points + "\
     Bits: " + this.gameplayData.bits + "B\
     Docked location: " + locationName + "\
     Jag hunger: " + this.gameplayData.jag.hunger.points + "/" + this.gameplayData.jag.hungerMax.points + "\
@@ -125,10 +125,68 @@ function SpaceShipController(delegate, gameplayData) {
   };
 
   this.tryToFillFusionTank = function() {
-    prompt("No Fusion blocks are available");
+    var didfillFusion = false;
+    var shouldLoop = true;
+    var iterator = this.gameplayData.ship.storage.iterator();
+    while (shouldLoop) {
+      var item = iterator.next();
+      if (item == null) {
+        print("Null item");
+        shouldLoop = false;
+      }
+      else if (item.type == ItemType.fusionBlock) {
+          print("Fill fusion");
+          var result = this.gameplayData.ship.fillFusion(100);
+          if (result.success) {
+            iterator.remove();
+            shouldLoop = false;
+            didFillFusion = true;
+          }
+          else {
+            prompt(result.message);
+          }
+      }
+      else {
+        print("Not fusion tank item: " + item.name + " of type: " + item.type);
+        print("Not fusion tank block: " + ItemType.fusionBlock);
+      }
+    }
+
+    if (didFillFusion == false) {
+      prompt("No fusion blocks are available");
+    }
   };
 
   this.tryToRepairShip = function() {
-    prompt("No Repair bots are available");
+    var didRepair = false;
+    var shouldLoop = true;
+    var iterator = this.gameplayData.ship.storage.iterator();
+    while (shouldLoop) {
+      var item = iterator.next();
+      if (item == null) {
+        print("Null item");
+        shouldLoop = false;
+      }
+      else if (item.type == ItemType.repairBot) {
+          print("Repair");
+          var result = this.gameplayData.ship.repair(100);
+          if (result.success) {
+            iterator.remove();
+            shouldLoop = false;
+            didRepair = true;
+          }
+          else {
+            prompt(result.message);
+          }
+      }
+      else {
+        print("Not repair bot item: " + item.name + " of type: " + item.type);
+        print("Not repair bot type: " + ItemType.repairBot);
+      }
+    }
+
+    if (didRepair == false) {
+      prompt("No repair bots are available");
+    }
   };
 }
