@@ -24,10 +24,12 @@ function ShipTravelController(delegate, gameplayData) {
       print("[Fusion: " + fusion + "/" + fusionMax + "] " +  this.output + ">");
       this.gameplayData.ship.drainFusion(1);
       var travelEvent = Math.randInt(0, 100);
-      if (travelEvent == 1) {
-        prompt("Arrived to some random location");
-        this.output = "o";
-        this.delegate.shipTravelControllerDidArriveAtSomeRandomLocation(this);
+      if (travelEvent == 1 && this.gameplayData.bits < -1000) {
+        var fine = 500;
+        prompt("While traveling you encounter space money collectors. They approach your ship");
+        prompt("\"Mister Jag, you own to Galactic Bank " + this.gameplayData.bits + "B, please make payment ASAP.\"");
+        prompt("\"or there will be consequences. You will be fined " + fine + "B for now.\"");
+        this.gameplayData.bits -= fine;
       }
       else if (travelEvent == 2) {
         var place = "space station";
@@ -36,7 +38,7 @@ function ShipTravelController(delegate, gameplayData) {
         }
         var action = prompt("While traveling you encounter *abandoned* " + place + ".\
         1. Dock it\
-        2. Fly to destination");
+        2. Fly away");
         if (action == "1") {
           this.output = "o";
           this.delegate.shipTravelControllerDidArriveAtSomeRandomLocation(this);
@@ -45,7 +47,7 @@ function ShipTravelController(delegate, gameplayData) {
       else if (travelEvent == 3) {
         var action = prompt("While traveling you encounter the space station.\
         1. Dock it\
-        2. Fly to destination");
+        2. Fly away");
         if (action == "1") {
           this.output = "o";
           this.delegate.shipTravelControllerDidArriveAtSpaceStation(this);
@@ -58,6 +60,13 @@ function ShipTravelController(delegate, gameplayData) {
         if (action == 1) {
           this.sosEncounter();
         }
+      }
+      else if (travelEvent == 5 && this.gameplayData.bits < -100000) {
+        prompt("While traveling you encounter space money collectors. They approach your ship");
+        prompt("\"Mister Jag, you own to Galactic Bank " + this.gameplayData.bits + "B.\"");
+        prompt("\"You are going to jail.\"");
+        prompt("Jag got into jail :-(");
+        this.delegate.shipTravelControllerDidRequestGameOver(this);
       }
     }
   };

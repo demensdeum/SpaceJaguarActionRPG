@@ -58,8 +58,9 @@ function SpaceShipController(delegate, gameplayData) {
     }
   };
 
-  this.eat = function() {
-    var didEat = false;
+  this.useItemOfType = function(type, functionOwner, useFunction) {
+    print("Input type: " + type);
+    var didUse = false;
     var shouldLoop = true;
     var iterator = this.gameplayData.ship.storage.iterator();
     while (shouldLoop) {
@@ -68,27 +69,33 @@ function SpaceShipController(delegate, gameplayData) {
         print("Null item");
         shouldLoop = false;
       }
-      else if (item.type == ItemType.food) {
-          print("Omnomnom");
-          var result = this.gameplayData.jag.eat(item);
+      else if (item.type == type) {
+          print("Item used");
+          var result = useFunction(item, functionOwner);
           if (result.success) {
             iterator.remove();
             shouldLoop = false;
-            didEat = true;
+            didUse = true;
           }
           else {
             prompt(result.message);
           }
       }
-      else {
-        print("Not food item: " + item.name + " of type: " + item.type);
-        print("Not food type: " + ItemType.food);
-      }
     }
 
-    if (didEat == false) {
-      prompt("Nothing to eat");
+    if (didUse == false) {
+      prompt("Nothing to use of type: " + type);
     }
+  };
+
+  this.tryToFillFusionTank = function() {
+    var ship = this.gameplayData.ship;
+    this.useItemOfType(ItemType.fusionBlock, ship, ship.STATIC_useItem);
+  };
+
+  this.eat = function() {
+    var jag = this.gameplayData.jag;
+    this.useItemOfType(ItemType.food, jag, this.gameplayData.jag.eat);
   };
 
   this.sos = function() {
@@ -121,39 +128,6 @@ function SpaceShipController(delegate, gameplayData) {
     }
     else {
       prompt("No one answered to SOS signal...");
-    }
-  };
-
-  this.tryToFillFusionTank = function() {
-    var didfillFusion = false;
-    var shouldLoop = true;
-    var iterator = this.gameplayData.ship.storage.iterator();
-    while (shouldLoop) {
-      var item = iterator.next();
-      if (item == null) {
-        print("Null item");
-        shouldLoop = false;
-      }
-      else if (item.type == ItemType.fusionBlock) {
-          print("Fill fusion");
-          var result = this.gameplayData.ship.fillFusion(100);
-          if (result.success) {
-            iterator.remove();
-            shouldLoop = false;
-            didFillFusion = true;
-          }
-          else {
-            prompt(result.message);
-          }
-      }
-      else {
-        print("Not fusion tank item: " + item.name + " of type: " + item.type);
-        print("Not fusion tank block: " + ItemType.fusionBlock);
-      }
-    }
-
-    if (didFillFusion == false) {
-      prompt("No fusion blocks are available");
     }
   };
 

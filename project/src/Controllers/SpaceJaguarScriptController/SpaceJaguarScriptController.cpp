@@ -2,6 +2,13 @@
 #include <iostream>
 #include <FlameSteelEngineGameToolkit/Utils/FSEGTUtils.h>
 
+#if __EMSCRIPTEN__
+#include <emscripten.h>
+#include <emscripten/val.h>
+using namespace emscripten;
+#endif
+
+
 using namespace std;
 using namespace SpaceJaguarActionRPG;
 
@@ -153,7 +160,16 @@ void tinyjSBindingsToFlameSteelEngineGameToolkit_Prompt(CScriptVar *v, void *con
 	auto text = v->getParameter("text")->getString();
 	string inputText;
 	cout << "Tiny-JS print: "<< text << endl;
+#if __EMSCRIPTEN__
+	EM_ASM({
+		var promptText = UTF8ToString($0);
+		__global_flamesteelenginegametoolkit_prompt_result = prompt(promptText);
+		}, text.c_str());
+	val rawAction = val::global("__global_flamesteelenginegametoolkit_prompt_result");
+	inputText = rawAction.as<string>();
+#else
 	getline (cin, inputText);
+#endif
 	v->getReturnVar()->setString(inputText);
 }
 

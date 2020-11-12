@@ -25,11 +25,20 @@ function Ship() {
     }
   };
 
+  this.STATIC_useItem = function(item, ship) {
+    if (item.type == ItemType.fusionBlock) {
+      ship.fillFusion(200);
+      return new CallResult(true, "");
+    }
+    else {
+      return new CallResult(false, "Can't use item of type: " + item.type + " at ship");
+    }
+  };
+
   this.fillFusion = function(points) {
     this.fusion.points += points;
     if (this.fusion.points > this.fusionMax.points) {
       this.fusion.points = this.fusionMax.points;
     }
-    return new CallResult(true, "");
   };
 };

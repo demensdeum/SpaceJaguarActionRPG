@@ -32,9 +32,13 @@ this.isDead = function() {
   return this.health.points < 1;
 };
 
-this.eat = function(item) {
+this.eat = function(item, jag) {
+  print("Eaten");
   if (item.type == ItemType.food) {
-    this.hunger.points += 1;
+    jag.hunger.points += 1;
+    if (jag.hunger.point > jag.hungerMax.points) {
+      jag.hunger.points = jag.hungerMax.points;
+    }
     return new CallResult(true, "");
   }
   else {

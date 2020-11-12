@@ -57,7 +57,7 @@ function ListIterator(list) {
     this._previous.link = this._current.next;
     this._current = this._previous;
     this._next = this._current.link;
-    this.length -= 1;
+    this._list.length -= 1;
   };
 
 };

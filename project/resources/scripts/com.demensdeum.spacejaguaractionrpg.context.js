@@ -94,4 +94,8 @@ function Context() {
         this.spaceShipControllerDidRequestGoBackToSpaceShip = function(spaceStationController) {
           this.setCurrentController(this.spaceShipController);
         };
+
+        this.shipTravelControllerDidRequestGameOver = function(shipTravelController) {
+          this.setCurrentController(this.companyLogoController);
+        };
     };
